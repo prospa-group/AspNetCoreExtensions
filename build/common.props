@@ -1,0 +1,20 @@
+<Project>
+  <Import Project="dependencies.props" />
+	
+	<PropertyGroup>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<LangVersion>latest</LangVersion>
+		<CodeAnalysisRuleSet>..\..\Prospa.ruleset</CodeAnalysisRuleSet>
+	  <NoWarn>$(NoWarn)</NoWarn>
+	</PropertyGroup>  
+
+	<ItemGroup>
+		<AdditionalFiles Include="..\..\stylecop.json" Link="stylecop.json" />		
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="StyleCop.Analyzers" Version="$(StyleCopAnalyzersVersion)" PrivateAssets="All" />
+	</ItemGroup>
+  
+</Project>

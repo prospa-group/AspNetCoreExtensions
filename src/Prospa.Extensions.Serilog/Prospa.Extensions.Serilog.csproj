@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\build\common.props" />
+
+  <PropertyGroup>
+    <Description>Serilog extensions and enrichers.</Description>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageTags>prospa;serilog</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup Label="Third Party Package References">
+    <PackageReference Include="Serilog.Enrichers.Environment" Version="2.1.2" />
+    <PackageReference Include="Serilog.Enrichers.Thread" Version="3.0.0" />
+    <PackageReference Include="Serilog.Exceptions" Version="4.1.0" />
+    <PackageReference Include="Serilog.Filters.Expressions" Version="1.1.0" />
+    <PackageReference Include="Serilog.Enrichers.Demystify" Version="0.1.0-*" />
+  </ItemGroup>
+
+</Project>

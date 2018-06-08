@@ -1,0 +1,32 @@
+<Project>
+
+  <PropertyGroup Label="Private Asset Package Versions">
+    <StyleCopAnalyzersVersion>1.0.0</StyleCopAnalyzersVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Microsoft Package Versions">
+    <DependencyModelVersion>2.1.0</DependencyModelVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Microsoft AspNet Core Package Versions">
+    <AspNetCoreVersion>2.1.0</AspNetCoreVersion>
+    <AspNetCoreMvcVersioningVersion>2.2.0</AspNetCoreMvcVersioningVersion>
+    <AspNetCoreMvcVersioningApiExplorerVersion>2.2.0</AspNetCoreMvcVersioningApiExplorerVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Third Party AspNet Core Package Versions">
+    <SwashbuckleVersion>2.4.0</SwashbuckleVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Third Party Package Versions">
+    <SerilogVersion>2.7.1</SerilogVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Test Package Versions">
+    <MoqVersion>4.8.2</MoqVersion>
+    <TestSdkVersion>15.8.0-preview-20180510-03</TestSdkVersion>
+    <XunitVersion>2.4.0-beta.2.build4010</XunitVersion>
+    <FluentAssertionsVersion>5.3.2</FluentAssertionsVersion>
+  </PropertyGroup>
+
+</Project>

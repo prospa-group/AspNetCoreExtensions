@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\build\common.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>$(StandardTest)</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup Label="Project References">
+    <ProjectReference Include="..\..\src\Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger\Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger.csproj" />
+    <ProjectReference Include="..\..\src\Prospa.Extensions.AspNetCore.Swagger\Prospa.Extensions.AspNetCore.Swagger.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Label="Microsoft Package References">
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="$(AspNetCoreMvcVersioningVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="$(AspNetCoreMvcVersioningApiExplorerVersion)" />
+  </ItemGroup>
+
+</Project>
