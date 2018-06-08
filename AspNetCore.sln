@@ -56,6 +56,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prospa.Extensions.AspNetCor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prospa.Extensions.AspNetCore.Mvc.Core.Facts", "test\Prospa.Extensions.AspNetCore.Mvc.Core.Facts\Prospa.Extensions.AspNetCore.Mvc.Core.Facts.csproj", "{ACDDEB9D-5C1C-4524-A485-D9CE24A69EE5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox.Api.IntegrationTests", "test\Sandbox.Api.IntegrationTests\Sandbox.Api.IntegrationTests.csproj", "{912B893C-0C4B-4832-B1E5-EEA8892D6C69}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -106,6 +108,10 @@ Global
 		{ACDDEB9D-5C1C-4524-A485-D9CE24A69EE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACDDEB9D-5C1C-4524-A485-D9CE24A69EE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACDDEB9D-5C1C-4524-A485-D9CE24A69EE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{912B893C-0C4B-4832-B1E5-EEA8892D6C69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{912B893C-0C4B-4832-B1E5-EEA8892D6C69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{912B893C-0C4B-4832-B1E5-EEA8892D6C69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{912B893C-0C4B-4832-B1E5-EEA8892D6C69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -122,6 +128,7 @@ Global
 		{150BD5E5-42A6-4D5A-A18C-F3228B689BA1} = {266C7D7D-E777-4EB3-9D63-4F6CCA2B9096}
 		{AC7A3B24-FD40-415D-B24D-8FA292E88A02} = {9B7714D5-8FC9-42A3-9122-5F930751E63A}
 		{ACDDEB9D-5C1C-4524-A485-D9CE24A69EE5} = {9B7714D5-8FC9-42A3-9122-5F930751E63A}
+		{912B893C-0C4B-4832-B1E5-EEA8892D6C69} = {9B7714D5-8FC9-42A3-9122-5F930751E63A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D4D524ED-D9EF-4F80-8A13-166CE29728C5}
