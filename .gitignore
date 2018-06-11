@@ -7,7 +7,7 @@ TestResults/
 *.sln.ide/
 _ReSharper.*/
 packages/
-artifacts/
+.artifacts/
 PublishProfiles/
 .vs/
 bower_components/
