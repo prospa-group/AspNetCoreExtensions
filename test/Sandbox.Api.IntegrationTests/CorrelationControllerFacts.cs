@@ -15,7 +15,7 @@ namespace Sandbox.Api.IntegrationTests
             _factory = factory;
         }
 
-        [Fact]
+        [Fact(Skip = "WIP")]
         public async Task Should_require_correlation_id()
         {
             // Arrange

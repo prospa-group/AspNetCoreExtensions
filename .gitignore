@@ -44,3 +44,5 @@ msbuild.binlog
 NDependOut/*
 Session/*
 Session.html
+tools/*
+!tools/packages.config
