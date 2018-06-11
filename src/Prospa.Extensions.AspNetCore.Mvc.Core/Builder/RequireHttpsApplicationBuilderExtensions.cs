@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Prospa.Extensions.AspNetCore.Mvc.Core;
 using Prospa.Extensions.AspNetCore.Mvc.Core.Resources;
-using Prospa.Extensions.Http.Json;
 
 // ReSharper disable CheckNamespace
 namespace Microsoft.AspNetCore.Builder
@@ -51,7 +51,7 @@ namespace Microsoft.AspNetCore.Builder
                               Title = ErrorMessages.RequireHttpsTitle
                           };
 
-            return context.Response.WriteAsync(JsonConvert.SerializeObject(response, DefaultJsonSerializerSettings.Instance));
+            return context.Response.WriteAsync(JsonConvert.SerializeObject(response, DefaultCamelCaseJsonSerializerSettings.Instance));
         }
 
         private static bool HasForwardProtoAndNotHttps(HttpContext context)

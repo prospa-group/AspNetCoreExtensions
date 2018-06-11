@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Microsoft Package Versions">
-    <DependencyModelVersion>2.1.0</DependencyModelVersion>
+    <MicrosoftExtensionsVersion>2.1.0</MicrosoftExtensionsVersion>
   </PropertyGroup>
 
   <PropertyGroup Label="Microsoft AspNet Core Package Versions">
@@ -20,6 +20,7 @@
 
   <PropertyGroup Label="Third Party Package Versions">
     <SerilogVersion>2.7.1</SerilogVersion>
+    <NewtonsoftJsonVersion>11.0.2</NewtonsoftJsonVersion>
   </PropertyGroup>
 
   <PropertyGroup Label="Test Package Versions">

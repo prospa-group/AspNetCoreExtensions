@@ -13,7 +13,6 @@
     <PackageReference Include="Serilog.Enrichers.Thread" Version="3.0.0" />
     <PackageReference Include="Serilog.Exceptions" Version="4.1.0" />
     <PackageReference Include="Serilog.Filters.Expressions" Version="1.1.0" />
-    <PackageReference Include="Serilog.Enrichers.Demystify" Version="0.1.0-*" />
   </ItemGroup>
 
 </Project>

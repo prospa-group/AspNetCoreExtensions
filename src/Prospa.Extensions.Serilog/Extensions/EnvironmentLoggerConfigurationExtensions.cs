@@ -37,8 +37,7 @@ namespace Serilog.Configuration
                    .Enrich.WithEnvironmentName()
                    .Enrich.WithMachineName()
                    .Enrich.WithThreadId()
-                   .Enrich.FromLogContext()
-                   .Enrich.WithDemystifiedStackTraces();
+                   .Enrich.FromLogContext();
         }
 
         public static LoggerConfiguration WithEnvironmentName(this LoggerEnrichmentConfiguration enrichmentConfiguration)

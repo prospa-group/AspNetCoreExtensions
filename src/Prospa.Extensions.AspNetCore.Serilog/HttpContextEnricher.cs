@@ -8,13 +8,11 @@ namespace Prospa.Extensions.AspNetCore.Serilog
     {
         private readonly LogEventProperty _correlationIdProperty;
         private readonly LogEventProperty _originalForProperty;
-        private readonly LogEventProperty _subjectProperty;
 
         public HttpContextEnricher(HttpContext context)
         {
             _correlationIdProperty = context.Request.Headers.CorrelationIdLogEventProperty();
             _originalForProperty = context.Request.Headers.OriginalForLogEventProperty();
-            _subjectProperty = context.User.Identity.SubjectLogEventProperty();
         }
 
         /// <inheritdoc />
@@ -22,7 +20,6 @@ namespace Prospa.Extensions.AspNetCore.Serilog
         {
             logEvent.AddPropertyIfAbsentAndNotNull(_correlationIdProperty);
             logEvent.AddPropertyIfAbsentAndNotNull(_originalForProperty);
-            logEvent.AddPropertyIfAbsentAndNotNull(_subjectProperty);
         }
     }
 }

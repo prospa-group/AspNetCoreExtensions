@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Prospa.Extensions.AspNetCore.Http;
+using Prospa.Extensions.AspNetCore.Mvc.Core;
 using Prospa.Extensions.AspNetCore.Mvc.Core.Resources;
-using Prospa.Extensions.Http.Json;
 
 // ReSharper disable CheckNamespace
 namespace GlobalExceptionHandler.WebApi
@@ -86,7 +86,7 @@ namespace GlobalExceptionHandler.WebApi
                 }
             }
 
-            return JsonConvert.SerializeObject(errorResponse, DefaultJsonSerializerSettings.Instance);
+            return JsonConvert.SerializeObject(errorResponse, DefaultCamelCaseJsonSerializerSettings.Instance);
         }
     }
 }

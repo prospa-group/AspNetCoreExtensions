@@ -22,6 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_solution items", "_solutio
 		global.json = global.json
 		Prospa.ruleset = Prospa.ruleset
 		stylecop.json = stylecop.json
+		version.props = version.props
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_sandbox", "_sandbox", "{266C7D7D-E777-4EB3-9D63-4F6CCA2B9096}"
@@ -30,8 +31,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_sandbox", "_sandbox", "{26
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prospa.Extensions.Serilog", "src\Prospa.Extensions.Serilog\Prospa.Extensions.Serilog.csproj", "{47914A64-E3E9-4458-AAC9-1226A39E8BCA}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prospa.Extensions.Http", "src\Prospa.Extensions.Http\Prospa.Extensions.Http.csproj", "{E7A8FC29-8449-4D4F-9ADB-D0AB640A4DCC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prospa.Extensions.AspNetCore.Swagger", "src\Prospa.Extensions.AspNetCore.Swagger\Prospa.Extensions.AspNetCore.Swagger.csproj", "{107F12C4-470A-418B-B722-045EBC3229B0}"
 EndProject
@@ -68,10 +67,6 @@ Global
 		{47914A64-E3E9-4458-AAC9-1226A39E8BCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47914A64-E3E9-4458-AAC9-1226A39E8BCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47914A64-E3E9-4458-AAC9-1226A39E8BCA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E7A8FC29-8449-4D4F-9ADB-D0AB640A4DCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E7A8FC29-8449-4D4F-9ADB-D0AB640A4DCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E7A8FC29-8449-4D4F-9ADB-D0AB640A4DCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E7A8FC29-8449-4D4F-9ADB-D0AB640A4DCC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{107F12C4-470A-418B-B722-045EBC3229B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{107F12C4-470A-418B-B722-045EBC3229B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{107F12C4-470A-418B-B722-045EBC3229B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -118,7 +113,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{47914A64-E3E9-4458-AAC9-1226A39E8BCA} = {C7A3CBA0-B61F-4D11-8D9F-E5100AD46FE7}
-		{E7A8FC29-8449-4D4F-9ADB-D0AB640A4DCC} = {C7A3CBA0-B61F-4D11-8D9F-E5100AD46FE7}
 		{107F12C4-470A-418B-B722-045EBC3229B0} = {C7A3CBA0-B61F-4D11-8D9F-E5100AD46FE7}
 		{AEE1BA62-0DFA-4F33-99BA-1AEBAEF0E9CC} = {C7A3CBA0-B61F-4D11-8D9F-E5100AD46FE7}
 		{D6F47CCE-B89B-4984-87C7-8F7D42E8547D} = {C7A3CBA0-B61F-4D11-8D9F-E5100AD46FE7}

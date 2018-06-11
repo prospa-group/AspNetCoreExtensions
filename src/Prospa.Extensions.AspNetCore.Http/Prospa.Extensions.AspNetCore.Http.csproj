@@ -12,8 +12,4 @@
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="$(AspNetCoreVersion)" />
   </ItemGroup>
 
-  <ItemGroup Label="Project References">
-    <ProjectReference Include="..\Prospa.Extensions.Http\Prospa.Extensions.Http.csproj" />
-  </ItemGroup>
-
 </Project>

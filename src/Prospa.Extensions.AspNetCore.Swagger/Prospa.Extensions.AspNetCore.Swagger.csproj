@@ -10,7 +10,7 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="$(SwashbuckleVersion)" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Label="Project References">
     <ProjectReference Include="..\Prospa.Extensions.AspNetCore.Mvc.Core\Prospa.Extensions.AspNetCore.Mvc.Core.csproj" />
   </ItemGroup>
 

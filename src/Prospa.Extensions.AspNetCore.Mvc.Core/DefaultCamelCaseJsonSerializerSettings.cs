@@ -3,9 +3,9 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 
-namespace Prospa.Extensions.Http.Json
+namespace Prospa.Extensions.AspNetCore.Mvc.Core
 {
-    public static class DefaultJsonSerializerSettings
+    public static class DefaultCamelCaseJsonSerializerSettings
     {
         private const int DefaultMaxDepth = 32;
 

@@ -5,14 +5,14 @@
   <PropertyGroup>
     <Description>Serilog ASP.NET Core extensions and enrichers.</Description>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageTags>prospa;serilog</PackageTags>
+    <PackageTags>prospa;serilog;aspnetcore</PackageTags>
   </PropertyGroup>
 
   <ItemGroup Label="Third Party Package References">
     <PackageReference Include="Serilog" Version="$(SerilogVersion)" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Label="Project References">
     <ProjectReference Include="..\Prospa.Extensions.AspNetCore.Http\Prospa.Extensions.AspNetCore.Http.csproj" />
   </ItemGroup>
 

@@ -15,7 +15,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="$(AspNetCoreMvcVersioningApiExplorerVersion)" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Label="Project References">
     <ProjectReference Include="..\Prospa.Extensions.AspNetCore.Mvc.Core\Prospa.Extensions.AspNetCore.Mvc.Core.csproj" />
   </ItemGroup>
 

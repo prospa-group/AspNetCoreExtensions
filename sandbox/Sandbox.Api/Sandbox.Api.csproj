@@ -43,7 +43,6 @@
     <ProjectReference Include="..\..\src\Prospa.Extensions.AspNetCore.Serilog\Prospa.Extensions.AspNetCore.Serilog.csproj" />
     <ProjectReference Include="..\..\src\Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger\Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger.csproj" />
     <ProjectReference Include="..\..\src\Prospa.Extensions.AspNetCore.Swagger\Prospa.Extensions.AspNetCore.Swagger.csproj" />
-    <ProjectReference Include="..\..\src\Prospa.Extensions.Http\Prospa.Extensions.Http.csproj" />
     <ProjectReference Include="..\..\src\Prospa.Extensions.Serilog\Prospa.Extensions.Serilog.csproj" />
   </ItemGroup>
 
