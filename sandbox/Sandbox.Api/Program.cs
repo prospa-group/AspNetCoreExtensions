@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using App.Metrics;
 using App.Metrics.AspNetCore.Health;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
@@ -11,7 +12,9 @@ namespace Sandbox.Api
     {
         public static int Main(string[] args)
         {
-            var webHost = CreateWebHostBuilder(args).Build();
+            var metrics = AppMetrics.CreateDefaultBuilder().BuildDefaultMetrics();
+
+            var webHost = CreateWebHostBuilder(args, metrics).Build();
 
             Log.Logger = webHost.CreateDefaultLogger(Constants.Environments.CurrentAspNetCoreEnv);
 
@@ -32,14 +35,16 @@ namespace Sandbox.Api
             }
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args, IMetricsRoot metrics) =>
             WebHost.CreateDefaultBuilder(args)
                    .UseKestrel(options => options.AddServerHeader = false)
                    .UseContentRoot(Directory.GetCurrentDirectory())
                    .ConfigureDefaultAppConfiguration(args)
-                   .UseDefaultMetrics()
+                   .ConfigureDefaultMetrics(metrics)
+                   .ConfigureDefaultHealth(metrics)
                    .UseSerilog()
-                   .UseHealth()
+                   .UseDefaultMetrics()
+                   .UseDefaultHealth()
                    .UseStartup<Startup>();
     }
 }

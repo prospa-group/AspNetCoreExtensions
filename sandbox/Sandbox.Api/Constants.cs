@@ -32,6 +32,8 @@ namespace Sandbox.Api
             public const string AllowAny = nameof(AllowAny);
         }
 
+        public const string EndpointKey = "A8559AC2-6E35-46F0-BDB4-4F1FAA2990F0";
+
         public static class Environments
         {
             public const string Development = nameof(Development);

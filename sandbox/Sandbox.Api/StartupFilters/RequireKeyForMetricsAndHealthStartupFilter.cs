@@ -22,10 +22,13 @@ namespace Sandbox.Api.StartupFilters
                 {
                     var key = ExtractKey(context);
 
-                    if (Endpoints.Any(e => context.Request.Path.Value == e && StringValues.IsNullOrEmpty(key)))
+                    if (Endpoints.Any(e => context.Request.Path.Value == e))
                     {
-                        context.Abort();
-                        return;
+                        if (key != Constants.EndpointKey)
+                        {
+                            context.Abort();
+                            return;
+                        }
                     }
 
                     await next2.Invoke();
@@ -37,8 +40,8 @@ namespace Sandbox.Api.StartupFilters
 
         private static string ExtractKey(HttpContext context)
         {
-            return context.Request.QueryString.HasValue && context.Request.Query.ContainsKey(nameof(MetricsRegistry.EndpointKey))
-                ? context.Request.Query[nameof(MetricsRegistry.EndpointKey)]
+            return context.Request.QueryString.HasValue && context.Request.Query.ContainsKey(nameof(Constants.EndpointKey))
+                ? context.Request.Query[nameof(Constants.EndpointKey)]
                 : StringValues.Empty;
         }
     }
