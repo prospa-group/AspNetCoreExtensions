@@ -1,4 +1,5 @@
-﻿using App.Metrics;
+﻿using System;
+using App.Metrics;
 using App.Metrics.AspNetCore;
 using App.Metrics.Extensions.Configuration;
 using App.Metrics.Reporting.GrafanaCloudHostedMetrics;
@@ -46,6 +47,11 @@ namespace Sandbox.Api
             {
                 var grafanaCloudHostedMetricsOptions = new MetricsReportingHostedMetricsOptions();
                 configuration.GetSection(nameof(MetricsReportingHostedMetricsOptions)).Bind(grafanaCloudHostedMetricsOptions);
+
+                if (string.IsNullOrWhiteSpace(grafanaCloudHostedMetricsOptions.HostedMetrics.ApiKey))
+                {
+                    throw new ApplicationException("Hosted Metrics ApiKey Missing, add MetricsReportingHostedMetricsOptions--HostedMetrics--ApiKey to KeyVault");
+                }
 
                 builder.Report.ToHostedMetrics(grafanaCloudHostedMetricsOptions);
             }
