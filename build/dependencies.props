@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Microsoft AspNet Core Package Versions">
-    <AspNetCoreVersion>2.1.1</AspNetCoreVersion>
+    <AspNetCoreVersion>2.1.5</AspNetCoreVersion>
     <AspNetCoreMvcVersioningVersion>2.3.0</AspNetCoreMvcVersioningVersion>
     <AspNetCoreMvcVersioningApiExplorerVersion>2.2.0</AspNetCoreMvcVersioningApiExplorerVersion>
   </PropertyGroup>
