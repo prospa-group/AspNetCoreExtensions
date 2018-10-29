@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup Label="Third Party Package References">
-    <PackageReference Include="GlobalExceptionHandler" Version="3.0.0" />
+    <PackageReference Include="GlobalExceptionHandler" Version="4.0.0" />
   </ItemGroup>
 
   <ItemGroup>

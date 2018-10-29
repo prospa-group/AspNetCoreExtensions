@@ -25,13 +25,14 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             app.UseMiddleware<LogEnrichmentMiddleware>();
 
-            app.UseExceptionHandler("/error").WithConventions(x =>
-            {
-                x.HandleHttpValidationExceptions(hostingEnvironment);
-                x.HandleOperationCancelledExceptions(hostingEnvironment);
-                x.HandleUnauthorizedExceptions(hostingEnvironment);
-                x.HandleUnhandledExceptions(hostingEnvironment);
-            });
+            app.UseGlobalExceptionHandler(
+                configuration =>
+                {
+                    configuration.HandleHttpValidationExceptions(hostingEnvironment);
+                    configuration.HandleOperationCancelledExceptions(hostingEnvironment);
+                    configuration.HandleUnauthorizedExceptions(hostingEnvironment);
+                    configuration.HandleUnhandledExceptions(hostingEnvironment);
+                });
 
             return app;
         }

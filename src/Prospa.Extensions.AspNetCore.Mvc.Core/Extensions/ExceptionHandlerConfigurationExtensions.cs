@@ -19,27 +19,27 @@ namespace GlobalExceptionHandler.WebApi
             this ExceptionHandlerConfiguration configuration,
             IHostingEnvironment hostingEnvironment)
         {
-            configuration.ForException<ValidationException>()
-                         .ReturnStatusCode(StatusCodes.Status400BadRequest)
-                         .UsingMessageFormatter((ex, context) => FormatErrorResponse(hostingEnvironment, context, ex, ex.Message));
+            configuration.Map<ValidationException>()
+                         .ToStatusCode(StatusCodes.Status400BadRequest)
+                         .WithBody((ex, context) => FormatErrorResponse(hostingEnvironment, context, ex, ex.Message));
         }
 
         public static void HandleOperationCancelledExceptions(
             this ExceptionHandlerConfiguration configuration,
             IHostingEnvironment hostingEnvironment)
         {
-            configuration.ForException<OperationCanceledException>()
-                         .ReturnStatusCode(499)
-                         .UsingMessageFormatter((ex, context) => FormatErrorResponse(hostingEnvironment, context, ex, ErrorMessages.OperationCancelled));
+            configuration.Map<OperationCanceledException>()
+                         .ToStatusCode(499)
+                         .WithBody((ex, context) => FormatErrorResponse(hostingEnvironment, context, ex, ErrorMessages.OperationCancelled));
         }
 
         public static void HandleUnauthorizedExceptions(
             this ExceptionHandlerConfiguration configuration,
             IHostingEnvironment hostingEnvironment)
         {
-            configuration.ForException<UnauthorizedAccessException>()
-                         .ReturnStatusCode(StatusCodes.Status401Unauthorized)
-                         .UsingMessageFormatter((ex, context) => FormatErrorResponse(hostingEnvironment, context, ex, ErrorMessages.Unauthorized));
+            configuration.Map<UnauthorizedAccessException>()
+                         .ToStatusCode(StatusCodes.Status401Unauthorized)
+                         .WithBody((ex, context) => FormatErrorResponse(hostingEnvironment, context, ex, ErrorMessages.Unauthorized));
         }
 
         public static void HandleUnhandledExceptions(
@@ -47,9 +47,9 @@ namespace GlobalExceptionHandler.WebApi
             IHostingEnvironment hostingEnvironment)
         {
             configuration.ContentType = "application/problem+json";
-            configuration.ForException<Exception>()
-                         .ReturnStatusCode(StatusCodes.Status500InternalServerError)
-                         .UsingMessageFormatter((ex, context) => FormatErrorResponse(hostingEnvironment, context, ex, ErrorMessages.InternalServer));
+            configuration.Map<Exception>()
+                         .ToStatusCode(StatusCodes.Status500InternalServerError)
+                         .WithBody((ex, context) => FormatErrorResponse(hostingEnvironment, context, ex, ErrorMessages.InternalServer));
         }
 
         private static string FormatErrorResponse(IHostingEnvironment hostingEnvironment, HttpContext context, Exception ex, string message)
