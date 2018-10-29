@@ -21,7 +21,7 @@ namespace Microsoft.Extensions.Options
             {
                 foreach (var scope in _options.ScopePolicies.GetPolicyScopes(scopePolicy))
                 {
-                    options.AddPolicy(scopePolicy, policy => { policy.Requirements.Add(new HasScopeRequirement(scope, _options.Authority)); });
+                    options.AddPolicy(scopePolicy, policy => { policy.Requirements.Add(new HasScopeRequirement(scope)); });
                 }
             }
         }
