@@ -5,7 +5,7 @@ using App.Metrics.Reporting.GrafanaCloudHostedMetrics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Sandbox.Api.StartupFilters;
+using Prospa.Extensions.AspNetCore.Mvc.Core.StartupFilters;
 
 namespace Sandbox.Api
 {
@@ -13,7 +13,10 @@ namespace Sandbox.Api
     {
         public static IWebHostBuilder UseDefaultMetrics(this IWebHostBuilder webHostBuilder)
         {
-            webHostBuilder.ConfigureServices((context, services) => services.AddSingleton<IStartupFilter>(new RequireKeyForMetricsAndHealthStartupFilter()));
+            webHostBuilder.ConfigureServices((context, services) =>
+            {
+                services.AddSingleton<IStartupFilter>(new RequireEndpointKeyStartupFilter(new[] { "/health", "/metrics", "/metrics-text", "/env", "/docs" }, "123123"));
+            });
 
             webHostBuilder.UseMetrics();
 
