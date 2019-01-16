@@ -16,7 +16,7 @@ namespace Prospa.Extensions.AspNetCore.Serilog
             _correlationIdProperty = context.Request.Headers.CorrelationIdLogEventProperty();
             _originalForProperty = context.Request.Headers.OriginalForLogEventProperty();
             _subProperty = context.User?.SubjectIdEventProperty();
-            _clientIdProperty = context.User?.SubjectIdEventProperty();
+            _clientIdProperty = context.User?.ClientIdEventProperty();
         }
 
         /// <inheritdoc />
