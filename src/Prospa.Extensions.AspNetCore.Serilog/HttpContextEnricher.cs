@@ -25,7 +25,7 @@ namespace Prospa.Extensions.AspNetCore.Serilog
             logEvent.AddPropertyIfAbsentAndNotNull(_correlationIdProperty);
             logEvent.AddPropertyIfAbsentAndNotNull(_originalForProperty);
             logEvent.AddPropertyIfAbsentAndNotNull(_subProperty);
-            logEvent.AddPropertyIfAbsentAndNotNull(_correlationIdProperty);
+            logEvent.AddPropertyIfAbsentAndNotNull(_clientIdProperty);
         }
     }
 }
