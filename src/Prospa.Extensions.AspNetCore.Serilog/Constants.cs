@@ -15,7 +15,9 @@
 
             public static readonly string OriginalFor = nameof(OriginalFor);
 
-            public static readonly string Subject = nameof(Subject);
+            public static readonly string Sub = nameof(Sub);
+
+            public static readonly string ClientId = nameof(ClientId);
         }
     }
 }
