@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using Prospa.Extensions.AspNetCore.Authorization;
 
 // ReSharper disable CheckNamespace
 namespace Microsoft.AspNetCore.Authorization
@@ -10,14 +9,14 @@ namespace Microsoft.AspNetCore.Authorization
     {
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, HasScopeRequirement requirement)
         {
-            if (!context.User.HasClaim(c => c.Type == Constants.Claims.Scope && c.Issuer == requirement.Issuer))
+            if (!context.User.HasClaim(c => c.Type == Prospa.Extensions.AspNetCore.Authorization.Constants.Claims.Scope))
             {
                 return Task.CompletedTask;
             }
 
-            var scopes = context.User.FindFirst(c => c.Type == Constants.Claims.Scope && c.Issuer == requirement.Issuer).Value.Split(' ');
+            var scopes = context.User.FindAll(c => c.Type == Prospa.Extensions.AspNetCore.Authorization.Constants.Claims.Scope);
 
-            if (scopes.Any(s => s == requirement.Scope))
+            if (scopes.Any(s => s.Value == requirement.Scope))
             {
                 context.Succeed(requirement);
             }

@@ -9,12 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup Label="Microsoft Package References">
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="$(AspNetCoreVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.3" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
   </ItemGroup>
 
   <ItemGroup Label="Third Party Package References">
-    <PackageReference Include="GlobalExceptionHandler" Version="3.0.0" />
+    <PackageReference Include="GlobalExceptionHandler" Version="4.0.0" />
   </ItemGroup>
 
   <ItemGroup>

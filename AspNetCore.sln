@@ -19,6 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_solution items", "_solutio
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
 		AspNetCore.sln.DotSettings = AspNetCore.sln.DotSettings
+		azure-pipelines.yml = azure-pipelines.yml
 		build.cake = build.cake
 		global.json = global.json
 		Prospa.ruleset = Prospa.ruleset
