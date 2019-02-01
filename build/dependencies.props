@@ -5,11 +5,11 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Microsoft Package Versions">
-    <MicrosoftExtensionsVersion>2.1.1</MicrosoftExtensionsVersion>
+    <MicrosoftExtensionsVersion>2.2.0</MicrosoftExtensionsVersion>
   </PropertyGroup>
 
   <PropertyGroup Label="Microsoft AspNet Core Package Versions">
-    <AspNetCoreVersion>2.1.5</AspNetCoreVersion>
+    <AspNetCoreVersion>2.2.0</AspNetCoreVersion>
     <AspNetCoreMvcVersioningVersion>2.3.0</AspNetCoreMvcVersioningVersion>
     <AspNetCoreMvcVersioningApiExplorerVersion>2.2.0</AspNetCoreMvcVersioningApiExplorerVersion>
   </PropertyGroup>
@@ -27,7 +27,7 @@
     <MoqVersion>4.9.0</MoqVersion>
     <TestSdkVersion>15.8.0</TestSdkVersion>
     <XunitVersion>2.4.0</XunitVersion>
-    <FluentAssertionsVersion>5.4.1</FluentAssertionsVersion>
+    <FluentAssertionsVersion>5.6.0</FluentAssertionsVersion>
   </PropertyGroup>
 
 </Project>
