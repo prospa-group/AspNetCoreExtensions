@@ -38,14 +38,14 @@
     <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="2.6.2" />
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
     <PackageReference Include="Serilog.Sinks.Seq" Version="4.0.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="$(SwashbuckleVersion)" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-beta" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="5.0.0-beta" />
   </ItemGroup>
 
   <ItemGroup Label="Project References">
     <ProjectReference Include="..\..\src\Prospa.Extensions.AspNetCore.Authorization\Prospa.Extensions.AspNetCore.Authorization.csproj" />
+    <ProjectReference Include="..\..\src\Prospa.Extensions.AspNetCore.Mvc.Core\Prospa.Extensions.AspNetCore.Mvc.Core.csproj" />
     <ProjectReference Include="..\..\src\Prospa.Extensions.AspNetCore.Serilog\Prospa.Extensions.AspNetCore.Serilog.csproj" />
-    <ProjectReference Include="..\..\src\Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger\Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger.csproj" />
-    <ProjectReference Include="..\..\src\Prospa.Extensions.AspNetCore.Swagger\Prospa.Extensions.AspNetCore.Swagger.csproj" />
     <ProjectReference Include="..\..\src\Prospa.Extensions.Serilog\Prospa.Extensions.Serilog.csproj" />
   </ItemGroup>
 

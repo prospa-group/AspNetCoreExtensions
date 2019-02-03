@@ -3,14 +3,8 @@ using System.Reflection;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection;
 using Prospa.Extensions.AspNetCore.Authorization;
-using Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger.DocumentFilters;
-using Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger.OperationFilters;
-using Prospa.Extensions.AspNetCore.Swagger;
-using Prospa.Extensions.AspNetCore.Swagger.OperationFilters;
-using Prospa.Extensions.AspNetCore.Swagger.SchemaFilters;
-using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.AspNetCore.Annotations;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using Swashbuckle.AspNetCore.SwaggerUI;
 
 // ReSharper disable CheckNamespace
 namespace Microsoft.AspNetCore.Builder
@@ -29,13 +23,19 @@ namespace Microsoft.AspNetCore.Builder
                     var assemblyDescription = assembly.GetCustomAttribute<AssemblyDescriptionAttribute>().Description;
                     var apiVersionDescriptionProvider = provider.GetRequiredService<IApiVersionDescriptionProvider>();
 
-                    options.SwaggerVersionedDoc(apiVersionDescriptionProvider, assemblyDescription, assembly.GetName().Name);
-                    options.AllowFilteringDocsByApiVersion();
+                    // TODO: Open API
+                    // options.SwaggerVersionedDoc(apiVersionDescriptionProvider, assemblyDescription, assembly.GetName().Name);
+                    // options.AllowFilteringDocsByApiVersion();
 
                     AddDefaultOptions(options, assembly);
                     AddDefaultOperationFilters(provider, options);
                     AddDefaultSchemaFilters(options);
                     AddDefaultDocumentFilters(options);
+
+                    options.OperationFilter<AnnotationsOperationFilter>();
+                    options.OperationFilter<XmlCommentsOperationFilter>();
+                    // options.OperationFilter<AddHeaderOperationFilter>();
+                    // options.OperationFilter<SecurityRequirementsOperationFilter>();
                 });
 
             return services;
@@ -48,8 +48,9 @@ namespace Microsoft.AspNetCore.Builder
                 {
                     options.PreSerializeFilters.Add((swagger, httpReq) =>
                     {
-                        swagger.Host = httpReq.Host.Value;
-                        swagger.LowercaseRoutes();
+                        // TODO: Open API
+                        // swagger.Host = httpReq.Host.Value;
+                        // swagger.LowercaseRoutes();
                     });
                 });
 
@@ -62,25 +63,31 @@ namespace Microsoft.AspNetCore.Builder
                 options =>
                 {
                     var provider = app.ApplicationServices.GetService<IApiVersionDescriptionProvider>();
-                    options.SwaggerVersionedJsonEndpoints(provider);
+                    // TODO: Open API
+                    // options.SwaggerVersionedJsonEndpoints(provider);
                 });
 
             return app;
         }
 
-        private static void AddDefaultDocumentFilters(SwaggerGenOptions options) { options.DocumentFilter<SetVersionInPaths>(); }
+        private static void AddDefaultDocumentFilters(SwaggerGenOptions options)
+        {
+            // TODO: Open API
+            // options.DocumentFilter<SetVersionInPaths>();
+        }
 
         private static void AddDefaultOperationFilters(IServiceProvider provider, SwaggerGenOptions options)
         {
             var authzOptions = provider.GetRequiredService<AuthOptions>();
 
-            options.OperationFilter<AddAuthorizationHeaderParameterOperationFilter>(authzOptions.ScopePolicies);
-            options.OperationFilter<RemoveVersionParameters>();
-            options.OperationFilter<HttpHeaderOperationFilter>();
-            options.OperationFilter<ForbiddenResponseOperationFilter>();
-            options.OperationFilter<UnauthorizedResponseOperationFilter>();
-            options.OperationFilter<DelimitedQueryStringOperationFilter>();
-            options.OperationFilter<DeprecatedVersionOperationFilter>();
+            // TODO: Open API
+            // options.OperationFilter<AddAuthorizationHeaderParameterOperationFilter>(authzOptions.ScopePolicies);
+            // options.OperationFilter<RemoveVersionParameters>();
+            // options.OperationFilter<HttpHeaderOperationFilter>();
+            // options.OperationFilter<ForbiddenResponseOperationFilter>();
+            // options.OperationFilter<UnauthorizedResponseOperationFilter>();
+            // options.OperationFilter<DelimitedQueryStringOperationFilter>();
+            // options.OperationFilter<DeprecatedVersionOperationFilter>();
         }
 
         private static void AddDefaultOptions(SwaggerGenOptions options, Assembly assembly)
@@ -90,12 +97,14 @@ namespace Microsoft.AspNetCore.Builder
             options.DescribeAllEnumsAsStrings();
             options.DescribeAllParametersInCamelCase();
             options.DescribeStringEnumsInCamelCase();
-            options.IncludeXmlCommentsIfExists(assembly);
+            // TODO: Open API
+            // options.IncludeXmlCommentsIfExists(assembly);
         }
 
         private static void AddDefaultSchemaFilters(SwaggerGenOptions options)
         {
-            options.SchemaFilter<ModelStateDictionarySchemaFilter>();
+            // TODO: Open API
+            // options.SchemaFilter<ModelStateDictionarySchemaFilter>();
         }
     }
 }
