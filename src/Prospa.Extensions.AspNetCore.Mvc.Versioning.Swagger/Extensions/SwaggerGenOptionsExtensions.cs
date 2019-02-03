@@ -1,8 +1,10 @@
 ﻿using System.Linq;
+using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 using Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger.Extensions;
-using Swashbuckle.AspNetCore.Swagger;
 
 // ReSharper disable CheckNamespace
 namespace Swashbuckle.AspNetCore.SwaggerGen
@@ -15,7 +17,21 @@ namespace Swashbuckle.AspNetCore.SwaggerGen
             options.DocInclusionPredicate(
                 (docName, apiDesc) =>
                 {
-                    var versions = apiDesc.ControllerAttributes().OfType<ApiVersionAttribute>().SelectMany(attr => attr.Versions);
+                    if (!apiDesc.TryGetMethodInfo(out MethodInfo methodInfo))
+                    {
+                        return false;
+                    }
+
+                    if (methodInfo.DeclaringType == null)
+                    {
+                        return false;
+                    }
+
+                    var versions = methodInfo.DeclaringType
+                                             .GetCustomAttributes(true)
+                                             .OfType<ApiVersionAttribute>()
+                                             .SelectMany(attr => attr.Versions);
+
                     return versions.Any(v => $"v{v.ToString()}" == docName);
                 });
 
@@ -34,7 +50,7 @@ namespace Swashbuckle.AspNetCore.SwaggerGen
                     ? $"{assemblyDescription} This API version has been deprecated."
                     : assemblyDescription;
 
-                var info = new Info
+                var info = new OpenApiInfo
                            {
                                Title = assemblyProduct,
                                Description = description,

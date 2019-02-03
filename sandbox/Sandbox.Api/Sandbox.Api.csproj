@@ -45,7 +45,9 @@
   <ItemGroup Label="Project References">
     <ProjectReference Include="..\..\src\Prospa.Extensions.AspNetCore.Authorization\Prospa.Extensions.AspNetCore.Authorization.csproj" />
     <ProjectReference Include="..\..\src\Prospa.Extensions.AspNetCore.Mvc.Core\Prospa.Extensions.AspNetCore.Mvc.Core.csproj" />
+    <ProjectReference Include="..\..\src\Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger\Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger.csproj" />
     <ProjectReference Include="..\..\src\Prospa.Extensions.AspNetCore.Serilog\Prospa.Extensions.AspNetCore.Serilog.csproj" />
+    <ProjectReference Include="..\..\src\Prospa.Extensions.AspNetCore.Swagger\Prospa.Extensions.AspNetCore.Swagger.csproj" />
     <ProjectReference Include="..\..\src\Prospa.Extensions.Serilog\Prospa.Extensions.Serilog.csproj" />
   </ItemGroup>
 

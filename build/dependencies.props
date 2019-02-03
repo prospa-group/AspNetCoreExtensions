@@ -15,7 +15,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Third Party AspNet Core Package Versions">
-    <SwashbuckleVersion>2.4.0</SwashbuckleVersion>
+    <SwashbuckleVersion>5.0.0-beta</SwashbuckleVersion>
   </PropertyGroup>
 
   <PropertyGroup Label="Third Party Package Versions">

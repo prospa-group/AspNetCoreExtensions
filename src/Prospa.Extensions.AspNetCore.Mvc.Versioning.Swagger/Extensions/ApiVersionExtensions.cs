@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.OpenApi.Models;
 
 namespace Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger.Extensions
 {
@@ -10,7 +10,7 @@ namespace Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger.Extensions
             return $"Version {version}";
         }
 
-        public static string VersionFromInfo(this Info info)
+        public static string VersionFromInfo(this OpenApiInfo info)
         {
             return info.Version.Replace("Version ", string.Empty);
         }
