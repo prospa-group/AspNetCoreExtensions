@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -17,48 +19,51 @@ namespace Prospa.Extensions.AspNetCore.Swagger.OperationFilters
         public AddAuthorizationHeaderParameterOperationFilter(Dictionary<string, string[]> scopePolicyMapping) { _scopePolicyMapping = scopePolicyMapping; }
 
         /// <inheritdoc />
-        public void Apply(Operation operation, OperationFilterContext context)
+        public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
-            var controllerScopes = context.ApiDescription.ControllerAttributes().OfType<AuthorizeAttribute>().Select(attr => attr.Policy);
+            var actionAttributes = context.MethodInfo.GetCustomAttributes(true);
+            var controllerAttributes = context.MethodInfo.DeclaringType.GetTypeInfo().GetCustomAttributes(true);
+            var actionAndControllerAttributes = actionAttributes.Union(controllerAttributes).Distinct().ToList();
+            var actionAndControllerPolicies = actionAndControllerAttributes.OfType<AuthorizeAttribute>().Select(attr => attr.Policy);
 
-            var actionPolicies = context.ApiDescription.ActionAttributes().OfType<AuthorizeAttribute>().Select(attr => attr.Policy);
-
-            var requiredPolicies = controllerScopes.Union(actionPolicies).Distinct().ToList();
-
-            if (!requiredPolicies.Any())
+            if (!actionAndControllerPolicies.Any())
             {
                 return;
             }
 
-            operation.Responses.Add("401", new Response { Description = "Unauthorized" });
-            operation.Responses.Add("403", new Response { Description = "Forbidden" });
+            operation.Responses.Add("401", new OpenApiResponse { Description = "Unauthorized" });
+            operation.Responses.Add("403", new OpenApiResponse { Description = "Forbidden" });
 
             var requiredScopes = new List<string>();
 
-            foreach (var policy in requiredPolicies)
+            foreach (var policy in actionAndControllerPolicies)
             {
                 requiredScopes.AddRange(GetPolicyScopes(policy));
             }
 
             operation.Description += $"\n\r<b>Required OAuth2 Scopes:</b> <i>{string.Join(", ", requiredScopes)}</i>";
 
-            // Only setting this to get the padlock display
-            operation.Security = new List<IDictionary<string, IEnumerable<string>>>
+            var oauthScheme = new OpenApiSecurityScheme
+                              {
+                                  Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "oauth2" }
+                              };
+
+            operation.Security = new List<OpenApiSecurityRequirement>
                                  {
-                                     new Dictionary<string, IEnumerable<string>>
+                                     new OpenApiSecurityRequirement
                                      {
-                                         { "oauth2", requiredScopes }
+                                         [oauthScheme] = requiredScopes.ToList()
                                      }
                                  };
 
             operation.Parameters.Add(
-                new NonBodyParameter
+                new OpenApiParameter
                 {
                     Name = "Authorization",
-                    In = "header",
+                    In = ParameterLocation.Header,
                     Description = "Bearer {access token}",
                     Required = true,
-                    Type = "string"
+                    Style = ParameterStyle.Simple
                 });
         }
 

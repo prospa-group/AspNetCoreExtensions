@@ -8,6 +8,7 @@ using Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger.OperationFilters;
 using Prospa.Extensions.AspNetCore.Swagger;
 using Prospa.Extensions.AspNetCore.Swagger.OperationFilters;
 using Prospa.Extensions.AspNetCore.Swagger.SchemaFilters;
+using Swashbuckle.AspNetCore.Annotations;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
@@ -36,6 +37,8 @@ namespace Microsoft.AspNetCore.Builder
                     AddDefaultOperationFilters(provider, options);
                     AddDefaultSchemaFilters(options);
                     AddDefaultDocumentFilters(options);
+
+                    options.OperationFilter<AnnotationsOperationFilter>();
                 });
 
             return services;
@@ -48,7 +51,6 @@ namespace Microsoft.AspNetCore.Builder
                 {
                     options.PreSerializeFilters.Add((swagger, httpReq) =>
                     {
-                        swagger.Host = httpReq.Host.Value;
                         swagger.LowercaseRoutes();
                     });
                 });
@@ -68,7 +70,10 @@ namespace Microsoft.AspNetCore.Builder
             return app;
         }
 
-        private static void AddDefaultDocumentFilters(SwaggerGenOptions options) { options.DocumentFilter<SetVersionInPaths>(); }
+        private static void AddDefaultDocumentFilters(SwaggerGenOptions options)
+        {
+            options.DocumentFilter<SetVersionInPaths>();
+        }
 
         private static void AddDefaultOperationFilters(IServiceProvider provider, SwaggerGenOptions options)
         {

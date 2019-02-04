@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
-using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Prospa.Extensions.AspNetCore.Swagger.OperationFilters
@@ -14,18 +14,18 @@ namespace Prospa.Extensions.AspNetCore.Swagger.OperationFilters
     {
         private const string UnauthorizedStatusCode = "401";
 
-        private static readonly Response UnauthorizedResponse = new Response()
-                                                                {
-                                                                    Description =
-                                                                        "Unauthorized - The user has not supplied the necessary credentials to access the resource."
-                                                                };
+        private static readonly OpenApiResponse UnauthorizedResponse = new OpenApiResponse
+                                                                       {
+                                                                           Description =
+                                                                               "Unauthorized - The user has not supplied the necessary credentials to access the resource."
+                                                                       };
 
         /// <summary>
         ///     Applies the specified operation.
         /// </summary>
         /// <param name="operation">The operation.</param>
         /// <param name="context">The context.</param>
-        public void Apply(Operation operation, OperationFilterContext context)
+        public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
             var filterDescriptors = context.ApiDescription.ActionDescriptor.FilterDescriptors;
             var authorizationRequirements = filterDescriptors.GetPolicyRequirements();

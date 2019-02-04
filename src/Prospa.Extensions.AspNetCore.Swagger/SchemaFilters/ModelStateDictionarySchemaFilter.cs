@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Prospa.Extensions.AspNetCore.Swagger.SchemaFilters
@@ -16,7 +16,7 @@ namespace Prospa.Extensions.AspNetCore.Swagger.SchemaFilters
         /// </summary>
         /// <param name="model">The model.</param>
         /// <param name="context">The context.</param>
-        public void Apply(Schema model, SchemaFilterContext context)
+        public void Apply(OpenApiSchema model, SchemaFilterContext context)
         {
             if (context.SystemType == typeof(ModelStateDictionary))
             {
@@ -25,8 +25,9 @@ namespace Prospa.Extensions.AspNetCore.Swagger.SchemaFilters
                 modelState.AddModelError("property2", "Error message 2");
                 var serializableError = new SerializableError(modelState);
 
-                model.Default = serializableError;
-                model.Example = serializableError;
+                // TODO: OpenAPI
+                // model.Default = serializableError;
+                // model.Example = serializableError;
             }
         }
     }

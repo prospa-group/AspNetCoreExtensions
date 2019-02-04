@@ -16,7 +16,7 @@ namespace Sandbox.Api
         {
             webHostBuilder.ConfigureServices((context, services) =>
             {
-                services.AddSingleton<IStartupFilter>(new RequireEndpointKeyStartupFilter(new[] { "/health", "/metrics", "/metrics-text", "/env", "/docs" }, "123123"));
+                services.AddSingleton<IStartupFilter>(new RequireEndpointKeyStartupFilter(new[] { "/health", "/metrics", "/metrics-text", "/env", "/docs" }, "123"));
             });
 
             webHostBuilder.UseMetrics();
