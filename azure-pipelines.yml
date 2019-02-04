@@ -31,13 +31,13 @@ steps:
   condition: succeeded()
   inputs:
     command: pack
-    packDirectory: '$(Build.ArtifactStagingDirectory)/packages'
+    packDirectory: '$(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact'
   condition: succeeded()
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)/packages'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
 
 - task: DotNetCoreCLI@2
   displayName: dotnet nuget push
@@ -45,4 +45,4 @@ steps:
   inputs:
     command: custom
     custom: nuget
-    arguments: push $(Build.ArtifactStagingDirectory)/packages/*.nupkg --source https://api.nuget.org/v3/index.json --no-service-endpoint --api-key $(NugetApiKey)
+    arguments: push $(Build.ArtifactStagingDirectory)/*.nupkg --source https://api.nuget.org/v3/index.json --no-service-endpoint --api-key $(NugetApiKey)
