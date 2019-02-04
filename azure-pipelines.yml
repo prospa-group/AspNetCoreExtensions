@@ -10,7 +10,7 @@ steps:
     packageType: 'sdk'
     version: '2.2.101' 
 
-- script: ./build.ps1
+- script: build.ps1
   displayName: 'dotnet build $(buildConfiguration)'
 
 - task: PublishTestResults@2
