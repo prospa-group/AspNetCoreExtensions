@@ -39,7 +39,7 @@ namespace Prospa.Extensions.AspNetCore.Mvc.Core.StartupFilters
                 {
                     var key = ExtractToken(context);
 
-                    if (DefaultEndpoints.Any(e => context.Request.Path.Value == e))
+                    if (_endpoints.Contains(context.Request.Path.Value))
                     {
                         if (key != _key)
                         {
