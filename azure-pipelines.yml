@@ -33,6 +33,12 @@ steps:
     command: pack
     packDirectory: '$(Build.ArtifactStagingDirectory)/packages'
 
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
+  condition: succeeded()
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/packages'
+
 - task: DotNetCoreCLI@2
   displayName: dotnet nuget push
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
@@ -40,10 +46,3 @@ steps:
     command: custom
     custom: nuget
     arguments: push $(Build.ArtifactStagingDirectory)/packages/*.nupkg --source https://api.nuget.org/v3/index.json --no-service-endpoint --api-key $(NugetApiKey)
-
-
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact'
-  condition: succeeded()
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
