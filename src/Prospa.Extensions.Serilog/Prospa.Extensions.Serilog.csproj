@@ -12,7 +12,7 @@
     <PackageReference Include="Serilog.Enrichers.Environment" Version="2.1.2" />
     <PackageReference Include="Serilog.Enrichers.Thread" Version="3.0.0" />
     <PackageReference Include="Serilog.Exceptions" Version="4.1.0" />
-    <PackageReference Include="Serilog.Filters.Expressions" Version="1.1.0" />
+    <PackageReference Include="Serilog.Filters.Expressions" Version="2.0.0" />
   </ItemGroup>
 
 </Project>
