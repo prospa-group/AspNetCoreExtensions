@@ -1,7 +1,7 @@
 <Project>
 
   <PropertyGroup Label="Private Asset Package Versions">
-    <StyleCopAnalyzersVersion>1.0.0</StyleCopAnalyzersVersion>
+    <StyleCopAnalyzersVersion>1.0.2</StyleCopAnalyzersVersion>
   </PropertyGroup>
 
   <PropertyGroup Label="Microsoft Package Versions">
