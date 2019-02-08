@@ -10,7 +10,7 @@
 
   <ItemGroup Label="Microsoft Package References">
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="2.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="2.2.0" />
   </ItemGroup>
 
 </Project>
