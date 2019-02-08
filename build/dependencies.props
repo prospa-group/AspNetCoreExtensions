@@ -11,7 +11,7 @@
   <PropertyGroup Label="Microsoft AspNet Core Package Versions">
     <AspNetCoreVersion>2.2.0</AspNetCoreVersion>
     <AspNetCoreMvcVersioningVersion>2.3.0</AspNetCoreMvcVersioningVersion>
-    <AspNetCoreMvcVersioningApiExplorerVersion>2.2.0</AspNetCoreMvcVersioningApiExplorerVersion>
+    <AspNetCoreMvcVersioningApiExplorerVersion>3.2.0</AspNetCoreMvcVersioningApiExplorerVersion>
   </PropertyGroup>
 
   <PropertyGroup Label="Third Party AspNet Core Package Versions">
