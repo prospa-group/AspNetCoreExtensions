@@ -26,6 +26,7 @@ namespace Sandbox.Api
                .UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = Constants.HttpHeaders.ForwardedHeaders })
                .UseDefaultSecurityHeaders(_hostingEnvironment)
                .UseAuthentication()
+               .UseAuthorization()
                .UseDefaultDiagnostics(_hostingEnvironment)
                .UseCors(Constants.Cors.AllowAny)
                .UseDefaultSwagger()
