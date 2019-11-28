@@ -21,17 +21,18 @@ namespace Microsoft.Extensions.DependencyInjection
             return services;
         }
 
-        public static IApplicationBuilder UseDefaultDiagnostics(this IApplicationBuilder app, IHostingEnvironment hostingEnvironment)
+        public static IApplicationBuilder UseDefaultDiagnostics(this IApplicationBuilder app, IWebHostEnvironment hostingEnvironment)
         {
             app.UseMiddleware<LogEnrichmentMiddleware>();
 
             app.UseGlobalExceptionHandler(
                 configuration =>
                 {
-                    configuration.HandleHttpValidationExceptions(hostingEnvironment);
-                    configuration.HandleOperationCancelledExceptions(hostingEnvironment);
-                    configuration.HandleUnauthorizedExceptions(hostingEnvironment);
-                    configuration.HandleUnhandledExceptions(hostingEnvironment);
+                    // TODO: Global exception handling
+                    // configuration.HandleHttpValidationExceptions(hostingEnvironment);
+                    // configuration.HandleOperationCancelledExceptions(hostingEnvironment);
+                    // configuration.HandleUnauthorizedExceptions(hostingEnvironment);
+                    // configuration.HandleUnhandledExceptions(hostingEnvironment);
                 });
 
             return app;

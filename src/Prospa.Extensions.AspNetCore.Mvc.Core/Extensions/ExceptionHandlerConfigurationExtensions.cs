@@ -1,12 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
 using Prospa.Extensions.AspNetCore.Http;
-using Prospa.Extensions.AspNetCore.Mvc.Core;
 using Prospa.Extensions.AspNetCore.Mvc.Core.Resources;
 
 // ReSharper disable CheckNamespace
@@ -86,7 +85,7 @@ namespace GlobalExceptionHandler.WebApi
                 }
             }
 
-            return JsonConvert.SerializeObject(errorResponse, DefaultCamelCaseJsonSerializerSettings.Instance);
+            return JsonSerializer.Serialize(errorResponse);
         }
     }
 }

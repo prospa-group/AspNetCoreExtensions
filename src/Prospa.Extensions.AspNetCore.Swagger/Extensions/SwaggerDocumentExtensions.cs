@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Microsoft.OpenApi.Models;
 
 // ReSharper disable CheckNamespace
 namespace Swashbuckle.AspNetCore.Swagger
@@ -6,7 +7,7 @@ namespace Swashbuckle.AspNetCore.Swagger
 {
     public static class SwaggerDocumentExtensions
     {
-        public static SwaggerDocument LowercaseRoutes(this SwaggerDocument swagger)
+        public static OpenApiDocument LowercaseRoutes(this OpenApiDocument swagger)
         {
             var paths = swagger.Paths.ToDictionary(item => item.Key.ToLowerInvariant(), item => item.Value);
             swagger.Paths.Clear();

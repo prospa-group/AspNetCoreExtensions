@@ -25,8 +25,7 @@ namespace System.Security.Claims
                     new Claim("name", "Test User"),
                     scopeClaim,
                     new Claim("nonce", Guid.NewGuid().ToString())
-                },
-                authOptions.ByPassAuthAuthType);
+                });
 
             return new ClaimsPrincipal(identity);
         }

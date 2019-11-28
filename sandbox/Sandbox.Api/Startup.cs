@@ -8,12 +8,12 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Sandbox.Api
 {
-    public class Startup : IStartup
+    public class Startup
     {
         private readonly IConfiguration _configuration;
-        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public Startup(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
+        public Startup(IConfiguration configuration, IWebHostEnvironment hostingEnvironment)
         {
             _configuration = configuration;
             _hostingEnvironment = hostingEnvironment;
@@ -25,21 +25,20 @@ namespace Sandbox.Api
                .UseCorrelationId(new CorrelationIdOptions { UpdateTraceIdentifier = false })
                .UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = Constants.HttpHeaders.ForwardedHeaders })
                .UseDefaultSecurityHeaders(_hostingEnvironment)
-               .UseAuthorizationByPass()
                .UseAuthentication()
                .UseDefaultDiagnostics(_hostingEnvironment)
                .UseCors(Constants.Cors.AllowAny)
-               .UseMvc()
                .UseDefaultSwagger()
                .UseDefaultSwaggerUi();
+
+            app.UseRouting();
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
 
-        public IServiceProvider ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
             AddCoreServices(services);
             AddApplicationServices(services);
-
-            return services.BuildServiceProvider();
         }
 
         private void AddApplicationServices(IServiceCollection services)
@@ -51,16 +50,21 @@ namespace Sandbox.Api
         {
             services.AddCorrelationId();
 
-            services.AddMvcCore()
+            services
+                    .AddMvcCore()
                     .AddMetricsCore()
                     .AddDefaultCors()
                     .AddDefaultValidation()
-                    .AddDefaultVersionedApiExplorer()
+                    .AddApiExplorer()
                     .AddAuthorization()
                     .AddDataAnnotations()
-                    .AddJsonFormatters()
                     .AddDefaultJsonOptions()
                     .AddDefaultMvcOptions();
+
+            services.AddRouting(options => options.LowercaseUrls = true);
+            
+            services.AddApiVersioning()
+                    .AddVersionedApiExplorer(options => options.GroupNameFormat = Constants.Versioning.GroupNameFormat);
 
             services
                 .AddRouting(options => options.LowercaseUrls = true)

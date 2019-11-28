@@ -1,9 +1,8 @@
 ﻿using System;
 using System.IO;
 using App.Metrics;
-using App.Metrics.AspNetCore.Health;
-using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 using Serilog;
 
 namespace Sandbox.Api
@@ -35,16 +34,20 @@ namespace Sandbox.Api
             }
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args, IMetricsRoot metrics) =>
-            WebHost.CreateDefaultBuilder(args)
-                   .UseKestrel(options => options.AddServerHeader = false)
+        public static IHostBuilder CreateWebHostBuilder(string[] args, IMetricsRoot metrics) =>
+            Host.CreateDefaultBuilder(args)
                    .UseContentRoot(Directory.GetCurrentDirectory())
                    .ConfigureDefaultAppConfiguration(args)
                    .ConfigureDefaultMetrics(metrics)
-                   .ConfigureDefaultHealth(metrics)
+                   .ConfigureDefaultHealth()
                    .UseSerilog()
                    .UseDefaultMetrics()
                    .UseDefaultHealth()
-                   .UseStartup<Startup>();
+                   .ConfigureWebHost(
+                       builder =>
+                       {
+                           builder.UseKestrel(options => options.AddServerHeader = false);
+                           builder.UseStartup<Startup>();
+                       });
     }
 }
