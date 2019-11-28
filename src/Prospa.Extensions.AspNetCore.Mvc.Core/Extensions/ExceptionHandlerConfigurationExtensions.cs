@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Prospa.Extensions.AspNetCore.Http;
 using Prospa.Extensions.AspNetCore.Mvc.Core.Resources;
 
@@ -16,7 +17,7 @@ namespace GlobalExceptionHandler.WebApi
     {
         public static void HandleHttpValidationExceptions(
             this ExceptionHandlerConfiguration configuration,
-            IHostingEnvironment hostingEnvironment)
+            IWebHostEnvironment hostingEnvironment)
         {
             configuration.Map<ValidationException>()
                          .ToStatusCode(StatusCodes.Status400BadRequest)
@@ -25,7 +26,7 @@ namespace GlobalExceptionHandler.WebApi
 
         public static void HandleOperationCancelledExceptions(
             this ExceptionHandlerConfiguration configuration,
-            IHostingEnvironment hostingEnvironment)
+            IWebHostEnvironment hostingEnvironment)
         {
             configuration.Map<OperationCanceledException>()
                          .ToStatusCode(499)
@@ -34,7 +35,7 @@ namespace GlobalExceptionHandler.WebApi
 
         public static void HandleUnauthorizedExceptions(
             this ExceptionHandlerConfiguration configuration,
-            IHostingEnvironment hostingEnvironment)
+            IWebHostEnvironment hostingEnvironment)
         {
             configuration.Map<UnauthorizedAccessException>()
                          .ToStatusCode(StatusCodes.Status401Unauthorized)
@@ -43,7 +44,7 @@ namespace GlobalExceptionHandler.WebApi
 
         public static void HandleUnhandledExceptions(
             this ExceptionHandlerConfiguration configuration,
-            IHostingEnvironment hostingEnvironment)
+            IWebHostEnvironment hostingEnvironment)
         {
             configuration.ContentType = "application/problem+json";
             configuration.Map<Exception>()
@@ -51,7 +52,7 @@ namespace GlobalExceptionHandler.WebApi
                          .WithBody((ex, context) => FormatErrorResponse(hostingEnvironment, context, ex, ErrorMessages.InternalServer));
         }
 
-        private static string FormatErrorResponse(IHostingEnvironment hostingEnvironment, HttpContext context, Exception ex, string message)
+        private static string FormatErrorResponse(IWebHostEnvironment hostingEnvironment, HttpContext context, Exception ex, string message)
         {
             var logger = context.RequestServices.GetRequiredService<IHttpRequestDetailsLogger>();
 

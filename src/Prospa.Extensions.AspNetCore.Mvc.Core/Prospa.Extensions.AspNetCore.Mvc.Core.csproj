@@ -2,12 +2,15 @@
 
   <PropertyGroup>
     <Description>ASP.NET Core MVC core components extensions.</Description>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFrameworks>netcoreapp3.0;</TargetFrameworks>
     <PackageTags>prospa;aspnetcore;mvc</PackageTags>
   </PropertyGroup>
-
+  
+  <ItemGroup Label="Framework References">
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  
   <ItemGroup Label="Microsoft Package References">
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.6.0" />
     <PackageReference Include="System.Text.Json" Version="4.6.0" />
   </ItemGroup>

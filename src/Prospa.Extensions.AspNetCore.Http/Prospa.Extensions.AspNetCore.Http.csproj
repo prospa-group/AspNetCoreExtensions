@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <Description>ASP.NET Core HTTP extensions.</Description>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFrameworks>netcoreapp3.0;</TargetFrameworks>
     <PackageTags>prospa;http;extensions</PackageTags>
   </PropertyGroup>
 
-  <ItemGroup Label="Microsoft Package References">
-    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+  <ItemGroup Label="Framework References">
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
 </Project>

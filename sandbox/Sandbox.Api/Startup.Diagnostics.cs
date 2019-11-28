@@ -28,11 +28,10 @@ namespace Microsoft.Extensions.DependencyInjection
             app.UseGlobalExceptionHandler(
                 configuration =>
                 {
-                    // TODO: Global exception handling
-                    // configuration.HandleHttpValidationExceptions(hostingEnvironment);
-                    // configuration.HandleOperationCancelledExceptions(hostingEnvironment);
-                    // configuration.HandleUnauthorizedExceptions(hostingEnvironment);
-                    // configuration.HandleUnhandledExceptions(hostingEnvironment);
+                    configuration.HandleHttpValidationExceptions(hostingEnvironment);
+                    configuration.HandleOperationCancelledExceptions(hostingEnvironment);
+                    configuration.HandleUnauthorizedExceptions(hostingEnvironment);
+                    configuration.HandleUnhandledExceptions(hostingEnvironment);
                 });
 
             return app;
