@@ -43,7 +43,7 @@ namespace Sandbox.Api
                    .UseSerilog()
                    .UseDefaultMetrics()
                    .UseDefaultHealth()
-                   .ConfigureWebHost(
+                   .ConfigureWebHostDefaults(
                        builder =>
                        {
                            builder.UseKestrel(options => options.AddServerHeader = false);

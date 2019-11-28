@@ -13,7 +13,6 @@ namespace Sandbox.Api.ConfigureOptions
         public void Configure(JsonOptions options)
         {
             options.JsonSerializerOptions.MaxDepth = MaxJsonDepth;
-            options.JsonSerializerOptions.IgnoreNullValues = true;
             options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
             options.JsonSerializerOptions.WriteIndented = true;
             options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
