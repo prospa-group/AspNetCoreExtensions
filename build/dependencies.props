@@ -24,7 +24,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Test Package Versions">
-    <MoqVersion>4.9.0</MoqVersion>
+    <MoqVersion>4.13.1</MoqVersion>
     <TestSdkVersion>15.8.0</TestSdkVersion>
     <XunitVersion>2.4.0</XunitVersion>
     <FluentAssertionsVersion>5.6.0</FluentAssertionsVersion>
