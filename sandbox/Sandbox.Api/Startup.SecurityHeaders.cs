@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 using Sandbox.Api;
 
 // ReSharper disable CheckNamespace
@@ -7,7 +8,7 @@ namespace Microsoft.AspNetCore.Builder
 {
     public static class StartupSecurityHeaders
     {
-        public static IApplicationBuilder UseDefaultSecurityHeaders(this IApplicationBuilder app, IHostingEnvironment hostingEnvironment)
+        public static IApplicationBuilder UseDefaultSecurityHeaders(this IApplicationBuilder app, IWebHostEnvironment hostingEnvironment)
         {
             if (!hostingEnvironment.IsDevelopment())
             {

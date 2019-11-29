@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Options;
-using Sandbox.Api;
 using Sandbox.Api.ConfigureOptions;
 
 // ReSharper disable CheckNamespace
@@ -30,7 +29,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
         public static IMvcCoreBuilder AddDefaultJsonOptions(this IMvcCoreBuilder builder)
         {
-            builder.Services.AddSingleton<IConfigureOptions<MvcJsonOptions>, JsonMvcOptionsSetup>();
+            builder.Services.AddSingleton<IConfigureOptions<JsonOptions>, JsonOptionsSetup>();
 
             return builder;
         }
@@ -39,15 +38,6 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             builder.SetCompatibilityVersion(CompatibilityVersion.Latest);
             builder.Services.AddSingleton<IConfigureOptions<MvcOptions>, FormattersMvcOptionsSetup>();
-
-            return builder;
-        }
-
-        public static IMvcCoreBuilder AddDefaultVersionedApiExplorer(this IMvcCoreBuilder builder)
-        {
-            builder
-                .AddApiExplorer()
-                .AddVersionedApiExplorer(options => options.GroupNameFormat = Constants.Versioning.GroupNameFormat);
 
             return builder;
         }

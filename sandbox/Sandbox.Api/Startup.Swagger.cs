@@ -1,14 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 using Prospa.Extensions.AspNetCore.Authorization;
 using Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger.DocumentFilters;
 using Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger.OperationFilters;
 using Prospa.Extensions.AspNetCore.Swagger;
 using Prospa.Extensions.AspNetCore.Swagger.OperationFilters;
-using Prospa.Extensions.AspNetCore.Swagger.SchemaFilters;
-using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
@@ -34,7 +34,6 @@ namespace Microsoft.AspNetCore.Builder
 
                     AddDefaultOptions(options, assembly);
                     AddDefaultOperationFilters(provider, options);
-                    AddDefaultSchemaFilters(options);
                     AddDefaultDocumentFilters(options);
                 });
 
@@ -48,8 +47,7 @@ namespace Microsoft.AspNetCore.Builder
                 {
                     options.PreSerializeFilters.Add((swagger, httpReq) =>
                     {
-                        swagger.Host = httpReq.Host.Value;
-                        swagger.LowercaseRoutes();
+                        swagger.Servers = new List<OpenApiServer> { new OpenApiServer { Url = $"{httpReq.Scheme}://{httpReq.Host.Value}" } };
                     });
                 });
 
@@ -87,15 +85,8 @@ namespace Microsoft.AspNetCore.Builder
         {
             options.IgnoreObsoleteActions();
             options.IgnoreObsoleteProperties();
-            options.DescribeAllEnumsAsStrings();
             options.DescribeAllParametersInCamelCase();
-            options.DescribeStringEnumsInCamelCase();
             options.IncludeXmlCommentsIfExists(assembly);
-        }
-
-        private static void AddDefaultSchemaFilters(SwaggerGenOptions options)
-        {
-            options.SchemaFilter<ModelStateDictionarySchemaFilter>();
         }
     }
 }

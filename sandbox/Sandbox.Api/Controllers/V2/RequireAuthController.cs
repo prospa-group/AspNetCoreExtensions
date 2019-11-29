@@ -11,9 +11,9 @@ namespace Sandbox.Api.Controllers.V2
     {
         private readonly ILogger _logger = Log.ForContext<RequireAuthController>();
 
-        [HttpGet]
+        [HttpGet("{id}", Name = nameof(Get))]
         [Authorize(Constants.Auth.Policies.ReadPolicy)]
-        public ActionResult<Entity> Get(int id)
+        public ActionResult<Entity> Get([FromRoute]int id)
         {
             _logger.Information("Should add Subject Property");
 
@@ -30,7 +30,7 @@ namespace Sandbox.Api.Controllers.V2
         [Authorize(Constants.Auth.Policies.WritePolicy)]
         public ActionResult<Entity> Post(Entity entity)
         {
-            return CreatedAtAction(nameof(Get), new { id = entity.Id }, entity);
+            return CreatedAtRoute(nameof(Get), new { id = entity.Id }, null);
         }
     }
 

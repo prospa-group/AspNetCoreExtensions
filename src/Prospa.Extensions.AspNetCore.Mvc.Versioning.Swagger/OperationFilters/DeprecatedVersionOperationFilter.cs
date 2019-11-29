@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.OpenApi.Models;
+using Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger.Extensions;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger.OperationFilters
@@ -8,11 +9,9 @@ namespace Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger.OperationFilters
     public class DeprecatedVersionOperationFilter : IOperationFilter
     {
         /// <inheritdoc />
-        public void Apply(Operation operation, OperationFilterContext context)
+        public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
-            var lastControllerVersion =
-                context.ApiDescription.ControllerAttributes()
-                .OfType<ApiVersionAttribute>().Where(apiVer => apiVer.Deprecated);
+            var lastControllerVersion = context.GetControllerAndActionAttributes<ApiVersionAttribute>().Where(apiVer => apiVer.Deprecated);
 
             if (!lastControllerVersion.Any())
             {

@@ -1,12 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\build\common.props" />
-
   <PropertyGroup>
     <Description>Serilog ASP.NET Core extensions and enrichers.</Description>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netcoreapp3.0;</TargetFrameworks>
     <PackageTags>prospa;serilog;aspnetcore</PackageTags>
   </PropertyGroup>
+
+  <ItemGroup Label="Framework References">
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
 
   <ItemGroup Label="Third Party Package References">
     <PackageReference Include="Serilog" Version="$(SerilogVersion)" />

@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.OpenApi.Models;
 using Prospa.Extensions.AspNetCore.Mvc.Core.Filters;
-using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Prospa.Extensions.AspNetCore.Swagger.OperationFilters
 {
     /// <summary>
-    ///     Adds a Swashbuckle <see cref="NonBodyParameter" /> to all operations with a description of the required HTTP header
+    ///     Adds a Swashbuckle <see cref="OpenApiParameter" /> to all operations with a description of the required HTTP header.
     /// </summary>
     /// <seealso cref="IOperationFilter" />
     public class HttpHeaderOperationFilter : IOperationFilter
@@ -18,7 +17,7 @@ namespace Prospa.Extensions.AspNetCore.Swagger.OperationFilters
         /// </summary>
         /// <param name="operation">The operation.</param>
         /// <param name="context">The context.</param>
-        public void Apply(Operation operation, OperationFilterContext context)
+        public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
             var filter = context.ApiDescription
                                 .ActionDescriptor
@@ -33,7 +32,7 @@ namespace Prospa.Extensions.AspNetCore.Swagger.OperationFilters
 
             if (operation.Parameters == null)
             {
-                operation.Parameters = new List<IParameter>();
+                operation.Parameters = new List<OpenApiParameter>();
             }
 
             var description = filter.Description;
@@ -43,19 +42,13 @@ namespace Prospa.Extensions.AspNetCore.Swagger.OperationFilters
                 description += "<br />Will be sent back in the HTTP response headers.";
             }
 
-            var noBodyParameter = new NonBodyParameter
+            var noBodyParameter = new OpenApiParameter
                                   {
                                       Description = description,
-                                      In = "header",
+                                      In = ParameterLocation.Header,
                                       Name = filter.HttpHeaderName,
-                                      Required = filter.Required,
-                                      Type = "string"
+                                      Required = filter.Required
                                   };
-
-            if (filter.GetType() == typeof(CorrelationIdHttpHeaderAttribute))
-            {
-                noBodyParameter.Default = Guid.NewGuid();
-            }
 
             operation.Parameters.Add(noBodyParameter);
         }

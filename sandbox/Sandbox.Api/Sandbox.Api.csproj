@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>API to demonstrate Prospa web framework features</Description>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <UserSecretsId>68e1f568-8ff2-4888-9709-1c35cc3e00cb</UserSecretsId>
     <Company>Prospa Advance</Company>
     <Authors>Prospa</Authors>
@@ -12,33 +12,29 @@
 
   <ItemGroup>
     <Folder Include="Properties\" />
-    <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup Label="Microsoft Package References">
-    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.3.0" />
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="$(AspNetCoreMvcVersioningVersion)" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="$(AspNetCoreMvcVersioningApiExplorerVersion)" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.8.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="4.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.0.0" />
   </ItemGroup>
 
   <ItemGroup Label="Third Party Package References">
-    <PackageReference Include="App.Metrics" Version="3.0.0" />
-    <PackageReference Include="App.Metrics.AspNetCore.Mvc" Version="3.0.0" />
-    <PackageReference Include="App.Metrics.AspNetCore.Health" Version="2.1.0" />
-    <PackageReference Include="App.Metrics.Reporting.GrafanaCloudHostedMetrics" Version="1.0.0" />
-    <PackageReference Include="App.Metrics.Health.Reporting.Metrics" Version="2.1.0" />
-    <PackageReference Include="App.Metrics.Health.Reporting.Slack" Version="2.1.0" />
+    <PackageReference Include="App.Metrics" Version="4.0.0-preview1.0.3" />
+    <PackageReference Include="App.Metrics.AspNetCore.Mvc" Version="4.0.0-preview1.0.3" />
+    <PackageReference Include="App.Metrics.Reporting.GrafanaCloudHostedMetrics" Version="4.0.0-preview1.0.3" />
     <PackageReference Include="CorrelationId" Version="2.1.0" />
-    <PackageReference Include="FluentValidation.AspNetCore" Version="7.6.104" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.5.1" />
     <PackageReference Include="NWebsec.AspNetCore.Middleware" Version="2.0.0" />
-    <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
+    <PackageReference Include="Serilog.AspNetCore" Version="3.2.0" />
     <PackageReference Include="Serilog.Filters.Expressions" Version="2.0.0" />
-    <PackageReference Include="Serilog.Settings.Configuration" Version="2.6.1" />
-    <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="2.6.2" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
+    <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="3.0.4" />
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
     <PackageReference Include="Serilog.Sinks.Seq" Version="4.0.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="$(SwashbuckleVersion)" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-*" />
   </ItemGroup>
 
   <ItemGroup Label="Project References">

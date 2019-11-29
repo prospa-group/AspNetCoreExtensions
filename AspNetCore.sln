@@ -12,6 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_build", "_build", "{E2B4DB
 	ProjectSection(SolutionItems) = preProject
 		build\common.props = build\common.props
 		build\dependencies.props = build\dependencies.props
+		version.props = version.props
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_solution items", "_solution items", "{637529DF-3E8B-4D37-B7CC-CB64C085F206}"
@@ -28,9 +29,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_solution items", "_solutio
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_sandbox", "_sandbox", "{266C7D7D-E777-4EB3-9D63-4F6CCA2B9096}"
-	ProjectSection(SolutionItems) = preProject
-		sandbox\Directory.Build.props = sandbox\Directory.Build.props
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prospa.Extensions.Serilog", "src\Prospa.Extensions.Serilog\Prospa.Extensions.Serilog.csproj", "{47914A64-E3E9-4458-AAC9-1226A39E8BCA}"
 EndProject

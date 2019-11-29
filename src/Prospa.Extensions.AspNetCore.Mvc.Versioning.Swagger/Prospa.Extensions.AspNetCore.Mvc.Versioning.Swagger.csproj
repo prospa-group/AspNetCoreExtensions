@@ -2,17 +2,21 @@
 
   <PropertyGroup>
     <Description>Swagger AspNetCore MVC Versioning Extensions.</Description>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netcoreapp3.0;</TargetFrameworks>
     <PackageTags>prospa;aspnetcore;swashbuckle;swagger</PackageTags>
   </PropertyGroup>
+
+  <ItemGroup Label="Framework References">
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
 
   <ItemGroup Label="Third Party Package References">    
     <PackageReference Include="Swashbuckle.AspNetCore" Version="$(SwashbuckleVersion)" />    
   </ItemGroup>
 
   <ItemGroup Label="Microsoft Package References">
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="2.3.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="4.0.0" />
   </ItemGroup>
 
   <ItemGroup Label="Project References">

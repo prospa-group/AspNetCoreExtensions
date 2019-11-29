@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.OpenApi.Models;
+using Prospa.Extensions.AspNetCore.Swagger.Extensions;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -17,21 +19,18 @@ namespace Prospa.Extensions.AspNetCore.Swagger.OperationFilters
         public AddAuthorizationHeaderParameterOperationFilter(Dictionary<string, string[]> scopePolicyMapping) { _scopePolicyMapping = scopePolicyMapping; }
 
         /// <inheritdoc />
-        public void Apply(Operation operation, OperationFilterContext context)
+        public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
-            var controllerScopes = context.ApiDescription.ControllerAttributes().OfType<AuthorizeAttribute>().Select(attr => attr.Policy);
-
-            var actionPolicies = context.ApiDescription.ActionAttributes().OfType<AuthorizeAttribute>().Select(attr => attr.Policy);
-
-            var requiredPolicies = controllerScopes.Union(actionPolicies).Distinct().ToList();
+            var controllerScopes = context.GetControllerAndActionAttributes<AuthorizeAttribute>().Select(attr => attr.Policy);
+            var requiredPolicies = controllerScopes.Distinct().ToList();
 
             if (!requiredPolicies.Any())
             {
                 return;
             }
 
-            operation.Responses.Add("401", new Response { Description = "Unauthorized" });
-            operation.Responses.Add("403", new Response { Description = "Forbidden" });
+            operation.Responses.Add("401", new OpenApiResponse { Description = "Unauthorized" });
+            operation.Responses.Add("403", new OpenApiResponse { Description = "Forbidden" });
 
             var requiredScopes = new List<string>();
 
@@ -43,22 +42,22 @@ namespace Prospa.Extensions.AspNetCore.Swagger.OperationFilters
             operation.Description += $"\n\r<b>Required OAuth2 Scopes:</b> <i>{string.Join(", ", requiredScopes)}</i>";
 
             // Only setting this to get the padlock display
-            operation.Security = new List<IDictionary<string, IEnumerable<string>>>
-                                 {
-                                     new Dictionary<string, IEnumerable<string>>
-                                     {
-                                         { "oauth2", requiredScopes }
-                                     }
-                                 };
+            operation.Security.Add(new OpenApiSecurityRequirement
+                                   {
+                                       { new OpenApiSecurityScheme { Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "oauth2" } }, requiredPolicies.ToList() }
+                                   });
 
             operation.Parameters.Add(
-                new NonBodyParameter
+                new OpenApiParameter
                 {
                     Name = "Authorization",
-                    In = "header",
+                    In = ParameterLocation.Header,
                     Description = "Bearer {access token}",
                     Required = true,
-                    Type = "string"
+                    Schema = new OpenApiSchema
+                             {
+                                 Type = "string"
+                             }
                 });
         }
 

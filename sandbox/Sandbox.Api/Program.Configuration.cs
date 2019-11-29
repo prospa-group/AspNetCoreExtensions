@@ -1,13 +1,12 @@
 ﻿using System.IO;
-using System.Reflection;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 
 namespace Sandbox.Api
 {
     public static class ProgramConfiguration
     {
-        public static IWebHostBuilder ConfigureDefaultAppConfiguration(this IWebHostBuilder webHostBuilder, string[] args)
+        public static IHostBuilder ConfigureDefaultAppConfiguration(this IHostBuilder webHostBuilder, string[] args)
         {
             webHostBuilder.ConfigureAppConfiguration(
                 (context, config) =>
