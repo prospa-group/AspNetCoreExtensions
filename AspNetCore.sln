@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_build", "_build", "{E2B4DB
 		build\common.props = build\common.props
 		build\dependencies.props = build\dependencies.props
 		Prospa.ruleset = Prospa.ruleset
-		azure-pipelines.yml = azure-pipelines.yml
+		.azure\azure-pipelines.yml = .azure\azure-pipelines.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_solution items", "_solution items", "{637529DF-3E8B-4D37-B7CC-CB64C085F206}"

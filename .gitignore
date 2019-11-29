@@ -36,7 +36,6 @@ nuget.exe
 node_modules
 *.orig
 .vscode/
-global.json
 BenchmarkDotNet.Artifacts/
 .idea/
 msbuild.binlog
