@@ -24,7 +24,7 @@ jobs:
       vmImage: 'vs2017-win2016'
     steps:
       - task: UseDotNet@2
-        displayName: 'Install .NET Core 3.x SDK'
+        displayName: 'Install .NET Core SDK'
         inputs:
           packageType: 'sdk'
           useGlobalJson: true
@@ -36,4 +36,4 @@ jobs:
       - task: PublishBuildArtifacts@1
         displayName: 'Publish Nuget Packages to Artifacts'
         inputs:
-          PathtoPublish: 'nuget'
+          PathtoPublish: 'artifacts'
