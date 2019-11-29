@@ -229,7 +229,7 @@ namespace Prospa.Extensions.AspNetCore.Mvc.Core.Facts.ModelBinding
 
             // Assert
             Assert.Equal(new[] { null, null, "value" }, result.Values);
-            Assert.Equal(",,value", (string)result);
+            Assert.Equal("value", (string)result);
         }
 
         [Theory]

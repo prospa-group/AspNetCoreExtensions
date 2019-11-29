@@ -130,6 +130,6 @@
     <Rule Id="SA1636" Action="None" />
     <Rule Id="SA1642" Action="Error" />
     <Rule Id="SA1643" Action="Error" />
-    <Rule Id="SA1649" Action="None" />
+    <Rule Id="SA1652" Action="None" />
   </Rules>
 </RuleSet>
