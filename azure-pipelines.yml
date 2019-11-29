@@ -1,48 +1,39 @@
-pool:
-  vmImage: 'VS2017-Win2016'
+trigger:
+  - master
+  - dev
+  - features/*
 
-variables:
-  buildConfiguration: 'Release'
+jobs:
+  - job: Linux
+    pool:
+      vmImage: 'ubuntu-16.04'
+    steps:
+      - task: UseDotNet@2
+        displayName: 'Install .NET Core SDK'
+        inputs:
+          packageType: 'sdk'
+          useGlobalJson: true
+      - task: Bash@3
+        displayName: 'Build Script'
+        inputs:
+          targetType: filePath
+          filePath: ./build.sh
 
-steps:
-- task: DotNetCoreInstaller@0
-  inputs:
-    packageType: 'sdk'
-    version: '2.2.101' 
-
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
-
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet test $(buildConfiguration)'
-  inputs:
-    command: test
-    projects: '**/*Tests/*.csproj'
-    arguments: '--configuration $(buildConfiguration)'
-
-- task: PublishTestResults@2
-  condition: succeededOrFailed()
-  inputs:
-    testRunner: VSTest
-    testResultsFiles: '**/*.trx'
-
-- task: DotNetCoreCLI@2
-  displayName: dotnet pack $(buildConfiguration)
-  condition: succeeded()
-  inputs:
-    command: pack
-    packDirectory: '$(Build.ArtifactStagingDirectory)'
-
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact'
-  condition: succeeded()
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-
-- task: DotNetCoreCLI@2
-  displayName: dotnet nuget push
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-  inputs:
-    command: custom
-    custom: nuget
-    arguments: push $(Build.ArtifactStagingDirectory)/**/*.nupkg --source https://api.nuget.org/v3/index.json --no-service-endpoint --api-key $(NugetApiKey)
+  - job: Windows
+    pool:
+      vmImage: 'vs2017-win2016'
+    steps:
+      - task: UseDotNet@2
+        displayName: 'Install .NET Core 3.x SDK'
+        inputs:
+          packageType: 'sdk'
+          useGlobalJson: true
+      - task: PowerShell@2
+        displayName: 'Build Script'
+        inputs:
+          targetType: filePath
+          filePath: ./build.ps1
+      - task: PublishBuildArtifacts@1
+        displayName: 'Publish Nuget Packages to Artifacts'
+        inputs:
+          PathtoPublish: 'nuget'
