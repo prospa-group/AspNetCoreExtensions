@@ -35,7 +35,7 @@ namespace Prospa.Extensions.AspNetCore.Swagger.OperationFilters
 
             var requiredScopes = new List<string>();
 
-            foreach (var policy in actionAndControllerPolicies)
+            foreach (var policy in requiredPolicies)
             {
                 requiredScopes.AddRange(GetPolicyScopes(policy));
             }
