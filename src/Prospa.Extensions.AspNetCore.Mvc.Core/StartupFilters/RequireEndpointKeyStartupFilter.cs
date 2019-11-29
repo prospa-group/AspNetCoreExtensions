@@ -12,12 +12,19 @@ namespace Prospa.Extensions.AspNetCore.Mvc.Core.StartupFilters
     /// </summary>
     public class RequireEndpointKeyStartupFilter : IStartupFilter
     {
+        private static readonly string[] DefaultEndpoints = { "/health", "/metrics", "/metrics-text", "/env", "/docs" };
         private readonly string[] _endpoints;
         private readonly string _key;
 
         public RequireEndpointKeyStartupFilter(string[] endpoints, string key)
         {
             _endpoints = endpoints;
+            _key = key;
+        }
+
+        public RequireEndpointKeyStartupFilter(string key)
+        {
+            _endpoints = DefaultEndpoints;
             _key = key;
         }
 
@@ -32,7 +39,7 @@ namespace Prospa.Extensions.AspNetCore.Mvc.Core.StartupFilters
                 {
                     var key = ExtractToken(context);
 
-                    if (_endpoints.Any(e => string.Compare(context.Request.Path.Value, e, StringComparison.InvariantCultureIgnoreCase) == 0))
+                    if (_endpoints.Contains(context.Request.Path.Value))
                     {
                         if (key != _key)
                         {

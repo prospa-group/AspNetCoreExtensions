@@ -17,7 +17,7 @@ namespace Prospa.Extensions.AspNetCore.Swagger.OperationFilters
         private const string ForbiddenStatusCode = "403";
 
         private static readonly OpenApiResponse ForbiddenResponse = new OpenApiResponse
-                                                             {
+        {
                                                                  Description =
                                                                      "Forbidden - The user does not have the necessary permissions to access the resource."
                                                              };

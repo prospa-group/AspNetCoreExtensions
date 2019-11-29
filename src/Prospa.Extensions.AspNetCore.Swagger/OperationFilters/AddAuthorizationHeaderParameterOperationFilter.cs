@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.OpenApi.Models;
 using Prospa.Extensions.AspNetCore.Swagger.Extensions;
@@ -34,7 +35,7 @@ namespace Prospa.Extensions.AspNetCore.Swagger.OperationFilters
 
             var requiredScopes = new List<string>();
 
-            foreach (var policy in requiredPolicies)
+            foreach (var policy in actionAndControllerPolicies)
             {
                 requiredScopes.AddRange(GetPolicyScopes(policy));
             }

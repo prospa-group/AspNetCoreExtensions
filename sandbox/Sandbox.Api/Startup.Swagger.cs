@@ -66,7 +66,10 @@ namespace Microsoft.AspNetCore.Builder
             return app;
         }
 
-        private static void AddDefaultDocumentFilters(SwaggerGenOptions options) { options.DocumentFilter<SetVersionInPaths>(); }
+        private static void AddDefaultDocumentFilters(SwaggerGenOptions options)
+        {
+            options.DocumentFilter<SetVersionInPaths>();
+        }
 
         private static void AddDefaultOperationFilters(IServiceProvider provider, SwaggerGenOptions options)
         {

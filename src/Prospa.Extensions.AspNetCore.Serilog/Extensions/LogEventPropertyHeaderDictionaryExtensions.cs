@@ -1,4 +1,5 @@
-﻿using Prospa.Extensions.AspNetCore.Serilog;
+﻿using System.Security.Claims;
+using Prospa.Extensions.AspNetCore.Serilog;
 using Serilog.Events;
 
 // ReSharper disable CheckNamespace
@@ -18,6 +19,22 @@ namespace Microsoft.AspNetCore.Http
         {
             return headers.ContainsKey(Constants.HeaderKeys.OriginalFor)
                 ? new LogEventProperty(Constants.LogEventProperties.OriginalFor, new ScalarValue(headers[Constants.HeaderKeys.OriginalFor]))
+                : null;
+        }
+
+        public static LogEventProperty SubjectIdEventProperty(this ClaimsPrincipal user)
+        {
+            var subjectId = user?.FindFirst("sub")?.Value;
+            return subjectId != null
+                ? new LogEventProperty(Constants.LogEventProperties.Sub, new ScalarValue(subjectId))
+                : null;
+        }
+
+        public static LogEventProperty ClientIdEventProperty(this ClaimsPrincipal user)
+        {
+            var clientId = user?.FindFirst("client_id")?.Value;
+            return clientId != null
+                ? new LogEventProperty(Constants.LogEventProperties.ClientId, new ScalarValue(clientId))
                 : null;
         }
     }

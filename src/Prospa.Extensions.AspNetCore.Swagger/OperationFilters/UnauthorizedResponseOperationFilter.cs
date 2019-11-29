@@ -15,10 +15,10 @@ namespace Prospa.Extensions.AspNetCore.Swagger.OperationFilters
         private const string UnauthorizedStatusCode = "401";
 
         private static readonly OpenApiResponse UnauthorizedResponse = new OpenApiResponse
-                                                                {
-                                                                    Description =
-                                                                        "Unauthorized - The user has not supplied the necessary credentials to access the resource."
-                                                                };
+                                                                       {
+                                                                           Description =
+                                                                               "Unauthorized - The user has not supplied the necessary credentials to access the resource."
+                                                                       };
 
         /// <summary>
         ///     Applies the specified operation.

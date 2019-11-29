@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 using Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger.Extensions;

@@ -27,15 +27,22 @@ steps:
     testResultsFiles: '**/*.trx'
 
 - task: DotNetCoreCLI@2
-  displayName: 'dotnet publish $(buildConfiguration)'
+  displayName: dotnet pack $(buildConfiguration)
+  condition: succeeded()
   inputs:
-    command: publish
-    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-    publishWebProjects: true
-    modifyOutputPath: true
-    zipAfterPublish: true
+    command: pack
+    packDirectory: '$(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact'
+  condition: succeeded()
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+
+- task: DotNetCoreCLI@2
+  displayName: dotnet nuget push
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  inputs:
+    command: custom
+    custom: nuget
+    arguments: push $(Build.ArtifactStagingDirectory)/**/*.nupkg --source https://api.nuget.org/v3/index.json --no-service-endpoint --api-key $(NugetApiKey)
