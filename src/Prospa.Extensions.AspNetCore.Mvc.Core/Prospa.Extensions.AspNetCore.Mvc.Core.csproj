@@ -10,7 +10,7 @@
 
   <ItemGroup Label="Microsoft Package References">
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.3" />
-    <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.6.0" />
   </ItemGroup>
 
   <ItemGroup Label="Third Party Package References">
