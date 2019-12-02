@@ -6,27 +6,28 @@ using App.Metrics.Reporting.GrafanaCloudHostedMetrics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Prospa.Extensions.AspNetCore.Mvc.Core.StartupFilters;
 
 namespace Sandbox.Api
 {
     public static class ProgramMetrics
     {
-        public static IWebHostBuilder UseDefaultMetrics(this IWebHostBuilder webHostBuilder)
+        public static IHostBuilder UseDefaultMetrics(this IHostBuilder hostBuilder)
         {
-            webHostBuilder.ConfigureServices((context, services) =>
+            hostBuilder.ConfigureServices((context, services) =>
             {
-                services.AddSingleton<IStartupFilter>(new RequireEndpointKeyStartupFilter(new[] { "/health", "/metrics", "/metrics-text", "/env", "/docs" }, "123"));
+                services.AddSingleton<IStartupFilter>(new RequireEndpointKeyStartupFilter(new[] { "/metrics", "/metrics-text", "/env" }, "123"));
             });
 
-            webHostBuilder.UseMetrics();
+            hostBuilder.UseMetrics();
 
             if (!Constants.Environments.IsDevelopment())
             {
-                webHostBuilder.UseApplicationInsights();
+                hostBuilder.ConfigureServices(services => services.AddApplicationInsightsTelemetry());
             }
 
-            return webHostBuilder;
+            return hostBuilder;
         }
 
         public static IMetricsRoot BuildDefaultMetrics(this IMetricsBuilder builder)
@@ -59,7 +60,7 @@ namespace Sandbox.Api
             return builder.Build();
         }
 
-        public static IWebHostBuilder ConfigureDefaultMetrics(this IWebHostBuilder webHostBuilder, IMetricsRoot metrics)
+        public static IHostBuilder ConfigureDefaultMetrics(this IHostBuilder webHostBuilder, IMetricsRoot metrics)
         {
             webHostBuilder.ConfigureMetrics(metrics);
 

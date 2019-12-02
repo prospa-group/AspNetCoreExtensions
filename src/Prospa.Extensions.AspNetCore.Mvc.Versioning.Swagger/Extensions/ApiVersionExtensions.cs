@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger.Extensions
 {

@@ -7,7 +7,7 @@ TestResults/
 *.sln.ide/
 _ReSharper.*/
 packages/
-.artifacts/
+artifacts/
 PublishProfiles/
 .vs/
 bower_components/
@@ -36,7 +36,6 @@ nuget.exe
 node_modules
 *.orig
 .vscode/
-global.json
 BenchmarkDotNet.Artifacts/
 .idea/
 msbuild.binlog

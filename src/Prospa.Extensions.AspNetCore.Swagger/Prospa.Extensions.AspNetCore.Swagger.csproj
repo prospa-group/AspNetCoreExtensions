@@ -2,9 +2,13 @@
 
   <PropertyGroup>
     <Description>Swagger AspNetCore Extensions.</Description>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netcoreapp3.0;</TargetFrameworks>
     <PackageTags>prospa;aspnetcore;swashbuckle;swagger</PackageTags>
   </PropertyGroup>
+
+  <ItemGroup Label="Framework References">
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
 
   <ItemGroup Label="Third Party Package References">
     <PackageReference Include="Swashbuckle.AspNetCore" Version="$(SwashbuckleVersion)" />

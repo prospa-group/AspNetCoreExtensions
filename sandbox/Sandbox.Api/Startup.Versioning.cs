@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Versioning;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.AspNetCore.Mvc.Versioning;
 
 // ReSharper disable CheckNamespace
 namespace Microsoft.Extensions.DependencyInjection
@@ -11,8 +8,6 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddDefaultApiVersioning(this IServiceCollection services)
         {
-            services.TryAddEnumerable(ServiceDescriptor.Singleton<IConfigureOptions<MvcOptions>, ConventionsMvcOptionsSetup>());
-
             services.AddApiVersioning(
                 options =>
                 {

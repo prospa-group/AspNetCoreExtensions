@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Configuration;
 using Serilog.Events;
@@ -11,10 +11,10 @@ namespace Sandbox.Api
     public static class ProgramLogger
     {
         public static ILogger CreateDefaultLogger(
-            this IWebHost webHost,
+            this IHost host,
             string environment)
         {
-            var configuration = webHost.Services.GetRequiredService<IConfiguration>();
+            var configuration = host.Services.GetRequiredService<IConfiguration>();
             var loggerConfiguration = new LoggerConfiguration()
                                       .ReadFrom
                                       .Configuration(configuration)
@@ -36,9 +36,7 @@ namespace Sandbox.Api
             {
                 loggerConfiguration
                     .WriteTo
-                    .ApplicationInsightsTraces(
-                        configuration.GetValue<string>(Constants.ConfigurationKeys.AppInsights.InstrumentationKey),
-                        restrictedToMinimumLevel: LogEventLevel.Error);
+                    .ApplicationInsights(TelemetryConverter.Traces, restrictedToMinimumLevel: LogEventLevel.Error);
             }
 
             return loggerConfiguration.CreateLogger();

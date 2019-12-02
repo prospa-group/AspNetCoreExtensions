@@ -6,6 +6,7 @@ namespace Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger.OperationFilters
 {
     public class RemoveVersionParameters : IOperationFilter
     {
+        /// <inheritdoc />
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
             var versionParameter = operation.Parameters?.FirstOrDefault(p => p.Name == "version");

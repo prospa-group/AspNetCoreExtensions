@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.OpenApi.Models;
+using Prospa.Extensions.AspNetCore.Swagger.Extensions;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -21,12 +22,10 @@ namespace Prospa.Extensions.AspNetCore.Swagger.OperationFilters
         /// <inheritdoc />
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
-            var actionAttributes = context.MethodInfo.GetCustomAttributes(true);
-            var controllerAttributes = context.MethodInfo.DeclaringType.GetTypeInfo().GetCustomAttributes(true);
-            var actionAndControllerAttributes = actionAttributes.Union(controllerAttributes).Distinct().ToList();
-            var actionAndControllerPolicies = actionAndControllerAttributes.OfType<AuthorizeAttribute>().Select(attr => attr.Policy);
+            var controllerScopes = context.GetControllerAndActionAttributes<AuthorizeAttribute>().Select(attr => attr.Policy);
+            var requiredPolicies = controllerScopes.Distinct().ToList();
 
-            if (!actionAndControllerPolicies.Any())
+            if (!requiredPolicies.Any())
             {
                 return;
             }
@@ -36,25 +35,18 @@ namespace Prospa.Extensions.AspNetCore.Swagger.OperationFilters
 
             var requiredScopes = new List<string>();
 
-            foreach (var policy in actionAndControllerPolicies)
+            foreach (var policy in requiredPolicies)
             {
                 requiredScopes.AddRange(GetPolicyScopes(policy));
             }
 
             operation.Description += $"\n\r<b>Required OAuth2 Scopes:</b> <i>{string.Join(", ", requiredScopes)}</i>";
 
-            var oauthScheme = new OpenApiSecurityScheme
-                              {
-                                  Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "oauth2" }
-                              };
-
-            operation.Security = new List<OpenApiSecurityRequirement>
-                                 {
-                                     new OpenApiSecurityRequirement
-                                     {
-                                         [oauthScheme] = requiredScopes.ToList()
-                                     }
-                                 };
+            // Only setting this to get the padlock display
+            operation.Security.Add(new OpenApiSecurityRequirement
+                                   {
+                                       { new OpenApiSecurityScheme { Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "oauth2" } }, requiredPolicies.ToList() }
+                                   });
 
             operation.Parameters.Add(
                 new OpenApiParameter
@@ -63,7 +55,10 @@ namespace Prospa.Extensions.AspNetCore.Swagger.OperationFilters
                     In = ParameterLocation.Header,
                     Description = "Bearer {access token}",
                     Required = true,
-                    Style = ParameterStyle.Simple
+                    Schema = new OpenApiSchema
+                             {
+                                 Type = "string"
+                             }
                 });
         }
 

@@ -14,26 +14,20 @@ namespace Swashbuckle.AspNetCore.SwaggerGen
     {
         public static SwaggerGenOptions AllowFilteringDocsByApiVersion(this SwaggerGenOptions options)
         {
-            options.DocInclusionPredicate(
-                (docName, apiDesc) =>
+            options.DocInclusionPredicate((docName, apiDesc) =>
+            {
+                if (!apiDesc.TryGetMethodInfo(out MethodInfo methodInfo))
                 {
-                    if (!apiDesc.TryGetMethodInfo(out MethodInfo methodInfo))
-                    {
-                        return false;
-                    }
+                    return false;
+                }
 
-                    if (methodInfo.DeclaringType == null)
-                    {
-                        return false;
-                    }
+                var versions = methodInfo.DeclaringType
+                                         .GetCustomAttributes(true)
+                                         .OfType<ApiVersionAttribute>()
+                                         .SelectMany(attr => attr.Versions);
 
-                    var versions = methodInfo.DeclaringType
-                                             .GetCustomAttributes(true)
-                                             .OfType<ApiVersionAttribute>()
-                                             .SelectMany(attr => attr.Versions);
-
-                    return versions.Any(v => $"v{v.ToString()}" == docName);
-                });
+                return versions.Any(v => $"v{v.ToString()}" == docName);
+            });
 
             return options;
         }

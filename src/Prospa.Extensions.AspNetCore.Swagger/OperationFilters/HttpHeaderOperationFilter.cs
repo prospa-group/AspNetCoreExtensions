@@ -6,6 +6,10 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Prospa.Extensions.AspNetCore.Swagger.OperationFilters
 {
+    /// <summary>
+    ///     Adds a Swashbuckle <see cref="OpenApiParameter" /> to all operations with a description of the required HTTP header.
+    /// </summary>
+    /// <seealso cref="IOperationFilter" />
     public class HttpHeaderOperationFilter : IOperationFilter
     {
         /// <summary>
@@ -43,15 +47,8 @@ namespace Prospa.Extensions.AspNetCore.Swagger.OperationFilters
                                       Description = description,
                                       In = ParameterLocation.Header,
                                       Name = filter.HttpHeaderName,
-                                      Required = filter.Required,
-                                      Style = ParameterStyle.Simple
+                                      Required = filter.Required
                                   };
-
-            if (filter.GetType() == typeof(CorrelationIdHttpHeaderAttribute))
-            {
-                // TODO: OpenAPI
-                // noBodyParameter.Default = Guid.NewGuid();
-            }
 
             operation.Parameters.Add(noBodyParameter);
         }

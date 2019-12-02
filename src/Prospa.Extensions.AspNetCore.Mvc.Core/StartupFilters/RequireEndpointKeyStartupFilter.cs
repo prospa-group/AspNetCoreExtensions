@@ -8,7 +8,7 @@ using Microsoft.Extensions.Primitives;
 namespace Prospa.Extensions.AspNetCore.Mvc.Core.StartupFilters
 {
     /// <summary>
-    /// Startup Filter to protect diagnostics endpoints such as health
+    /// Startup Filter to protect diagnostics endpoints such as health.
     /// </summary>
     public class RequireEndpointKeyStartupFilter : IStartupFilter
     {
