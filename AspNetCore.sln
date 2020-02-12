@@ -1,21 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27705.2000
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C7A3CBA0-B61F-4D11-8D9F-E5100AD46FE7}"
-ProjectSection(SolutionItems) = preProject
-	src\Directory.Build.targets = src\Directory.Build.targets
-EndProjectSection
+	ProjectSection(SolutionItems) = preProject
+		src\Directory.Build.targets = src\Directory.Build.targets
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_build", "_build", "{E2B4DBE0-D627-42BB-AC10-0A3F869353F8}"
 	ProjectSection(SolutionItems) = preProject
+		azure-pipelines.yml = azure-pipelines.yml
 		build.ps1 = build.ps1
 		build.sh = build.sh
 		build\common.props = build\common.props
 		build\dependencies.props = build\dependencies.props
 		Prospa.ruleset = Prospa.ruleset
-		azure-pipelines.yml = azure-pipelines.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_solution items", "_solution items", "{637529DF-3E8B-4D37-B7CC-CB64C085F206}"
@@ -24,11 +24,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_solution items", "_solutio
 		.gitignore = .gitignore
 		AspNetCore.sln.DotSettings = AspNetCore.sln.DotSettings
 		azure-pipelines.yml = azure-pipelines.yml
-		build.cake = build.cake
 		global.json = global.json
 		Prospa.ruleset = Prospa.ruleset
 		stylecop.json = stylecop.json
-		version.props = version.props
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_sandbox", "_sandbox", "{266C7D7D-E777-4EB3-9D63-4F6CCA2B9096}"
@@ -60,7 +58,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prospa.Extensions.AspNetCor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox.Api.IntegrationTests", "test\Sandbox.Api.IntegrationTests\Sandbox.Api.IntegrationTests.csproj", "{912B893C-0C4B-4832-B1E5-EEA8892D6C69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Build", "build\Script\Build.csproj", "{7C1536A0-3BBC-4848-8C63-2B353706455B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Build", "build\Script\Build.csproj", "{7C1536A0-3BBC-4848-8C63-2B353706455B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

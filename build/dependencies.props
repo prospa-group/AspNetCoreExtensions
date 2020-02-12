@@ -1,7 +1,7 @@
 <Project>
 
   <PropertyGroup Label="Private Asset Package Versions">
-    <StyleCopAnalyzersVersion>1.2.0-beta.113</StyleCopAnalyzersVersion>
+    <StyleCopAnalyzersVersion>1.1.118</StyleCopAnalyzersVersion>
   </PropertyGroup>
 
   <PropertyGroup Label="Microsoft Package Versions">
@@ -15,7 +15,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Third Party AspNet Core Package Versions">
-    <SwashbuckleVersion>5.0.0-rc2</SwashbuckleVersion>
+    <SwashbuckleVersion>5.0.0</SwashbuckleVersion>
   </PropertyGroup>
 
   <PropertyGroup Label="Third Party Package Versions">
