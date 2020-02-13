@@ -7,6 +7,8 @@ namespace Sandbox.Api
     {
         public static class Auth
         {
+            public static readonly string EndpointKey = nameof(EndpointKey);
+
             public static class Policies
             {
                 public const string ReadPolicy = "Read";
