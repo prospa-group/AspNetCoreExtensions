@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Sandbox.Api.Application.HealthChecks;
 
 namespace Sandbox.Api
 {
@@ -51,7 +52,8 @@ namespace Sandbox.Api
         {
             services.AddCorrelationId();
 
-            services.AddHealthChecks();
+            services.AddHealthChecks()
+                    .AddCheck<SampleHealthCheck>("sample_health_check");
 
             services
                     .AddMvcCore()
