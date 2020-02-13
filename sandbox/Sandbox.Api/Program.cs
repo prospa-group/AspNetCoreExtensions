@@ -39,10 +39,8 @@ namespace Sandbox.Api
                    .UseContentRoot(Directory.GetCurrentDirectory())
                    .ConfigureDefaultAppConfiguration(args)
                    .ConfigureDefaultMetrics(metrics)
-                   .ConfigureDefaultHealth()
                    .UseSerilog()
                    .UseDefaultMetrics()
-                   .UseDefaultHealth()
                    .ConfigureWebHostDefaults(
                        builder =>
                        {

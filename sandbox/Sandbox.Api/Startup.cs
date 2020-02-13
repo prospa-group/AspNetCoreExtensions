@@ -51,6 +51,8 @@ namespace Sandbox.Api
         {
             services.AddCorrelationId();
 
+            services.AddHealthChecks();
+
             services
                     .AddMvcCore()
                     .AddMetricsCore()
