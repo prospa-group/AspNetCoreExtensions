@@ -1,5 +1,4 @@
-﻿using System;
-using CorrelationId;
+﻿using CorrelationId;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +21,7 @@ namespace Sandbox.Api
         public void Configure(IApplicationBuilder app)
         {
             app.UseRequireHttps()
+               .UseDefaultHealth()
                .UseCorrelationId(new CorrelationIdOptions { UpdateTraceIdentifier = false })
                .UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = Constants.HttpHeaders.ForwardedHeaders })
                .UseDefaultSecurityHeaders(_hostingEnvironment)
@@ -50,6 +50,8 @@ namespace Sandbox.Api
         private void AddCoreServices(IServiceCollection services)
         {
             services.AddCorrelationId();
+
+            services.AddDefaultHealth();
 
             services
                     .AddMvcCore()

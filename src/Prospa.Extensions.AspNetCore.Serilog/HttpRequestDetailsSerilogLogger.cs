@@ -8,7 +8,7 @@ namespace Prospa.Extensions.AspNetCore.Serilog
 {
     public class HttpRequestDetailsSerilogLogger : IHttpRequestDetailsLogger
     {
-        private static readonly Func<HttpContext, string> MessageTemplate = httpContext => $"{httpContext.Request.Method} {httpContext.Request.Path.ToString()} failed, Status code: {httpContext.Response.StatusCode}";
+        private static readonly Func<HttpContext, string> MessageTemplate = httpContext => "{RequestMethod} {RequestPath} failed, {ResponseStatusCode}";
         private readonly ILogger _logger;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
@@ -23,19 +23,19 @@ namespace Prospa.Extensions.AspNetCore.Serilog
         /// <inheritdoc />
         public void Error(Exception exception)
         {
-            _logger.Write(LogEventLevel.Error, exception, MessageTemplate(_httpContextAccessor.HttpContext));
+            _logger.Write(LogEventLevel.Error, exception, MessageTemplate(_httpContextAccessor.HttpContext), _httpContextAccessor.HttpContext.Request.Method, _httpContextAccessor.HttpContext.Request.Path.ToString(), _httpContextAccessor.HttpContext.Response.StatusCode);
         }
 
         /// <inheritdoc />
         public void Fatal(Exception exception)
         {
-            _logger.Write(LogEventLevel.Fatal, exception, MessageTemplate(_httpContextAccessor.HttpContext));
+            _logger.Write(LogEventLevel.Fatal, exception, MessageTemplate(_httpContextAccessor.HttpContext), _httpContextAccessor.HttpContext.Request.Method, _httpContextAccessor.HttpContext.Request.Path.ToString(), _httpContextAccessor.HttpContext.Response.StatusCode);
         }
 
         /// <inheritdoc />
         public void Warning(Exception exception)
         {
-            _logger.Write(LogEventLevel.Warning, exception, MessageTemplate(_httpContextAccessor.HttpContext));
+            _logger.Write(LogEventLevel.Warning, exception, MessageTemplate(_httpContextAccessor.HttpContext), _httpContextAccessor.HttpContext.Request.Method, _httpContextAccessor.HttpContext.Request.Path.ToString(), _httpContextAccessor.HttpContext.Response.StatusCode);
         }
     }
 }

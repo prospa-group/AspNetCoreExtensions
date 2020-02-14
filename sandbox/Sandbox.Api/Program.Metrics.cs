@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Prospa.Extensions.AspNetCore.Mvc.Core.StartupFilters;
 
 namespace Sandbox.Api
 {
@@ -15,11 +14,6 @@ namespace Sandbox.Api
     {
         public static IHostBuilder UseDefaultMetrics(this IHostBuilder hostBuilder)
         {
-            hostBuilder.ConfigureServices((context, services) =>
-            {
-                services.AddSingleton<IStartupFilter>(new RequireEndpointKeyStartupFilter(new[] { "/metrics", "/metrics-text", "/env" }, "123"));
-            });
-
             hostBuilder.UseMetrics();
 
             if (!Constants.Environments.IsDevelopment())

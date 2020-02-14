@@ -2,8 +2,9 @@
 
   <PropertyGroup>
     <Description>Swagger AspNetCore MVC Versioning Extensions.</Description>
-    <TargetFrameworks>netcoreapp3.0;</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.1;</TargetFrameworks>
     <PackageTags>prospa;aspnetcore;swashbuckle;swagger</PackageTags>
+    <OpenApiGenerateDocuments>false</OpenApiGenerateDocuments>
   </PropertyGroup>
 
   <ItemGroup Label="Framework References">
@@ -15,12 +16,12 @@
   </ItemGroup>
 
   <ItemGroup Label="Microsoft Package References">
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="4.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="4.1.1" />
   </ItemGroup>
 
   <ItemGroup Label="Project References">
     <ProjectReference Include="..\Prospa.Extensions.AspNetCore.Mvc.Core\Prospa.Extensions.AspNetCore.Mvc.Core.csproj" />
   </ItemGroup>
-
+  
 </Project>

@@ -2,7 +2,10 @@
 using System.IO;
 using App.Metrics;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Prospa.Extensions.AspNetCore.Mvc.Core.StartupFilters;
 using Serilog;
 
 namespace Sandbox.Api
@@ -38,16 +41,21 @@ namespace Sandbox.Api
             Host.CreateDefaultBuilder(args)
                    .UseContentRoot(Directory.GetCurrentDirectory())
                    .ConfigureDefaultAppConfiguration(args)
+                   .ConfigureServices((context, services) =>
+                   {
+                       services.AddSingleton<IStartupFilter>(
+                           new RequireEndpointKeyStartupFilter(
+                               new[] { "/health", "/metrics", "/metrics-text", "/env", "/docs" },
+                           context.Configuration.GetValue<string>(Constants.Auth.EndpointKey)));
+                   })
                    .ConfigureDefaultMetrics(metrics)
-                   .ConfigureDefaultHealth()
                    .UseSerilog()
                    .UseDefaultMetrics()
-                   .UseDefaultHealth()
-                   .ConfigureWebHostDefaults(
-                       builder =>
-                       {
-                           builder.UseKestrel(options => options.AddServerHeader = false);
-                           builder.UseStartup<Startup>();
-                       });
+                   .ConfigureWebHostDefaults(webHostBuilder =>
+                    {
+                        webHostBuilder
+                            .ConfigureKestrel(options => { options.AddServerHeader = false; })
+                            .UseStartup<Startup>();
+                    });
     }
 }
