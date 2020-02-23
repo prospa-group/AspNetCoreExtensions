@@ -4,7 +4,7 @@ using Serilog.Exceptions;
 
 // ReSharper disable CheckNamespace
 namespace Serilog.Configuration
-    // ReSharper restore CheckNamespace
+// ReSharper restore CheckNamespace
 {
     public static class EnvironmentLoggerConfigurationExtensions
     {
@@ -32,6 +32,7 @@ namespace Serilog.Configuration
         {
             return enrichmentConfiguration
                    .WithExceptionDetails()
+                   .Enrich.WithDiagnosticActivity()
                    .Enrich.WithApplicationName()
                    .Enrich.WithApplicationVersion()
                    .Enrich.WithEnvironmentName()
@@ -48,6 +49,16 @@ namespace Serilog.Configuration
             }
 
             return enrichmentConfiguration.With<EnvironmentNameEnricher>();
+        }
+
+        public static LoggerConfiguration WithDiagnosticActivity(this LoggerEnrichmentConfiguration enrichmentConfiguration)
+        {
+            if (enrichmentConfiguration == null)
+            {
+                throw new ArgumentNullException(nameof(enrichmentConfiguration));
+            }
+
+            return enrichmentConfiguration.With<DiagnosticActivityEnricher>();
         }
     }
 }

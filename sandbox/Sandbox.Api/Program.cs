@@ -14,9 +14,7 @@ namespace Sandbox.Api
     {
         public static int Main(string[] args)
         {
-            var metrics = AppMetrics.CreateDefaultBuilder().BuildDefaultMetrics();
-
-            var webHost = CreateWebHostBuilder(args, metrics).Build();
+            var webHost = CreateHostBuilder(args).Build();
 
             Log.Logger = webHost.CreateDefaultLogger(Constants.Environments.CurrentAspNetCoreEnv);
 
@@ -37,9 +35,11 @@ namespace Sandbox.Api
             }
         }
 
-        public static IHostBuilder CreateWebHostBuilder(string[] args, IMetricsRoot metrics) =>
-            Host.CreateDefaultBuilder(args)
-                   .UseContentRoot(Directory.GetCurrentDirectory())
+        public static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            var metrics = AppMetrics.CreateDefaultBuilder().BuildDefaultMetrics();
+
+            return Host.CreateDefaultBuilder(args)
                    .ConfigureDefaultAppConfiguration(args)
                    .ConfigureServices((context, services) =>
                    {
@@ -57,5 +57,6 @@ namespace Sandbox.Api
                             .ConfigureKestrel(options => { options.AddServerHeader = false; })
                             .UseStartup<Startup>();
                     });
+        }
     }
 }
