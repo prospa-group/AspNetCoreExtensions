@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Prospa.Extensions.AspNetCore.Mvc.Core.Filters;
 using Sandbox.Api.Routing;
+using Serilog;
 
 namespace Sandbox.Api.Controllers.V2
 {
@@ -9,6 +10,7 @@ namespace Sandbox.Api.Controllers.V2
     [ApiController]
     public class CorrelationController : ControllerBase
     {
+        private static readonly ILogger _logger = Log.ForContext<CorrelationController>();
         private readonly ICorrelationContextAccessor _correlationContext;
 
         public CorrelationController(ICorrelationContextAccessor correlationContext) { _correlationContext = correlationContext; }
@@ -17,6 +19,10 @@ namespace Sandbox.Api.Controllers.V2
         [CorrelationIdHttpHeader(Required = false)]
         public ActionResult<string> GetOptional()
         {
+            System.Diagnostics.Activity.Current?.AddTag("TestTag", "1");
+            System.Diagnostics.Activity.Current?.AddBaggage("TestBaggage", "2");
+
+            _logger.Information("Test to see if diagnostic tag is added");
             return _correlationContext.CorrelationContext.CorrelationId;
         }
 
