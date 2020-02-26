@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Application Insights extensions.</Description>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <PackageTags>prospa;http;extensions</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup Label="Microsoft References">
+    <PackageReference Include="Microsoft.ApplicationInsights" Version="2.12.0" />
+  </ItemGroup>
+
+</Project>

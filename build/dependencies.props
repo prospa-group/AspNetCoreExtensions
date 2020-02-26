@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Microsoft Package Versions">
-    <MicrosoftExtensionsVersion>2.2.0</MicrosoftExtensionsVersion>
+    <MicrosoftExtensionsVersion>3.1.0</MicrosoftExtensionsVersion>
   </PropertyGroup>
 
   <PropertyGroup Label="Microsoft AspNet Core Package Versions">

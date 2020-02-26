@@ -22,8 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_solution items", "_solutio
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
-		AspNetCore.sln.DotSettings = AspNetCore.sln.DotSettings
 		azure-pipelines.yml = azure-pipelines.yml
+		Extensions.sln.DotSettings = Extensions.sln.DotSettings
 		global.json = global.json
 		Prospa.ruleset = Prospa.ruleset
 		stylecop.json = stylecop.json
@@ -59,6 +59,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox.Api.IntegrationTests", "test\Sandbox.Api.IntegrationTests\Sandbox.Api.IntegrationTests.csproj", "{912B893C-0C4B-4832-B1E5-EEA8892D6C69}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Build", "build\Script\Build.csproj", "{7C1536A0-3BBC-4848-8C63-2B353706455B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prospa.Extensions.ApplicationInsights", "src\Prospa.Extensions.ApplicationInsights\Prospa.Extensions.ApplicationInsights.csproj", "{BDAB0851-1E74-414D-95DB-E1F11F4EB81C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -114,6 +116,10 @@ Global
 		{7C1536A0-3BBC-4848-8C63-2B353706455B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C1536A0-3BBC-4848-8C63-2B353706455B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C1536A0-3BBC-4848-8C63-2B353706455B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDAB0851-1E74-414D-95DB-E1F11F4EB81C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDAB0851-1E74-414D-95DB-E1F11F4EB81C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDAB0851-1E74-414D-95DB-E1F11F4EB81C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDAB0851-1E74-414D-95DB-E1F11F4EB81C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -131,6 +137,7 @@ Global
 		{ACDDEB9D-5C1C-4524-A485-D9CE24A69EE5} = {9B7714D5-8FC9-42A3-9122-5F930751E63A}
 		{912B893C-0C4B-4832-B1E5-EEA8892D6C69} = {9B7714D5-8FC9-42A3-9122-5F930751E63A}
 		{7C1536A0-3BBC-4848-8C63-2B353706455B} = {E2B4DBE0-D627-42BB-AC10-0A3F869353F8}
+		{BDAB0851-1E74-414D-95DB-E1F11F4EB81C} = {C7A3CBA0-B61F-4D11-8D9F-E5100AD46FE7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D4D524ED-D9EF-4F80-8A13-166CE29728C5}

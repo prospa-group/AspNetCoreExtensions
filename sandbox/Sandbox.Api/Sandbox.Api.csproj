@@ -39,6 +39,7 @@
   </ItemGroup>
 
   <ItemGroup Label="Project References">
+    <ProjectReference Include="..\..\src\Prospa.Extensions.ApplicationInsights\Prospa.Extensions.ApplicationInsights.csproj" />
     <ProjectReference Include="..\..\src\Prospa.Extensions.AspNetCore.Authorization\Prospa.Extensions.AspNetCore.Authorization.csproj" />
     <ProjectReference Include="..\..\src\Prospa.Extensions.AspNetCore.Mvc.Core\Prospa.Extensions.AspNetCore.Mvc.Core.csproj" />
     <ProjectReference Include="..\..\src\Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger\Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger.csproj" />

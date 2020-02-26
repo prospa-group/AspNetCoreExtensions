@@ -9,7 +9,7 @@ namespace Build
 {
     public class Program
     {
-        private const string Prefix = "Prospa.Extensions.AspNetCore";
+        private const string Prefix = "Prospa.Extensions";
         private const bool RequireTests = true;
         private const string ArtifactsDir = "artifacts";
         private const string Build = "build";

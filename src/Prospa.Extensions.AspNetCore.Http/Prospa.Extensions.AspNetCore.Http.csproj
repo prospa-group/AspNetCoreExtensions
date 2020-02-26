@@ -10,4 +10,18 @@
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
+  <ItemGroup Label="Microsoft References">
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="$(MicrosoftExtensionsVersion)" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="$(MicrosoftExtensionsVersion)" />
+    <PackageReference Include="System.Text.Json" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup Label="Third Party References">
+    <PackageReference Include="IdentityModel" Version="4.0.0" />
+    <PackageReference Include="Roslynator.Analyzers" Version="2.1.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
 </Project>
