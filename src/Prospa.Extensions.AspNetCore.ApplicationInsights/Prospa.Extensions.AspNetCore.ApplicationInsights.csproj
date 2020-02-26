@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>ASP.NET Core Application Insights extensions.</Description>
+    <TargetFrameworks>netcoreapp3.1;</TargetFrameworks>
+    <PackageTags>prospa;http;extensions</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup Label="Framework References">
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup Label="Microsoft References">
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.12.0" />
+  </ItemGroup>
+
+</Project>
