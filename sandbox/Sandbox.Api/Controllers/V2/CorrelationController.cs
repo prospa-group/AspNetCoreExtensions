@@ -10,7 +10,7 @@ namespace Sandbox.Api.Controllers.V2
     [ApiController]
     public class CorrelationController : ControllerBase
     {
-        private static readonly ILogger _logger = Log.ForContext<CorrelationController>();
+        private static readonly ILogger Logger = Log.ForContext<CorrelationController>();
         private readonly ICorrelationContextAccessor _correlationContext;
 
         public CorrelationController(ICorrelationContextAccessor correlationContext) { _correlationContext = correlationContext; }
@@ -22,7 +22,7 @@ namespace Sandbox.Api.Controllers.V2
             System.Diagnostics.Activity.Current?.AddTag("TestTag", "1");
             System.Diagnostics.Activity.Current?.AddBaggage("TestBaggage", "2");
 
-            _logger.Information("Test to see if diagnostic tag is added");
+            Logger.Information("Test to see if diagnostic tag is added");
             return _correlationContext.CorrelationContext.CorrelationId;
         }
 

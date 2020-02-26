@@ -2,17 +2,17 @@
 using Microsoft.ApplicationInsights.Channel;
 using Microsoft.ApplicationInsights.Extensibility;
 
-namespace Prospa.Extensions.AspNetCore.ApplicationInsights
+namespace Prospa.Extensions.ApplicationInsights
 {
     /// <summary>
     /// filters out dependencies like polling queues that are not attached to any larger operation.
     /// </summary>
     [DebuggerStepThrough]
-    public class AzureDependencyTelemetryProcessor : ITelemetryProcessor
+    public class AzureDependencyFilterTelemetryProcessor : ITelemetryProcessor
     {
         private readonly ITelemetryProcessor _inner;
 
-        public AzureDependencyTelemetryProcessor(ITelemetryProcessor inner)
+        public AzureDependencyFilterTelemetryProcessor(ITelemetryProcessor inner)
         {
             _inner = inner;
         }

@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Prospa.Extensions.ApplicationInsights;
-using Prospa.Extensions.AspNetCore.ApplicationInsights;
 using Prospa.Extensions.AspNetCore.Http;
 using Prospa.Extensions.AspNetCore.Http.Builder;
+using Prospa.Extensions.AspNetCore.Http.Middlewares;
 using Prospa.Extensions.AspNetCore.Serilog;
 
 // ReSharper disable CheckNamespace
@@ -23,16 +23,14 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IHttpRequestDetailsLogger, HttpRequestDetailsSerilogLogger>();
 
             services.AddSingleton<ITelemetryInitializer, ActivityTagTelemetryInitializer>();
-            services.AddApplicationInsightsTelemetryProcessor<AzureDependencyTelemetryProcessor>();
+            services.AddApplicationInsightsTelemetryProcessor<AzureDependencyFilterTelemetryProcessor>();
 
             return services;
         }
 
         public static IApplicationBuilder UseDefaultDiagnostics(this IApplicationBuilder app, IWebHostEnvironment hostingEnvironment)
         {
-            app.UseMiddleware<LogEnrichmentMiddleware>();
-
-            app.UseDiagnosticActivityTagging();
+            app.UseDiagnosticActivityTagging(new DiagnosticActivityMiddlewareOptions { HeadersToTag = new []{ "X-Original-For" } });
 
             app.UseGlobalExceptionHandler(
                 configuration =>
