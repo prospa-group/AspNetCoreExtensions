@@ -8,7 +8,7 @@ namespace Prospa.Extensions.AspNetCore.ApplicationInsights
     /// filters out dependencies like polling queues that are not attached to any larger operation.
     /// </summary>
     [DebuggerStepThrough]
-    internal class AzureDependencyTelemetryProcessor : ITelemetryProcessor
+    public class AzureDependencyTelemetryProcessor : ITelemetryProcessor
     {
         private readonly ITelemetryProcessor _inner;
 

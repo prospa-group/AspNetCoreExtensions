@@ -1,9 +1,12 @@
 ﻿using GlobalExceptionHandler.WebApi;
+using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
+using Prospa.Extensions.AspNetCore.ApplicationInsights;
 using Prospa.Extensions.AspNetCore.Http;
+using Prospa.Extensions.AspNetCore.Http.Builder;
 using Prospa.Extensions.AspNetCore.Serilog;
 
 // ReSharper disable CheckNamespace
@@ -18,12 +21,17 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddSingleton(provider => provider.GetRequiredService<IOptions<HttpErrorLogOptions>>().Value);
             services.AddScoped<IHttpRequestDetailsLogger, HttpRequestDetailsSerilogLogger>();
 
+            services.AddSingleton<ITelemetryInitializer, ActivityTagTelemetryInitializer>();
+            services.AddApplicationInsightsTelemetryProcessor<AzureDependencyTelemetryProcessor>();
+
             return services;
         }
 
         public static IApplicationBuilder UseDefaultDiagnostics(this IApplicationBuilder app, IWebHostEnvironment hostingEnvironment)
         {
             app.UseMiddleware<LogEnrichmentMiddleware>();
+
+            app.UseDiagnosticActivityTagging();
 
             app.UseGlobalExceptionHandler(
                 configuration =>
