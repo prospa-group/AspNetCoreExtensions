@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
+using Prospa.Extensions.ApplicationInsights;
 using Prospa.Extensions.AspNetCore.ApplicationInsights;
 using Prospa.Extensions.AspNetCore.Http;
 using Prospa.Extensions.AspNetCore.Http.Builder;

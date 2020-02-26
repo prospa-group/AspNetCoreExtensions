@@ -3,7 +3,7 @@ using Microsoft.ApplicationInsights.Channel;
 using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.ApplicationInsights.Extensibility;
 
-namespace Prospa.Extensions.AspNetCore.ApplicationInsights
+namespace Prospa.Extensions.ApplicationInsights
 {
     [DebuggerStepThrough]
     public class ActivityTagTelemetryInitializer : ITelemetryInitializer
