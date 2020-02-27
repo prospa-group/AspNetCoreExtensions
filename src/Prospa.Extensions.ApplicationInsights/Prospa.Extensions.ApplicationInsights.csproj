@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup Label="Microsoft References">
-    <PackageReference Include="Microsoft.ApplicationInsights" Version="2.12.0" />
+    <PackageReference Include="Microsoft.ApplicationInsights" Version="2.13.1" />
   </ItemGroup>
 
 </Project>
