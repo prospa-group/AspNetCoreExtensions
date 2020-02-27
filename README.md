@@ -2,8 +2,8 @@
 
 |Branch|Azure Devops|
 |------|:--------:|
-|dev|[![Build Status](https://dev.azure.com/prospaoss/dotnet/_apis/build/status/prospa-group-oss.DotnetTemplates?branchName=master)](https://dev.azure.com/prospaoss/dotnet/_build/latest?definitionId=2&branchName=dev)
-|master|[![Build Status](https://dev.azure.com/prospaoss/dotnet/_apis/build/status/prospa-group-oss.DotnetTemplates?branchName=master)](https://dev.azure.com/prospaoss/dotnet/_build/latest?definitionId=2&branchName=master)|
+|dev|[![Build Status](https://dev.azure.com/prospaoss/dotnet/_apis/build/status/prospa-group-oss.DotnetExtensions?branchName=master)](https://dev.azure.com/prospaoss/dotnet/_build/latest?definitionId=2&branchName=dev)
+|master|[![Build Status](https://dev.azure.com/prospaoss/dotnet/_apis/build/status/prospa-group-oss.DotnetExtensions?branchName=master)](https://dev.azure.com/prospaoss/dotnet/_build/latest?definitionId=2&branchName=master)|
 
 ## Packages
 |Package|Nuget|
