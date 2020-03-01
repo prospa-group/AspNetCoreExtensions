@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Linq;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
@@ -22,6 +23,11 @@ namespace Prospa.Extensions.AspNetCore.Http.DelegatingHandlers
 
             if (!response.IsSuccessStatusCode)
             {
+                if (_options.IgnoreStatusCodes.Contains(response.StatusCode))
+                {
+                    return response;
+                }
+
                 var requestString = _options.DisableErrorRequestBodyLogging || request.Content == null
                     ? string.Empty
                     : await request.Content.ReadAsStringAsync().ConfigureAwait(false);
