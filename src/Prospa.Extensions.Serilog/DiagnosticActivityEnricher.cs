@@ -23,7 +23,7 @@ namespace Serilog.Core
                     logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty(tag.Key, tag.Value));
                 }
 
-                activity = Activity.Current.Parent;
+                activity = activity.Parent;
             }
         }
     }
