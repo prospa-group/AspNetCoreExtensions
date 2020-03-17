@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if NETCOREAPP
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Primitives;
@@ -44,3 +45,4 @@ namespace Prospa.Extensions.AspNetCore.Http
         public string QueryString { get; }
     }
 }
+#endif

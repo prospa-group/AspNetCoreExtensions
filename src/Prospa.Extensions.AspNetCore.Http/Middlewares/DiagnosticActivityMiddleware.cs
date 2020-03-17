@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿#if NETCOREAPP
+using System.Diagnostics;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -68,3 +69,4 @@ namespace Prospa.Extensions.AspNetCore.Http.Middlewares
         }
     }
 }
+#endif
