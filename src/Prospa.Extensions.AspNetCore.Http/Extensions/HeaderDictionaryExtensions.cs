@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿#if NETCOREAPP
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Primitives;
 
 // ReSharper disable CheckNamespace
 namespace Microsoft.AspNetCore.Http
-    // ReSharper restore CheckNamespace
+// ReSharper restore CheckNamespace
 {
     public static class HeaderDictionaryExtensions
     {
@@ -42,3 +43,4 @@ namespace Microsoft.AspNetCore.Http
         }
     }
 }
+#endif
