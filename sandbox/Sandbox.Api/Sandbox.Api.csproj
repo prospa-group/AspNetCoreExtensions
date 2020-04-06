@@ -23,7 +23,7 @@
 
   <ItemGroup Label="Third Party Package References">
     <PackageReference Include="App.Metrics" Version="4.0.0-preview1.0.3" />
-    <PackageReference Include="App.Metrics.AspNetCore.Mvc" Version="4.0.0-preview1.0.3" />
+    <PackageReference Include="App.Metrics.AspNetCore.Mvc" Version="4.0.0-preview1.0.7" />
     <PackageReference Include="App.Metrics.Reporting.GrafanaCloudHostedMetrics" Version="4.0.0-preview1.0.3" />
     <PackageReference Include="CorrelationId" Version="2.1.0" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="8.6.2" />
