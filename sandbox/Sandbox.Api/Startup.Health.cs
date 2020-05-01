@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.DependencyInjection;
+using Prospa.Extensions.Diagnostics.DDPublisher;
 using Sandbox.Api.Application.HealthChecks;
 
 namespace Sandbox.Api
@@ -21,7 +22,15 @@ namespace Sandbox.Api
         public static IServiceCollection AddDefaultHealth(this IServiceCollection services)
         {
             services.AddHealthChecks()
-                    .AddCheck<SampleHealthCheck>("sample_health_check");
+                    .AddCheck<SampleHealthCheck>("sample_health_check")
+                    .AddDatadogPublisher(
+                        configuration =>
+                        {
+                            configuration.ServiceCheckName = "sandbox.api";
+                            configuration.ApiKey = "ApiKey";
+                            configuration.ApplicationKey = "ApplicationKey";
+                            configuration.Url = "https://api.datadoghq.com/api";
+                        });
 
             services.AddHealthChecksUI();
 
