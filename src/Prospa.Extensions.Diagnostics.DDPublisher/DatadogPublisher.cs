@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -19,6 +18,8 @@ namespace Prospa.Extensions.Diagnostics.DDPublisher
 
         public async Task PublishAsync(HealthReport report, CancellationToken cancellationToken)
         {
+            var metric = new DataDogMetric(_configuration.ServiceCheckName);
+
             foreach (var keyedEntry in report.Entries)
             {
                 if (cancellationToken.IsCancellationRequested)
@@ -37,19 +38,18 @@ namespace Prospa.Extensions.Diagnostics.DDPublisher
                     _ => Status.Unknown
                 };
 
-                var tags = _configuration.DefaultTags.Concat(new[]
-                                                             {
-                                                                 $"check:{key}"
-                                                             }).ToArray();
+                var tags = _configuration
+                           .DefaultTags
+                           .Concat(entry.Tags)
+                           .Concat(new[]
+                           {
+                                $"{_configuration.ServiceTagPrefix}:{key}"
+                           }).ToArray();
 
-                var message = entry.Description ?? entry.Status.ToString();
-
-                var metric = new DataDogMetric();
-
-                metric.AddMetric(_configuration.ServiceCheckName, message, (int)dataDogStatus, (long)entry.Duration.TotalMilliseconds, tags);
-
-                await _client.SendMetricsAsync(metric);
+                metric.AddMetric(entry.Description, (int)dataDogStatus, (long)entry.Duration.TotalMilliseconds, tags);
             }
+
+            await _client.SendMetricsAsync(metric);
         }
     }
 }

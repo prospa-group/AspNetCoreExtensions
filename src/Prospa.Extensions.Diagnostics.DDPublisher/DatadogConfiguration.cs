@@ -18,5 +18,7 @@ namespace Prospa.Extensions.Diagnostics.DDPublisher
 
         [Required]
         public string ServiceCheckName { get; set; }
+
+        public string ServiceTagPrefix { get; set; } = "check";
     }
 }

@@ -6,14 +6,22 @@ namespace Prospa.Extensions.Diagnostics.DDPublisher
 {
     public class DataDogMetric
     {
+        private readonly string _host;
+
         public DataDogMetric()
+            : this(string.Empty)
         {
+        }
+
+        public DataDogMetric(string host)
+        {
+            _host = host;
             Series = new List<Series>();
         }
 
-        private List<Series> Series { get; }
+        public List<Series> Series { get; }
 
-        public void AddMetric(string host, string metricName, int metricValue, long metricInterval, IEnumerable<string> metricTags)
+        public void AddMetric(string metricName, int metricValue, long metricInterval, IEnumerable<string> metricTags)
         {
             var date = DateTime.UtcNow;
             var unixDate = ((DateTimeOffset)date).ToUnixTimeSeconds();
@@ -32,7 +40,7 @@ namespace Prospa.Extensions.Diagnostics.DDPublisher
                                          },
                                 Interval = metricInterval,
                                 Tags = metricTags.ToArray(),
-                                Host = host,
+                                Host = _host,
                                 HostName = Environment.MachineName
                             };
 
