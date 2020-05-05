@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Microsoft Package Versions">
-    <MicrosoftExtensionsVersion>3.1.2</MicrosoftExtensionsVersion>
+    <MicrosoftExtensionsVersion>3.1.3</MicrosoftExtensionsVersion>
   </PropertyGroup>
 
   <PropertyGroup Label="Microsoft AspNet Core Package Versions">
@@ -15,7 +15,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Third Party AspNet Core Package Versions">
-    <SwashbuckleVersion>5.0.0</SwashbuckleVersion>
+    <SwashbuckleVersion>5.4.1</SwashbuckleVersion>
   </PropertyGroup>
 
   <PropertyGroup Label="Third Party Package Versions">
@@ -23,10 +23,10 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Test Package Versions">
-    <MoqVersion>4.13.1</MoqVersion>
+    <MoqVersion>4.14.1</MoqVersion>
     <TestSdkVersion>16.4.0</TestSdkVersion>
     <XunitVersion>2.4.1</XunitVersion>
-    <FluentAssertionsVersion>5.9.0</FluentAssertionsVersion>
+    <FluentAssertionsVersion>5.10.3</FluentAssertionsVersion>
   </PropertyGroup>
 
 </Project>
