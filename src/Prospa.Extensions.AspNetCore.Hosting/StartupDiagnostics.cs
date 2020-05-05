@@ -1,4 +1,5 @@
-﻿using GlobalExceptionHandler.WebApi;
+﻿using System;
+using GlobalExceptionHandler.WebApi;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,9 +30,15 @@ namespace Microsoft.Extensions.DependencyInjection
             return services;
         }
 
-        public static IApplicationBuilder UseDefaultDiagnostics(this IApplicationBuilder app, IWebHostEnvironment hostingEnvironment)
+        public static IApplicationBuilder UseDefaultDiagnostics(
+            this IApplicationBuilder app,
+            IWebHostEnvironment hostingEnvironment,
+            Action<DiagnosticActivityMiddlewareOptions> optionsSetup)
         {
-            app.UseDiagnosticActivityTagging(new DiagnosticActivityMiddlewareOptions { HeadersToTag = new []{ "X-Original-For" } });
+            var options = new DiagnosticActivityMiddlewareOptions();
+            optionsSetup(options);
+
+            app.UseDiagnosticActivityTagging(options);
 
             app.UseGlobalExceptionHandler(
                 configuration =>
@@ -40,6 +47,18 @@ namespace Microsoft.Extensions.DependencyInjection
                     configuration.HandleOperationCancelledExceptions(hostingEnvironment);
                     configuration.HandleUnauthorizedExceptions(hostingEnvironment);
                     configuration.HandleUnhandledExceptions(hostingEnvironment);
+                });
+
+            return app;
+        }
+
+        public static IApplicationBuilder UseDefaultDiagnostics(this IApplicationBuilder app, IWebHostEnvironment hostingEnvironment)
+        {
+            app.UseDefaultDiagnostics(
+                hostingEnvironment,
+                options =>
+                {
+                    options.HeadersToTag = new[] { "X-Original-For" };
                 });
 
             return app;

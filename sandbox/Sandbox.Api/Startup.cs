@@ -24,9 +24,7 @@ namespace Sandbox.Api
                .UseCorrelationId(new CorrelationIdOptions { UpdateTraceIdentifier = false })
                .UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = Constants.HttpHeaders.ForwardedHeaders })
                .UseDefaultDiagnostics(_hostingEnvironment)
-               .UseCors(Constants.Cors.AllowAny)
-               .UseDefaultSwagger()
-               .UseDefaultSwaggerUi();
+               .UseDefaultSwagger();
 
             app.UseRouting();
             app.UseAuthentication();
@@ -36,43 +34,8 @@ namespace Sandbox.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            AddCoreServices(services);
-            AddApplicationServices(services);
-        }
-
-        private void AddApplicationServices(IServiceCollection services)
-        {
-            // TODO: Add app specific services
-        }
-
-        private void AddCoreServices(IServiceCollection services)
-        {
-            services.AddCorrelationId();
-
+            services.AddDefaultCoreServices(_configuration, typeof(Startup));
             services.AddDefaultHealth();
-
-            services
-                    .AddMvcCore()
-                    .AddDefaultCors()
-                    .AddDefaultValidation()
-                    .AddApiExplorer()
-                    .AddAuthorization()
-                    .AddDataAnnotations()
-                    .AddDefaultJsonOptions()
-                    .AddDefaultMvcOptions();
-
-            services.AddRouting(options => options.LowercaseUrls = true);
-            
-            services.AddApiVersioning()
-                    .AddVersionedApiExplorer(options => options.GroupNameFormat = Constants.Versioning.GroupNameFormat);
-
-            services
-                .AddRouting(options => options.LowercaseUrls = true)
-                .AddDefaultAuthenticationAndAuthorization(_configuration)
-                .AddDefaultApiVersioning()
-                .AddDefaultContextAccessors()
-                .AddDefaultDiagnostics(_configuration)
-                .AddDefaultSwagger();
         }
     }
 }

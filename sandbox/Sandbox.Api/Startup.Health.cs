@@ -1,12 +1,7 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using Prospa.Extensions.AspNetCore.Hosting;
 using Sandbox.Api.Application.HealthChecks;
 
 namespace Sandbox.Api
@@ -19,7 +14,7 @@ namespace Sandbox.Api
                 "/health",
                 new HealthCheckOptions
                 {
-                    ResponseWriter = WriteHealthResponse
+                    ResponseWriter = DefaultFormatting.WriteHealthResponse
                 });
 
             return builder;
@@ -31,32 +26,6 @@ namespace Sandbox.Api
                     .AddCheck<SampleHealthCheck>("sample_health_check");
 
             return services;
-        }
-        
-        private static Task WriteHealthResponse(HttpContext context, HealthReport result)
-        {
-            context.Response.ContentType = "application/json";
-
-            var json = new JObject(
-                new JProperty("status", result.Status.ToString()),
-                new JProperty(
-                    "results",
-                    new JObject(
-                        result.Entries.Select(
-                            pair =>
-                                new JProperty(
-                                    pair.Key,
-                                    new JObject(
-                                        new JProperty("status", pair.Value.Status.ToString()),
-                                        new JProperty("description", pair.Value.Description),
-                                        new JProperty(
-                                            "data",
-                                            new JObject(
-                                                pair.Value.Data.Select(
-                                                    p => new JProperty(p.Key, p.Value))))))))));
-
-            return context.Response.WriteAsync(
-                json.ToString(Formatting.Indented));
         }
     }
 }

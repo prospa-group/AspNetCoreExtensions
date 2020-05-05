@@ -51,10 +51,5 @@ namespace Sandbox.Api
             public const int HstsMaxAgeDays = 18 * 7;
             public const ForwardedHeaders ForwardedHeaders = Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.All;
         }
-
-        public static class Versioning
-        {
-            public const string GroupNameFormat = "'v'V";
-        }
     }
 }

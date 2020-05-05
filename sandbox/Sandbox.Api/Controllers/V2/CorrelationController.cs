@@ -1,7 +1,7 @@
 ﻿using CorrelationId;
 using Microsoft.AspNetCore.Mvc;
 using Prospa.Extensions.AspNetCore.Mvc.Core.Filters;
-using Sandbox.Api.Routing;
+using Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger.Routing;
 using Serilog;
 
 namespace Sandbox.Api.Controllers.V2

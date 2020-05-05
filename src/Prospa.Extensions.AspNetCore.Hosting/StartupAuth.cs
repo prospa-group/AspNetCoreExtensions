@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Prospa.Extensions.AspNetCore.Authorization;
 
-namespace Sandbox.Api
+namespace Prospa.Extensions.AspNetCore.Hosting
 {
     public static class StartupAuth
     {
