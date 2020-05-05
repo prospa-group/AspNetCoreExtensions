@@ -1,7 +1,6 @@
 ﻿using CorrelationId;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -24,15 +23,14 @@ namespace Sandbox.Api
                .UseDefaultHealth()
                .UseCorrelationId(new CorrelationIdOptions { UpdateTraceIdentifier = false })
                .UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = Constants.HttpHeaders.ForwardedHeaders })
-               .UseDefaultSecurityHeaders(_hostingEnvironment)
-               .UseAuthentication()
-               .UseAuthorization()
                .UseDefaultDiagnostics(_hostingEnvironment)
                .UseCors(Constants.Cors.AllowAny)
                .UseDefaultSwagger()
                .UseDefaultSwaggerUi();
 
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
 
@@ -55,7 +53,6 @@ namespace Sandbox.Api
 
             services
                     .AddMvcCore()
-                    .AddMetricsCore()
                     .AddDefaultCors()
                     .AddDefaultValidation()
                     .AddApiExplorer()

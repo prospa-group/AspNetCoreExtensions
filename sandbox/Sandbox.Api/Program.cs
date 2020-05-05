@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using App.Metrics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -37,20 +35,16 @@ namespace Sandbox.Api
 
         public static IHostBuilder CreateHostBuilder(string[] args)
         {
-            var metrics = AppMetrics.CreateDefaultBuilder().BuildDefaultMetrics();
-
             return Host.CreateDefaultBuilder(args)
                    .ConfigureDefaultAppConfiguration(args)
                    .ConfigureServices((context, services) =>
                    {
                        services.AddSingleton<IStartupFilter>(
                            new RequireEndpointKeyStartupFilter(
-                               new[] { "/health", "/metrics", "/metrics-text", "/env", "/docs" },
+                               new[] { "/health" },
                            context.Configuration.GetValue<string>(Constants.Auth.EndpointKey)));
                    })
-                   .ConfigureDefaultMetrics(metrics)
                    .UseSerilog()
-                   .UseDefaultMetrics()
                    .ConfigureWebHostDefaults(webHostBuilder =>
                     {
                         webHostBuilder

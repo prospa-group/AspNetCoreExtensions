@@ -22,6 +22,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddSingleton(provider => provider.GetRequiredService<IOptions<HttpErrorLogOptions>>().Value);
             services.AddScoped<IHttpRequestDetailsLogger, HttpRequestDetailsSerilogLogger>();
 
+            services.AddApplicationInsightsTelemetry();
             services.AddSingleton<ITelemetryInitializer, ActivityTagTelemetryInitializer>();
             services.AddApplicationInsightsTelemetryProcessor<AzureDependencyFilterTelemetryProcessor>();
 
