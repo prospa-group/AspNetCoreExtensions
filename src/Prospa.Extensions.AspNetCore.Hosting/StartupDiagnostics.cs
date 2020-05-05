@@ -4,11 +4,13 @@ using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Prospa.Extensions.ApplicationInsights;
 using Prospa.Extensions.AspNetCore.Http;
 using Prospa.Extensions.AspNetCore.Http.Builder;
 using Prospa.Extensions.AspNetCore.Http.Middlewares;
+using Prospa.Extensions.AspNetCore.Mvc.Core.StartupFilters;
 using Prospa.Extensions.AspNetCore.Serilog;
 
 // ReSharper disable CheckNamespace
@@ -17,7 +19,7 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class StartupDiagnostics
     {
-        public static IServiceCollection AddDefaultDiagnostics(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddProspaDefaultDiagnostics(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<HttpErrorLogOptions>(configuration.GetSection(nameof(HttpErrorLogOptions)));
             services.AddSingleton(provider => provider.GetRequiredService<IOptions<HttpErrorLogOptions>>().Value);
@@ -30,7 +32,17 @@ namespace Microsoft.Extensions.DependencyInjection
             return services;
         }
 
-        public static IApplicationBuilder UseDefaultDiagnostics(
+        public static IServiceCollection AddProspaMetaEndpointProtection(
+            this IServiceCollection services,
+            HostBuilderContext context,
+            params string[] endpoints)
+        {
+            services.AddSingleton<IStartupFilter>(new RequireEndpointKeyStartupFilter(endpoints, context.Configuration.GetValue<string>("EndpointKey")));
+
+            return services;
+        }
+
+        public static IApplicationBuilder UseProspaDefaultDiagnostics(
             this IApplicationBuilder app,
             IWebHostEnvironment hostingEnvironment,
             Action<DiagnosticActivityMiddlewareOptions> optionsSetup)
@@ -52,9 +64,9 @@ namespace Microsoft.Extensions.DependencyInjection
             return app;
         }
 
-        public static IApplicationBuilder UseDefaultDiagnostics(this IApplicationBuilder app, IWebHostEnvironment hostingEnvironment)
+        public static IApplicationBuilder UseProspaDefaultDiagnostics(this IApplicationBuilder app, IWebHostEnvironment hostingEnvironment)
         {
-            app.UseDefaultDiagnostics(
+            app.UseProspaDefaultDiagnostics(
                 hostingEnvironment,
                 options =>
                 {

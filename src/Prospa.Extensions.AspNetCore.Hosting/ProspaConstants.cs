@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -7,7 +8,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Prospa.Extensions.AspNetCore.Hosting
 {
-    public static class DefaultFormatting
+    public static class ProspaConstants
     {
         public static Task WriteHealthResponse(HttpContext context, HealthReport result)
         {
@@ -33,6 +34,37 @@ namespace Prospa.Extensions.AspNetCore.Hosting
 
             return context.Response.WriteAsync(
                 json.ToString(Formatting.Indented));
+        }
+
+        public static class Environments
+        {
+            public static readonly string CurrentAspNetCoreEnv = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+            public static string Prefix()
+            {
+                if (IsDevelopment)
+                {
+                    return "demo-";
+                }
+
+                if (IsStaging)
+                {
+                    return "staging-";
+                }
+
+                if (IsProduction)
+                {
+                    return "live-";
+                }
+
+                throw new ApplicationException("Invalid ASPNETCORE_ENVIRONMENT");
+            }
+
+            public static bool IsDevelopment => CurrentAspNetCoreEnv == Microsoft.Extensions.Hosting.Environments.Development;
+
+            public static bool IsStaging => CurrentAspNetCoreEnv == Microsoft.Extensions.Hosting.Environments.Staging;
+
+            public static bool IsProduction => CurrentAspNetCoreEnv == Microsoft.Extensions.Hosting.Environments.Production;
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Microsoft.AspNetCore.Builder
 {
     public static class StartupSwagger
     {
-        public static IServiceCollection AddDefaultSwagger(this IServiceCollection services, Assembly startupAssembly)
+        public static IServiceCollection AddProspaDefaultSwagger(this IServiceCollection services, Assembly startupAssembly)
         {
             var provider = services.BuildServiceProvider();
 
@@ -39,7 +39,7 @@ namespace Microsoft.AspNetCore.Builder
             return services;
         }
 
-        public static IApplicationBuilder UseDefaultSwagger(this IApplicationBuilder app)
+        public static IApplicationBuilder UseProspaDefaultSwagger(this IApplicationBuilder app)
         {
             app.UseSwagger(
                 options =>

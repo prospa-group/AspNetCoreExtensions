@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Prospa.Extensions.AspNetCore.Mvc.Core.StartupFilters;
 using Serilog;
 
 namespace Sandbox.Api
@@ -13,8 +12,6 @@ namespace Sandbox.Api
         public static int Main(string[] args)
         {
             var webHost = CreateHostBuilder(args).Build();
-
-            Log.Logger = webHost.CreateDefaultLogger(Constants.Environments.CurrentAspNetCoreEnv);
 
             try
             {
@@ -36,21 +33,27 @@ namespace Sandbox.Api
         public static IHostBuilder CreateHostBuilder(string[] args)
         {
             return Host.CreateDefaultBuilder(args)
-                   .ConfigureDefaultAppConfiguration(args)
-                   .ConfigureServices((context, services) =>
-                   {
-                       services.AddSingleton<IStartupFilter>(
-                           new RequireEndpointKeyStartupFilter(
-                               new[] { "/health" },
-                           context.Configuration.GetValue<string>(Constants.Auth.EndpointKey)));
-                   })
-                   .UseSerilog()
-                   .ConfigureWebHostDefaults(webHostBuilder =>
-                    {
-                        webHostBuilder
-                            .ConfigureKestrel(options => { options.AddServerHeader = false; })
-                            .UseStartup<Startup>();
-                    });
+                       .ConfigureAppConfiguration((context, builder) =>
+                       {
+                           builder.AddProspaDefaultAzureKeyVault();
+                       })
+                       .ConfigureServices((context, services) =>
+                       {
+                           services.AddProspaMetaEndpointProtection( context, Constants.HealthEndpoint);
+                           
+                       })
+                       .UseSerilog((context, configuration) =>
+                       {
+                           var seqServerUrl = context.Configuration.GetValue<string>(Constants.ConfigurationKeys.Seq.SeqServerUrl);
+                           configuration.WriteTo.Seq(seqServerUrl);
+                           context.CreateProspaDefaultLogger(configuration, typeof(Program));
+                       })
+                       .ConfigureWebHostDefaults(webHostBuilder =>
+                       {
+                           webHostBuilder
+                               .ConfigureKestrel(options => { options.AddServerHeader = false; })
+                               .UseStartup<Startup>();
+                       });
         }
     }
 }

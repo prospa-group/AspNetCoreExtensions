@@ -11,28 +11,21 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class StartupCore
     {
-        public static IServiceCollection AddDefaultCoreServices(this IServiceCollection services, IConfiguration configuration, Type type)
+        public static IServiceCollection AddProspaDefaultServices(
+            this IServiceCollection services,
+            IConfiguration configuration,
+            Type type)
         {
             services.AddCorrelationId();
-
-            services
-                    .AddMvcCore()
-                    .AddDefaultValidation(type)
-                    .AddApiExplorer()
-                    .AddAuthorization()
-                    .AddDataAnnotations();
-
-            services.AddRouting(options => options.LowercaseUrls = true);
 
             services.AddApiVersioning()
                     .AddVersionedApiExplorer(options => options.GroupNameFormat = "'v'V");
 
             services
-                .AddRouting(options => options.LowercaseUrls = true)
-                .AddDefaultApiVersioning()
-                .AddDefaultDiagnostics(configuration)
-                .AddDefaultAuthenticationAndAuthorization(configuration)
-                .AddDefaultSwagger(type.GetTypeInfo().Assembly);
+                .AddProspaDefaultApiVersioning()
+                .AddProspaDefaultDiagnostics(configuration)
+                .AddProspaDefaultAuthenticationAndAuthorization(configuration)
+                .AddProspaDefaultSwagger(type.GetTypeInfo().Assembly);
 
             return services;
         }

@@ -10,7 +10,7 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class StartupValidation
     {
-        public static IMvcCoreBuilder AddDefaultValidation(this IMvcCoreBuilder builder, Type type)
+        public static IMvcCoreBuilder AddProspaDefaultFluentValidation(this IMvcCoreBuilder builder, Type type)
         {
             builder.AddFluentValidation(config => config.RegisterValidatorsFromAssemblyContaining(type));
 
@@ -19,7 +19,7 @@ namespace Microsoft.Extensions.DependencyInjection
             return builder;
         }
 
-        public static IMvcCoreBuilder AddDefaultValidation(this IMvcCoreBuilder builder, Action<FluentValidationMvcConfiguration> setupOptions)
+        public static IMvcCoreBuilder AddProspaDefaultFluentValidation(this IMvcCoreBuilder builder, Action<FluentValidationMvcConfiguration> setupOptions)
         {
             builder.AddFluentValidation(setupOptions);
 

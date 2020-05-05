@@ -1,6 +1,7 @@
 ﻿using CorrelationId;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,9 +23,9 @@ namespace Sandbox.Api
             app.UseRequireHttps()
                .UseDefaultHealth()
                .UseCorrelationId(new CorrelationIdOptions { UpdateTraceIdentifier = false })
-               .UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = Constants.HttpHeaders.ForwardedHeaders })
-               .UseDefaultDiagnostics(_hostingEnvironment)
-               .UseDefaultSwagger();
+               .UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = ForwardedHeaders.All })
+               .UseProspaDefaultDiagnostics(_hostingEnvironment)
+               .UseProspaDefaultSwagger();
 
             app.UseRouting();
             app.UseAuthentication();
@@ -34,7 +35,14 @@ namespace Sandbox.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDefaultCoreServices(_configuration, typeof(Startup));
+            services.AddMvcCore()
+                    .AddProspaDefaultFluentValidation(typeof(Startup))
+                    .AddApiExplorer()
+                    .AddAuthorization()
+                    .AddDataAnnotations();
+
+            services.AddRouting(options => options.LowercaseUrls = true);
+            services.AddProspaDefaultServices(_configuration, typeof(Startup));
             services.AddDefaultHealth();
         }
     }

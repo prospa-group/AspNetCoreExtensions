@@ -10,49 +10,23 @@ namespace Prospa.Extensions.AspNetCore.Hosting
 {
     public static class StartupAuth
     {
-        public static IServiceCollection AddDefaultAuthenticationAndAuthorization(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddProspaDefaultAuthenticationAndAuthorization(this IServiceCollection services, IConfiguration configuration)
         {
+            // Configure Auth Options
             services.Configure<AuthOptions>(configuration.GetSection(nameof(AuthOptions)));
             services.AddSingleton(provider => provider.GetRequiredService<IOptions<AuthOptions>>().Value);
 
-            services.AddDefaultAuthorization();
-            services.AddDefaultAuthentication();
-
-            return services;
-        }
-
-        public static IServiceCollection AddDefaultAuthorization(this IServiceCollection services)
-        {
-            services
-                .AddAuthorization()
-                .AddDefaultScopeAuthorization();
-
-            return services;
-        }
-
-        public static IServiceCollection AddDefaultAuthentication(this IServiceCollection services)
-        {
-            services
-                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddDefaultJwtBearer();
-
-            return services;
-        }
-
-        public static IServiceCollection AddDefaultScopeAuthorization(this IServiceCollection services)
-        {
+            // Add Authorization
+            services.AddAuthorization();
             services.AddSingleton<IConfigureOptions<AuthorizationOptions>, ScopeAuthorizationOptionsSetup>();
             services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
 
+            // Add Authentication
+            var authenticationBuilder = services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme);
+            authenticationBuilder.Services.AddSingleton<IConfigureOptions<JwtBearerOptions>, JwtBearerOptionsSetup>();
+            authenticationBuilder.AddJwtBearer();
+
             return services;
-        }
-
-        public static AuthenticationBuilder AddDefaultJwtBearer(this AuthenticationBuilder builder)
-        {
-            builder.Services.AddSingleton<IConfigureOptions<JwtBearerOptions>, JwtBearerOptionsSetup>();
-            builder.AddJwtBearer();
-
-            return builder;
         }
     }
 }

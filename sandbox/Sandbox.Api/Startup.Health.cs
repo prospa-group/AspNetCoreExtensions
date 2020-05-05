@@ -11,10 +11,10 @@ namespace Sandbox.Api
         public static IApplicationBuilder UseDefaultHealth(this IApplicationBuilder builder)
         {
             builder.UseHealthChecks(
-                "/health",
+                Constants.HealthEndpoint,
                 new HealthCheckOptions
                 {
-                    ResponseWriter = DefaultFormatting.WriteHealthResponse
+                    ResponseWriter = ProspaConstants.WriteHealthResponse
                 });
 
             return builder;
