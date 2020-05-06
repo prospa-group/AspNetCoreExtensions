@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Linq;
+using System.IO;
+using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Prospa.Extensions.AspNetCore.Hosting
 {
@@ -12,28 +12,41 @@ namespace Prospa.Extensions.AspNetCore.Hosting
     {
         public static Task WriteHealthResponse(HttpContext context, HealthReport result)
         {
-            context.Response.ContentType = "application/json";
+            context.Response.ContentType = "application/json; charset=utf-8";
 
-            var json = new JObject(
-                new JProperty("status", result.Status.ToString()),
-                new JProperty(
-                    "results",
-                    new JObject(
-                        result.Entries.Select(
-                            pair =>
-                                new JProperty(
-                                    pair.Key,
-                                    new JObject(
-                                        new JProperty("status", pair.Value.Status.ToString()),
-                                        new JProperty("description", pair.Value.Description),
-                                        new JProperty(
-                                            "data",
-                                            new JObject(
-                                                pair.Value.Data.Select(
-                                                    p => new JProperty(p.Key, p.Value))))))))));
+            var options = new JsonWriterOptions { Indented = true };
 
-            return context.Response.WriteAsync(
-                json.ToString(Formatting.Indented));
+            using var stream = new MemoryStream();
+            using (var writer = new Utf8JsonWriter(stream, options))
+            {
+                writer.WriteStartObject();
+                writer.WriteString("status", result.Status.ToString());
+                writer.WriteStartObject("results");
+
+                foreach (var (key, value) in result.Entries)
+                {
+                    writer.WriteStartObject(key);
+                    writer.WriteString("status", value.Status.ToString());
+                    writer.WriteString("description", value.Description);
+                    writer.WriteStartObject("data");
+
+                    foreach (var item in value.Data)
+                    {
+                        writer.WritePropertyName(item.Key);
+                        JsonSerializer.Serialize(writer, item.Value, item.Value?.GetType() ?? typeof(object));
+                    }
+
+                    writer.WriteEndObject();
+                    writer.WriteEndObject();
+                }
+
+                writer.WriteEndObject();
+                writer.WriteEndObject();
+            }
+
+            var json = Encoding.UTF8.GetString(stream.ToArray());
+
+            return context.Response.WriteAsync(json);
         }
 
         public static class Environments

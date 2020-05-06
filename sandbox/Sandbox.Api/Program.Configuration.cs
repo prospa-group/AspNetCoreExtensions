@@ -12,6 +12,12 @@ namespace Sandbox.Api
         {
             var builtConfig = builder.Build();
             var keyVaultName = builtConfig.GetValue<string>("KeyVaultName");
+
+            if (string.IsNullOrWhiteSpace(keyVaultName))
+            {
+                return;
+            }
+            
             var keyVaultEndpoint = $"https://{ProspaConstants.Environments.Prefix()}{keyVaultName}.vault.azure.net/";
             var azureServiceTokenProvider = new AzureServiceTokenProvider();
             var keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(azureServiceTokenProvider.KeyVaultTokenCallback));
