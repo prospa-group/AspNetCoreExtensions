@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace Prospa.Extensions.AspNetCore.Hosting
+namespace Prospa.Extensions.Hosting
 {
     public static class ProspaConstants
     {
@@ -51,7 +51,13 @@ namespace Prospa.Extensions.AspNetCore.Hosting
 
         public static class Environments
         {
-            public static readonly string CurrentAspNetCoreEnv = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            public static readonly string CurrentEnv = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
+
+            public static bool IsDevelopment => CurrentEnv == Microsoft.Extensions.Hosting.Environments.Development;
+
+            public static bool IsProduction => CurrentEnv == Microsoft.Extensions.Hosting.Environments.Production;
+
+            public static bool IsStaging => CurrentEnv == Microsoft.Extensions.Hosting.Environments.Staging;
 
             public static string Prefix()
             {
@@ -72,12 +78,15 @@ namespace Prospa.Extensions.AspNetCore.Hosting
 
                 throw new ApplicationException("Invalid ASPNETCORE_ENVIRONMENT");
             }
+        }
 
-            public static bool IsDevelopment => CurrentAspNetCoreEnv == Microsoft.Extensions.Hosting.Environments.Development;
+        public static class SharedConfigurationKeys
+        {
+            public const string AzureAppConfiguration = nameof(AzureAppConfiguration);
 
-            public static bool IsStaging => CurrentAspNetCoreEnv == Microsoft.Extensions.Hosting.Environments.Staging;
+            public const string AzureServiceBusConnection = nameof(AzureServiceBusConnection);
 
-            public static bool IsProduction => CurrentAspNetCoreEnv == Microsoft.Extensions.Hosting.Environments.Production;
+            public const string NServiceBusLicense = "NServiceBus/License";
         }
     }
 }

@@ -2,7 +2,7 @@
 using Destructurama;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.Extensions.Configuration;
-using Prospa.Extensions.AspNetCore.Hosting;
+using Prospa.Extensions.Hosting;
 using Serilog;
 using Serilog.Configuration;
 using Serilog.Events;
@@ -57,7 +57,7 @@ namespace Microsoft.Extensions.Hosting
                     dataDogApiKey,
                     source: appDomain,
                     service: type.Assembly.GetName().Name,
-                    tags: new[] { $"env:{ProspaConstants.Environments.CurrentAspNetCoreEnv}", $"p3domain:{appDomain}", $"p3app:{type.Assembly.GetName().Name}" },
+                    tags: new[] { $"env:{ProspaConstants.Environments.CurrentEnv}", $"p3domain:{appDomain}", $"p3app:{type.Assembly.GetName().Name}" },
                     logLevel: LogEventLevel.Information);
             }
         }

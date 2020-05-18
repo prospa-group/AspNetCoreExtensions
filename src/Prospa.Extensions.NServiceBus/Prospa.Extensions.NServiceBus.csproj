@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>NServiceBus extensions.</Description>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <PackageTags>prospa;nservicebus</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup Label="Third Party Package References">
+    <PackageReference Include="NServiceBus" Version="7.2.2" />
+  </ItemGroup>
+
+</Project>
