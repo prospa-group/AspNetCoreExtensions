@@ -16,4 +16,5 @@
 |Prospa.Extensions.AspNetCore.Http|[![NuGet Badge](https://buildstats.info/nuget/Prospa.Extensions.AspNetCore.Http)](https://www.nuget.org/packages/Prospa.Extensions.AspNetCore.Http)|
 |Prospa.Extensions.AspNetCore.Authorization|[![NuGet Badge](https://buildstats.info/nuget/Prospa.Extensions.AspNetCore.Authorization)](https://www.nuget.org/packages/Prospa.Extensions.AspNetCore.Authorization)|
 |Prospa.Extensions.ApplicationInsights|[![NuGet Badge](https://buildstats.info/nuget/Prospa.Extensions.ApplicationInsights)](https://www.nuget.org/packages/Prospa.Extensions.ApplicationInsights)|
+|Prospa.Extensions.Diagnostics.DDPublisher|[![NuGet Badge](https://buildstats.info/nuget/Prospa.Extensions.Diagnostics.DDPublisher)](https://www.nuget.org/packages/Prospa.Extensions.Diagnostics.DDPublisher)|
 |Prospa.Extensions.Serilog|[![NuGet Badge](https://buildstats.info/nuget/Prospa.Extensions.Serilog)](https://www.nuget.org/packages/Prospa.Extensions.Serilog)|
