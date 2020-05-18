@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Sandbox.Api.Routing
+namespace Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger.Routing
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
     public sealed class VersionedRoute : RouteAttribute

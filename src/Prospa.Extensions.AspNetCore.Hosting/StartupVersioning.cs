@@ -6,7 +6,7 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class StartupVersioning
     {
-        public static IServiceCollection AddDefaultApiVersioning(this IServiceCollection services)
+        public static IServiceCollection AddProspaDefaultApiVersioning(this IServiceCollection services)
         {
             services.AddApiVersioning(
                 options =>

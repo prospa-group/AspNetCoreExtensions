@@ -8,6 +8,7 @@
 ## Packages
 |Package|Nuget|
 |------|:--------:|
+|Prospa.Extensions.AspNetCore.Hosting|[![NuGet Badge](https://buildstats.info/nuget/Prospa.Extensions.AspNetCore.Hosting)](https://www.nuget.org/packages/Prospa.Extensions.AspNetCore.Hosting)|
 |Prospa.Extensions.AspNetCore.Swagger|[![NuGet Badge](https://buildstats.info/nuget/Prospa.Extensions.AspNetCore.Swagger)](https://www.nuget.org/packages/Prospa.Extensions.AspNetCore.Swagger)|
 |Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger|[![NuGet Badge](https://buildstats.info/nuget/Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger)](https://www.nuget.org/packages/Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger)|
 |Prospa.Extensions.AspNetCore.Mvc.Core|[![NuGet Badge](https://buildstats.info/nuget/Prospa.Extensions.AspNetCore.Mvc.Core)](https://www.nuget.org/packages/Prospa.Extensions.AspNetCore.Mvc.Core)|
