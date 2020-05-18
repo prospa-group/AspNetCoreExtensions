@@ -4,7 +4,7 @@
 
   <PropertyGroup>
     <MinVerMinimumMajorMinor>2.2</MinVerMinimumMajorMinor>
-    <MinVerDefaultPreReleasePhase>preview10</MinVerDefaultPreReleasePhase>
+    <MinVerDefaultPreReleasePhase>preview8</MinVerDefaultPreReleasePhase>
   </PropertyGroup>
   
   <PropertyGroup>
