@@ -1,8 +1,8 @@
-﻿using HealthChecks.UI.Client;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.DependencyInjection;
 using Prospa.Extensions.Diagnostics.DDPublisher;
+using Prospa.Extensions.AspNetCore.Hosting;
 using Sandbox.Api.Application.HealthChecks;
 
 namespace Sandbox.Api
@@ -11,10 +11,12 @@ namespace Sandbox.Api
     {
         public static IApplicationBuilder UseDefaultHealth(this IApplicationBuilder builder)
         {
-            builder.UseHealthChecks("/health", new HealthCheckOptions
-            {
-                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-            });
+            builder.UseHealthChecks(
+                Constants.HealthEndpoint,
+                new HealthCheckOptions
+                {
+                    ResponseWriter = ProspaConstants.WriteHealthResponse
+                });
 
             return builder;
         }
@@ -31,8 +33,6 @@ namespace Sandbox.Api
                             configuration.ApplicationKey = "ApplicationKey";
                             configuration.Url = "https://api.datadoghq.com/api";
                         });
-
-            services.AddHealthChecksUI();
 
             return services;
         }

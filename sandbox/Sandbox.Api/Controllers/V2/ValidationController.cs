@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
+using Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger.Routing;
 using Sandbox.Api.Application.Commands;
-using Sandbox.Api.Routing;
 
 namespace Sandbox.Api.Controllers.V2
 {

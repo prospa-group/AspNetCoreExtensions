@@ -15,27 +15,10 @@
   </ItemGroup>
 
   <ItemGroup Label="Microsoft Package References">
-    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.13.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="4.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.2" />
   </ItemGroup>
 
   <ItemGroup Label="Third Party Package References">
-    <PackageReference Include="App.Metrics" Version="4.0.0-preview1.0.3" />
-    <PackageReference Include="App.Metrics.AspNetCore.Mvc" Version="4.0.0-preview1.0.3" />
-    <PackageReference Include="App.Metrics.Reporting.GrafanaCloudHostedMetrics" Version="4.0.0-preview1.0.3" />
-    <PackageReference Include="CorrelationId" Version="2.1.0" />
-    <PackageReference Include="FluentValidation.AspNetCore" Version="8.6.2" />
-    <PackageReference Include="AspNetCore.HealthChecks.UI" Version="3.0.9" />
-    <PackageReference Include="NWebsec.AspNetCore.Middleware" Version="3.0.0" />
-    <PackageReference Include="Serilog.AspNetCore" Version="3.2.0" />
-    <PackageReference Include="Serilog.Filters.Expressions" Version="2.1.0" />
-    <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
-    <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="3.1.0" />
-    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
     <PackageReference Include="Serilog.Sinks.Seq" Version="4.0.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup Label="Project References">
@@ -47,6 +30,7 @@
     <ProjectReference Include="..\..\src\Prospa.Extensions.AspNetCore.Swagger\Prospa.Extensions.AspNetCore.Swagger.csproj" />
     <ProjectReference Include="..\..\src\Prospa.Extensions.Diagnostics.DDPublisher\Prospa.Extensions.Diagnostics.DDPublisher.csproj" />
     <ProjectReference Include="..\..\src\Prospa.Extensions.Serilog\Prospa.Extensions.Serilog.csproj" />
+    <ProjectReference Include="..\..\src\Prospa.Extensions.AspNetCore.Hosting\Prospa.Extensions.AspNetCore.Hosting.csproj" />
   </ItemGroup>
 
 </Project>

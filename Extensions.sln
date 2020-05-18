@@ -66,6 +66,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prospa.Extensions.Diagnosti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prospa.Extensions.Diagnostics.Facts", "test\Prospa.Extensions.Diagnostics.Facts\Prospa.Extensions.Diagnostics.Facts.csproj", "{95B19539-0548-45F5-AEA4-19A2202FF656}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prospa.Extensions.AspNetCore.Hosting", "src\Prospa.Extensions.AspNetCore.Hosting\Prospa.Extensions.AspNetCore.Hosting.csproj", "{04C016EB-656C-40A5-A265-EB895BAE3771}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -124,6 +126,7 @@ Global
 		{BDAB0851-1E74-414D-95DB-E1F11F4EB81C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDAB0851-1E74-414D-95DB-E1F11F4EB81C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDAB0851-1E74-414D-95DB-E1F11F4EB81C}.Release|Any CPU.Build.0 = Release|Any CPU
+<<<<<<< HEAD
 		{65305900-4BAD-4FD3-84C1-3161143D6A0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{65305900-4BAD-4FD3-84C1-3161143D6A0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65305900-4BAD-4FD3-84C1-3161143D6A0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -132,6 +135,12 @@ Global
 		{95B19539-0548-45F5-AEA4-19A2202FF656}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95B19539-0548-45F5-AEA4-19A2202FF656}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95B19539-0548-45F5-AEA4-19A2202FF656}.Release|Any CPU.Build.0 = Release|Any CPU
+=======
+		{04C016EB-656C-40A5-A265-EB895BAE3771}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04C016EB-656C-40A5-A265-EB895BAE3771}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04C016EB-656C-40A5-A265-EB895BAE3771}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04C016EB-656C-40A5-A265-EB895BAE3771}.Release|Any CPU.Build.0 = Release|Any CPU
+>>>>>>> origin/master
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -150,8 +159,12 @@ Global
 		{912B893C-0C4B-4832-B1E5-EEA8892D6C69} = {9B7714D5-8FC9-42A3-9122-5F930751E63A}
 		{7C1536A0-3BBC-4848-8C63-2B353706455B} = {E2B4DBE0-D627-42BB-AC10-0A3F869353F8}
 		{BDAB0851-1E74-414D-95DB-E1F11F4EB81C} = {C7A3CBA0-B61F-4D11-8D9F-E5100AD46FE7}
+<<<<<<< HEAD
 		{65305900-4BAD-4FD3-84C1-3161143D6A0A} = {C7A3CBA0-B61F-4D11-8D9F-E5100AD46FE7}
 		{95B19539-0548-45F5-AEA4-19A2202FF656} = {9B7714D5-8FC9-42A3-9122-5F930751E63A}
+=======
+		{04C016EB-656C-40A5-A265-EB895BAE3771} = {C7A3CBA0-B61F-4D11-8D9F-E5100AD46FE7}
+>>>>>>> origin/master
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D4D524ED-D9EF-4F80-8A13-166CE29728C5}

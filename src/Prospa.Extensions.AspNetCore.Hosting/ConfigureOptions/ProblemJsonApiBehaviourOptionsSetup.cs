@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
-namespace Sandbox.Api.ConfigureOptions
+namespace Prospa.Extensions.AspNetCore.Hosting.ConfigureOptions
 {
     public class ProblemJsonApiBehaviourOptionsSetup : IConfigureOptions<ApiBehaviorOptions>
     {
