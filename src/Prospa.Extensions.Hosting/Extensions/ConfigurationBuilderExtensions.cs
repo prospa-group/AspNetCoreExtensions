@@ -17,14 +17,22 @@ namespace Microsoft.Extensions.Configuration
 
             if (string.IsNullOrWhiteSpace(appConfigConnection))
             {
-                throw new Exception($"Missing App Configuration: {ProspaConstants.SharedConfigurationKeys.AzureAppConfiguration}");
+                throw new Exception($"Missing App Configuration, Key: {ProspaConstants.SharedConfigurationKeys.AzureAppConfiguration}");
             }
 
             builder.AddAzureAppConfiguration(appConfigConnection);
         }
 
-        public static void AddSharedKeyvault(this IConfigurationBuilder builder, string keyvaultName)
+        public static void AddSharedKeyvault(this IConfigurationBuilder builder)
         {
+            var config = builder.Build();
+            var keyvaultName = config.GetValue<string>(ProspaConstants.SharedConfigurationKeys.AzureSharedKeyvaultName);
+
+            if (string.IsNullOrWhiteSpace(keyvaultName))
+            {
+                throw new Exception($"Missing App Configuration, Key: {ProspaConstants.SharedConfigurationKeys.AzureSharedKeyvaultName}");
+            }
+
             var keyVaultEndpoint = $"https://{ProspaConstants.Environments.Prefix()}{keyvaultName}.vault.azure.net/";
             var azureServiceTokenProvider = new AzureServiceTokenProvider();
             var keyVaultClient =
@@ -35,7 +43,14 @@ namespace Microsoft.Extensions.Configuration
 
         public static string SharedAzureServiceBusConnection(this IConfiguration configuration)
         {
-            return configuration.GetValue<string>(ProspaConstants.SharedConfigurationKeys.AzureServiceBusConnection);
+            var connection = configuration.GetValue<string>(ProspaConstants.SharedConfigurationKeys.AzureServiceBusConnection);
+
+            if (string.IsNullOrWhiteSpace(connection))
+            {
+                throw new Exception($"Missing App Configuration, Key: {ProspaConstants.SharedConfigurationKeys.AzureServiceBusConnection}");
+            }
+
+            return connection;
         }
     }
 }

@@ -51,7 +51,8 @@ namespace Prospa.Extensions.Hosting
 
         public static class Environments
         {
-            public static readonly string CurrentEnv = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
+            public static readonly string CurrentEnv = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ??
+                                                       Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
 
             public static bool IsDevelopment => CurrentEnv == Microsoft.Extensions.Hosting.Environments.Development;
 
@@ -83,6 +84,8 @@ namespace Prospa.Extensions.Hosting
         public static class SharedConfigurationKeys
         {
             public const string AzureAppConfiguration = nameof(AzureAppConfiguration);
+
+            public const string AzureSharedKeyvaultName = nameof(AzureSharedKeyvaultName);
 
             public const string AzureServiceBusConnection = nameof(AzureServiceBusConnection);
         }
