@@ -85,8 +85,6 @@ namespace Prospa.Extensions.Hosting
             public const string AzureAppConfiguration = nameof(AzureAppConfiguration);
 
             public const string AzureServiceBusConnection = nameof(AzureServiceBusConnection);
-
-            public const string NServiceBusLicense = "NServiceBus/License";
         }
     }
 }

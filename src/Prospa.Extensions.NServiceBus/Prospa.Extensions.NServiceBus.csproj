@@ -6,6 +6,10 @@
     <PackageTags>prospa;nservicebus</PackageTags>
   </PropertyGroup>
 
+  <ItemGroup Label="Microsoft Package References">
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.1.3" />
+  </ItemGroup>
+  
   <ItemGroup Label="Third Party Package References">
     <PackageReference Include="NServiceBus" Version="7.2.2" />
   </ItemGroup>
