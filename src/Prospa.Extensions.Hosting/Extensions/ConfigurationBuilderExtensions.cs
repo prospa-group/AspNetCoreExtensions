@@ -1,4 +1,6 @@
 ﻿using System;
+using Azure.Core;
+using Azure.Identity;
 using Microsoft.Azure.KeyVault;
 using Microsoft.Azure.Services.AppAuthentication;
 using Microsoft.Extensions.Configuration.AzureKeyVault;
@@ -13,32 +15,23 @@ namespace Microsoft.Extensions.Configuration
         public static void AddSharedAppConfiguration(this IConfigurationBuilder builder)
         {
             var config = builder.Build();
-            var appConfigConnection = config.GetValue<string>(ProspaConstants.SharedConfigurationKeys.AzureAppConfiguration);
+            var appConfigEndpoint = config.GetValue<string>(ProspaConstants.SharedConfigurationKeys.AzureAppConfigurationEndpoint);
 
-            if (string.IsNullOrWhiteSpace(appConfigConnection))
+            if (string.IsNullOrWhiteSpace(appConfigEndpoint))
             {
-                throw new Exception($"Missing App Configuration, Key: {ProspaConstants.SharedConfigurationKeys.AzureAppConfiguration}");
+                throw new Exception($"Missing App Configuration, Key: {ProspaConstants.SharedConfigurationKeys.AzureAppConfigurationEndpoint}");
             }
 
-            builder.AddAzureAppConfiguration(appConfigConnection);
-        }
+            var credentials = ProspaConstants.Environments.IsDevelopment
+                ? new DefaultAzureCredential()
+                : (TokenCredential)new ManagedIdentityCredential();
 
-        public static void AddSharedKeyvault(this IConfigurationBuilder builder)
-        {
-            var config = builder.Build();
-            var keyvaultName = config.GetValue<string>(ProspaConstants.SharedConfigurationKeys.AzureSharedKeyvaultName);
-
-            if (string.IsNullOrWhiteSpace(keyvaultName))
-            {
-                throw new Exception($"Missing App Configuration, Key: {ProspaConstants.SharedConfigurationKeys.AzureSharedKeyvaultName}");
-            }
-
-            var keyVaultEndpoint = $"https://{ProspaConstants.Environments.Prefix()}{keyvaultName}.vault.azure.net/";
-            var azureServiceTokenProvider = new AzureServiceTokenProvider();
-            var keyVaultClient =
-                new KeyVaultClient(
-                    new KeyVaultClient.AuthenticationCallback(azureServiceTokenProvider.KeyVaultTokenCallback));
-            builder.AddAzureKeyVault(keyVaultEndpoint, keyVaultClient, new DefaultKeyVaultSecretManager());
+            builder.AddAzureAppConfiguration(
+                options =>
+                {
+                    options.Connect(new Uri(appConfigEndpoint), credentials);
+                    options.ConfigureKeyVault(kv => kv.SetCredential(credentials));
+                });
         }
 
         public static string SharedAzureServiceBusConnection(this IConfiguration configuration)
