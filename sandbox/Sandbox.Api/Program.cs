@@ -33,7 +33,12 @@ namespace Sandbox.Api
         public static IHostBuilder CreateHostBuilder(string[] args)
         {
             return Host.CreateDefaultBuilder(args)
-                       .ConfigureAppConfiguration((context, builder) => { builder.AddDefaultKeyvault(); })
+                       .ConfigureAppConfiguration(
+                           (context, builder) =>
+                           {
+                               builder.AddSharedAppConfiguration();
+                               builder.AddDefaultKeyvault();
+                           })
                        .ConfigureServices((context, services) =>
                        {
                            services.AddProspaMetaEndpointProtection( context, Constants.HealthEndpoint);

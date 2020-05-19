@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.DependencyInjection;
 using Prospa.Extensions.Diagnostics.DDPublisher;
 using Prospa.Extensions.AspNetCore.Hosting;
+using Prospa.Extensions.Hosting;
 using Sandbox.Api.Application.HealthChecks;
 
 namespace Sandbox.Api
