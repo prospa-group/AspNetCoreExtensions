@@ -15,11 +15,11 @@ namespace Microsoft.Extensions.Configuration
         public static void AddSharedAppConfiguration(this IConfigurationBuilder builder)
         {
             var config = builder.Build();
-            var appConfigEndpoint = config.GetValue<string>(ProspaConstants.SharedConfigurationKeys.AzureAppConfigurationEndpoint);
+            var appConfigEndpoint = config.GetValue<string>(ProspaConstants.SharedConfigurationKeys.SharedAzureAppConfigurationEndpoint);
 
             if (string.IsNullOrWhiteSpace(appConfigEndpoint))
             {
-                throw new Exception($"Missing App Configuration, Key: {ProspaConstants.SharedConfigurationKeys.AzureAppConfigurationEndpoint}");
+                throw new Exception($"Missing App Configuration, Key: {ProspaConstants.SharedConfigurationKeys.SharedAzureAppConfigurationEndpoint}");
             }
 
             var credentials = ProspaConstants.Environments.IsDevelopment

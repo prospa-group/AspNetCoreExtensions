@@ -83,7 +83,7 @@ namespace Prospa.Extensions.Hosting
 
         public static class SharedConfigurationKeys
         {
-            public const string AzureAppConfigurationEndpoint = nameof(AzureAppConfigurationEndpoint);
+            public const string SharedAzureAppConfigurationEndpoint = nameof(SharedAzureAppConfigurationEndpoint);
 
             public const string AzureServiceBusConnection = nameof(AzureServiceBusConnection);
         }
