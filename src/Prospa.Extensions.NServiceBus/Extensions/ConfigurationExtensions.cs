@@ -17,5 +17,17 @@ namespace Microsoft.Extensions.Configuration
 
             return license;
         }
+
+        public static string AzureServiceBusConnection(this IConfiguration configuration)
+        {
+            var connection = configuration.GetValue<string>("AzureServiceBusConnection");
+
+            if (string.IsNullOrWhiteSpace(connection))
+            {
+                throw new Exception("Missing App Configuration, Key: 'AzureServiceBusConnection'");
+            }
+
+            return connection;
+        }
     }
 }
