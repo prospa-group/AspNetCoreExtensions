@@ -37,7 +37,6 @@ namespace Sandbox.Api
                            (context, builder) =>
                            {
                                builder.AddSharedAppConfiguration();
-                               builder.AddDefaultKeyvault();
                            })
                        .ConfigureServices((context, services) =>
                        {

@@ -1,28 +1,35 @@
-﻿using Microsoft.Azure.KeyVault;
-using Microsoft.Azure.Services.AppAuthentication;
+﻿using System;
+using Azure.Core;
+using Azure.Identity;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.AzureKeyVault;
-using Prospa.Extensions.AspNetCore.Hosting;
 using Prospa.Extensions.Hosting;
 
 namespace Sandbox.Api
 {
     public static class ProgramConfiguration
     {
-        public static void AddDefaultKeyvault(this IConfigurationBuilder builder)
+        public static void AddSharedAppConfiguration(this IConfigurationBuilder builder)
         {
-            var builtConfig = builder.Build();
-            var keyVaultName = builtConfig.GetValue<string>("KeyVaultName");
+            var config = builder.Build();
+            var appConfigEndpoint = config.GetValue<string>(ProspaConstants.SharedConfigurationKeys.SharedAzureAppConfigurationEndpoint);
 
-            if (string.IsNullOrWhiteSpace(keyVaultName))
+            if (string.IsNullOrWhiteSpace(appConfigEndpoint))
             {
-                return;
+                throw new Exception($"Missing App Configuration, Key: {ProspaConstants.SharedConfigurationKeys.SharedAzureAppConfigurationEndpoint}");
             }
-            
-            var keyVaultEndpoint = $"https://{ProspaConstants.Environments.Prefix()}{keyVaultName}.vault.azure.net/";
-            var azureServiceTokenProvider = new AzureServiceTokenProvider();
-            var keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(azureServiceTokenProvider.KeyVaultTokenCallback));
-            builder.AddAzureKeyVault(keyVaultEndpoint, keyVaultClient, new DefaultKeyVaultSecretManager());
+
+            var credentials = ProspaConstants.Environments.IsDevelopment
+                ? new DefaultAzureCredential()
+                : (TokenCredential)new ManagedIdentityCredential();
+
+            builder.AddAzureAppConfiguration(
+                options =>
+                {
+                    options.Connect(new Uri(appConfigEndpoint), credentials);
+                    options.ConfigureKeyVault(kv => kv.SetCredential(credentials));
+                    options.Select("SHARED:*");
+                    options.TrimKeyPrefix("SHARED:");
+                });
         }
     }
 }
