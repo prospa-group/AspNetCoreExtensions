@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using CorrelationId;
+using CorrelationId.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Prospa.Extensions.AspNetCore.Hosting;
@@ -16,7 +17,7 @@ namespace Microsoft.Extensions.DependencyInjection
             IConfiguration configuration,
             Type type)
         {
-            services.AddCorrelationId();
+            services.AddDefaultCorrelationId();
 
             services.AddApiVersioning()
                     .AddVersionedApiExplorer(options => options.GroupNameFormat = "'v'V");

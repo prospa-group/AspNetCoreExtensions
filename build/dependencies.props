@@ -5,14 +5,13 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Microsoft Package Versions">
-    <MicrosoftExtensionsVersion>3.1.3</MicrosoftExtensionsVersion>
-    <MicrosoftExtensionsDiagnosticsHealthChecks>3.1.3</MicrosoftExtensionsDiagnosticsHealthChecks>
+    <MicrosoftExtensionsVersion>3.1.4</MicrosoftExtensionsVersion>
+    <MicrosoftExtensionsDiagnosticsHealthChecks>3.1.4</MicrosoftExtensionsDiagnosticsHealthChecks>
     <MicrosoftSourceLinkGithub>1.0.0</MicrosoftSourceLinkGithub>
-    <MicrosoftJson>4.7.1</MicrosoftJson>
+    <MicrosoftJson>4.7.2</MicrosoftJson>
   </PropertyGroup>
 
   <PropertyGroup Label="Microsoft AspNet Core Package Versions">
-    <AspNetCoreVersion>2.2.0</AspNetCoreVersion>
     <AspNetCoreMvcVersioningVersion>4.0.0</AspNetCoreMvcVersioningVersion>
     <AspNetCoreMvcVersioningApiExplorerVersion>4.0.0</AspNetCoreMvcVersioningApiExplorerVersion>
   </PropertyGroup>
