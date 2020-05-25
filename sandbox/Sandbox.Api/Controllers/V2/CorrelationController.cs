@@ -1,4 +1,5 @@
 ﻿using CorrelationId;
+using CorrelationId.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Prospa.Extensions.AspNetCore.Mvc.Core.Filters;
 using Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger.Routing;
