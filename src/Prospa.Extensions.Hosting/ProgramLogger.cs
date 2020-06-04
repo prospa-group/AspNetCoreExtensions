@@ -29,18 +29,12 @@ namespace Microsoft.Extensions.Hosting
             {
                 loggerConfiguration.WriteTo.Console(theme: AnsiConsoleTheme.Literate);
             }
-            else
-            {
-                loggerConfiguration
-                    .WriteTo
-                    .ApplicationInsights(TelemetryConverter.Traces, restrictedToMinimumLevel: LogEventLevel.Error);
-            }
 
             WriteToDataDog(context.Configuration, loggerConfiguration, type);
 
             _ = loggerConfiguration
                 .WriteTo
-                .ApplicationInsights(TelemetryConfiguration.CreateDefault(), TelemetryConverter.Events, LogEventLevel.Warning);
+                .ApplicationInsights(TelemetryConfiguration.CreateDefault(), TelemetryConverter.Traces, LogEventLevel.Warning);
         }
 
         private static void WriteToDataDog(
