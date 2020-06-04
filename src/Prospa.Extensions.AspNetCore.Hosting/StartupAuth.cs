@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using System;
+using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -10,7 +11,9 @@ namespace Prospa.Extensions.AspNetCore.Hosting
 {
     public static class StartupAuth
     {
-        public static IServiceCollection AddProspaDefaultAuthenticationAndAuthorization(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddProspaDefaultAuthenticationAndAuthorization(
+            this IServiceCollection services,
+            IConfiguration configuration)
         {
             // Configure Auth Options
             services.Configure<AuthOptions>(configuration.GetSection(nameof(AuthOptions)));
@@ -22,9 +25,17 @@ namespace Prospa.Extensions.AspNetCore.Hosting
             services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
 
             // Add Authentication
-            var authenticationBuilder = services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme);
-            authenticationBuilder.Services.AddSingleton<IConfigureOptions<JwtBearerOptions>, JwtBearerOptionsSetup>();
-            authenticationBuilder.AddJwtBearer();
+            var authOptions = new AuthOptions();
+            configuration.GetSection(nameof(AuthOptions)).Bind(authOptions);
+            services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
+                    .AddIdentityServerAuthentication(
+                        options =>
+                        {
+                            options.Authority = authOptions.Authority;
+                            options.ApiName = authOptions.Audience;
+                            options.SupportedTokens = SupportedTokens.Both;
+                            options.JwtValidationClockSkew = TimeSpan.FromMinutes(5);
+                        });
 
             return services;
         }
