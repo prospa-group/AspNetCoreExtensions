@@ -29,6 +29,9 @@ namespace Prospa.Extensions.Diagnostics.DDPublisher
 
                 var key = keyedEntry.Key;
                 var entry = keyedEntry.Value;
+                var metricName = !string.IsNullOrWhiteSpace(_configuration.MetricNamePrefix)
+                    ? $"{_configuration.MetricNamePrefix}.{key.Replace(' ', '_')}"
+                    : key.Replace(' ', '_');
 
                 var dataDogStatus = entry.Status switch
                 {
@@ -46,7 +49,7 @@ namespace Prospa.Extensions.Diagnostics.DDPublisher
                                 $"{_configuration.ServiceTagPrefix}:{key}"
                            }).ToArray();
 
-                metric.AddMetric(entry.Description, (int)dataDogStatus, (long)entry.Duration.TotalMilliseconds, tags);
+                metric.AddMetric(metricName, (int)dataDogStatus, (long)entry.Duration.TotalMilliseconds, tags);
             }
 
             await _client.SendMetricsAsync(metric);

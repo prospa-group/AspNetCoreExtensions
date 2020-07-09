@@ -6,9 +6,6 @@ namespace Prospa.Extensions.Diagnostics.DDPublisher
     public class DatadogConfiguration
     {
         [Required]
-        public string Url { get; set; }
-
-        [Required]
         public string ApiKey { get; set; }
 
         [Required]
@@ -16,9 +13,14 @@ namespace Prospa.Extensions.Diagnostics.DDPublisher
 
         public string[] DefaultTags { get; set; } = Array.Empty<string>();
 
+        public string MetricNamePrefix { get; set; }
+
         [Required]
         public string ServiceCheckName { get; set; }
 
         public string ServiceTagPrefix { get; set; } = "check";
+
+        [Required]
+        public string Url { get; set; }
     }
 }
