@@ -2,14 +2,10 @@
 
   <PropertyGroup>
     <Description>.NET Core Hosting Extensions.</Description>
-    <TargetFrameworks>netcoreapp3.1;</TargetFrameworks>
-    <PackageTags>prospa;aspnetcore;hosting</PackageTags>
+    <TargetFrameworks>netstandard2.1;</TargetFrameworks>
+    <PackageTags>prospa;hosting</PackageTags>
     <OpenApiGenerateDocuments>false</OpenApiGenerateDocuments>
   </PropertyGroup>
-
-  <ItemGroup Label="Framework References">
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
 
   <ItemGroup Label="Third Party Package References">
     <PackageReference Include="Destructurama.Attributed" Version="2.0.0" />
@@ -18,13 +14,15 @@
     <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
     <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="3.1.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
-    <PackageReference Include="Serilog.Sinks.Datadog.Logs" Version="0.3.1" />
+    <PackageReference Include="Serilog.Sinks.Datadog.Logs" Version="0.3.2" />
   </ItemGroup>
 
   <ItemGroup Label="Microsoft Package References">
     <PackageReference Include="Azure.Identity" Version="1.2.0-preview.3" />
-    <PackageReference Include="Microsoft.Azure.AppConfiguration.AspNetCore" Version="3.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.AzureKeyVault" Version="3.1.4" />
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions" Version="3.1.6" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="3.1.6" />
+    <PackageReference Include="Microsoft.Azure.AppConfiguration.AspNetCore" Version="3.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.AzureKeyVault" Version="3.1.6" />
   </ItemGroup>
 
   <ItemGroup Label="Project References">
