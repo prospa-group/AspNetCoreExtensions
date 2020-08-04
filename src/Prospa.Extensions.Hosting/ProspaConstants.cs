@@ -77,7 +77,7 @@ namespace Prospa.Extensions.Hosting
                     return "live-";
                 }
 
-                throw new ApplicationException("Invalid ASPNETCORE_ENVIRONMENT");
+                throw new ArgumentException("Invalid ASPNETCORE_ENVIRONMENT");
             }
         }
 
