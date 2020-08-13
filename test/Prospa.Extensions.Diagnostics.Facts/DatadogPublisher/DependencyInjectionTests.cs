@@ -20,6 +20,9 @@ namespace Prospa.Extensions.Diagnostics.Facts.DatadogPublisher
                             configuration.ApiKey = "ApiKey";
                             configuration.Url = "Url";
                             configuration.ApplicationKey = "ApplicationKey";
+                            configuration.Domain = "test";
+                            configuration.Application = "app";
+                            configuration.Environment = "test";
                         });
 
             var serviceProvider = services.BuildServiceProvider();

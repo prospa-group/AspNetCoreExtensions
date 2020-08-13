@@ -42,7 +42,7 @@ namespace Sandbox.Api
 
             services.AddRouting(options => options.LowercaseUrls = true);
             services.AddProspaDefaultServices(_configuration, typeof(Startup));
-            services.AddDefaultHealth();
+            services.AddDefaultHealth(_configuration);
         }
     }
 }
