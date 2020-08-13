@@ -11,6 +11,15 @@ namespace Prospa.Extensions.Diagnostics.DDPublisher
         [Required]
         public string ApplicationKey { get; set; }
 
+        [Required]
+        public string Domain { get; set; }
+
+        [Required]
+        public string Application { get; set; }
+
+        [Required]
+        public string Environment { get; set; }
+
         public string[] DefaultTags { get; set; } = Array.Empty<string>();
 
         public string MetricNamePrefix { get; set; }

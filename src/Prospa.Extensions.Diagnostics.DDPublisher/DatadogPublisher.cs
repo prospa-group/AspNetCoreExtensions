@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -7,6 +9,7 @@ namespace Prospa.Extensions.Diagnostics.DDPublisher
 {
     public class DatadogPublisher : IHealthCheckPublisher
     {
+        private const string MetricNameTag = "metric_name";
         private readonly DatadogConfiguration _configuration;
         private readonly DatadogHttpClient _client;
 
@@ -27,11 +30,40 @@ namespace Prospa.Extensions.Diagnostics.DDPublisher
                     break;
                 }
 
-                var key = keyedEntry.Key;
+                var sanitizedKey = keyedEntry.Key.Replace(' ', '_');
                 var entry = keyedEntry.Value;
-                var metricName = !string.IsNullOrWhiteSpace(_configuration.MetricNamePrefix)
-                    ? $"{_configuration.MetricNamePrefix}.{key.Replace(' ', '_')}"
-                    : key.Replace(' ', '_');
+                var metricNameTag = string.Empty;
+                var metricName = string.Empty;
+                var sanitizedTags = new List<string>();
+
+                foreach (var tag in entry.Tags)
+                {
+                    var sanitizedTag = tag.Replace(' ', '_');
+
+                    var tagKeyValue = tag.Split(':');
+
+                    if (tagKeyValue.Length == 0)
+                    {
+                        sanitizedTags.Add(sanitizedTag);
+                        continue;
+                    }
+
+                    if (tagKeyValue[0] == MetricNameTag)
+                    {
+                        metricNameTag = tag;
+                        metricName = !string.IsNullOrWhiteSpace(_configuration.MetricNamePrefix)
+                            ? $"{_configuration.MetricNamePrefix}.{tagKeyValue[1].Replace(' ', '_')}"
+                            : tagKeyValue[1].Replace(' ', '_');
+                        continue;
+                    }
+
+                    sanitizedTags.Add(sanitizedTag);
+                }
+
+                if (string.IsNullOrWhiteSpace(metricNameTag))
+                {
+                    throw new ArgumentException($"metric_name tag is required on health check {keyedEntry.Value}");
+                }
 
                 var dataDogStatus = entry.Status switch
                 {
@@ -41,13 +73,15 @@ namespace Prospa.Extensions.Diagnostics.DDPublisher
                     _ => Status.Unknown
                 };
 
+                var p3domainTag = $"p3domain:{_configuration.Domain}".ToLower();
+                var p3appTag = $"p3app:{_configuration.Application}".ToLower();
+                var p3envTag = $"p3env:{_configuration.Environment}".ToLower();
+                var healthCheckTag = $"{_configuration.ServiceTagPrefix}:{sanitizedKey}".ToLower();
+
                 var tags = _configuration
                            .DefaultTags
-                           .Concat(entry.Tags)
-                           .Concat(new[]
-                           {
-                                $"{_configuration.ServiceTagPrefix}:{key}"
-                           }).ToArray();
+                           .Concat(sanitizedTags)
+                           .Concat(new[] { p3domainTag, p3appTag, p3envTag, healthCheckTag }).ToArray();
 
                 metric.AddMetric(metricName, (int)dataDogStatus, (long)entry.Duration.TotalMilliseconds, tags);
             }
