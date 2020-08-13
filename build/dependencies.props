@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Microsoft Package Versions">
-    <MicrosoftExtensionsVersion>3.1.4</MicrosoftExtensionsVersion>
-    <MicrosoftExtensionsDiagnosticsHealthChecks>3.1.4</MicrosoftExtensionsDiagnosticsHealthChecks>
+    <MicrosoftExtensionsVersion>3.1.7</MicrosoftExtensionsVersion>
+    <MicrosoftExtensionsDiagnosticsHealthChecks>3.1.7</MicrosoftExtensionsDiagnosticsHealthChecks>
     <MicrosoftSourceLinkGithub>1.0.0</MicrosoftSourceLinkGithub>
     <MicrosoftJson>4.7.2</MicrosoftJson>
   </PropertyGroup>
@@ -17,7 +17,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Third Party AspNet Core Package Versions">
-    <SwashbuckleVersion>5.4.1</SwashbuckleVersion>
+    <SwashbuckleVersion>5.5.1</SwashbuckleVersion>
   </PropertyGroup>
 
   <PropertyGroup Label="Third Party Package Versions">

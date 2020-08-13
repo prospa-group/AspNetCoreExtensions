@@ -44,8 +44,6 @@ namespace Sandbox.Api
                        })
                        .UseSerilog((context, configuration) =>
                        {
-                           var seqServerUrl = context.Configuration.GetValue<string>(Constants.ConfigurationKeys.Seq.SeqServerUrl);
-                           configuration.WriteTo.Seq(seqServerUrl);
                            context.CreateProspaDefaultLogger(configuration, typeof(Program));
                        })
                        .ConfigureWebHostDefaults(webHostBuilder =>
