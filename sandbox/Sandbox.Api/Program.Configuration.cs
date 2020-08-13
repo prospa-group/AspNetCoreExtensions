@@ -19,7 +19,7 @@ namespace Sandbox.Api
             }
 
             var credentials = ProspaConstants.Environments.IsDevelopment
-                ? new InteractiveBrowserCredential()
+                ? new DefaultAzureCredential()
                 : (TokenCredential)new ManagedIdentityCredential();
 
             builder.AddAzureAppConfiguration(

@@ -10,17 +10,6 @@
     <LangVersion>Latest</LangVersion>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
-
-  <ItemGroup Label="Microsoft Package References">
-  </ItemGroup>
-
-  <ItemGroup Label="Third Party Package References">
-    <PackageReference Include="Serilog.Sinks.Seq" Version="4.0.0" />
-  </ItemGroup>
-
   <ItemGroup Label="Project References">
     <ProjectReference Include="..\..\src\Prospa.Extensions.ApplicationInsights\Prospa.Extensions.ApplicationInsights.csproj" />
     <ProjectReference Include="..\..\src\Prospa.Extensions.AspNetCore.Authorization\Prospa.Extensions.AspNetCore.Authorization.csproj" />
