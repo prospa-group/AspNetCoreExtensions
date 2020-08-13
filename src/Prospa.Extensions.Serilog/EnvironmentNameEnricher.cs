@@ -8,24 +8,30 @@ namespace Serilog.Core
     public class EnvironmentNameEnricher : ILogEventEnricher
     {
         private const string AspNetCoreEnvVar = "ASPNETCORE_ENVIRONMENT";
+        private const string NetCoreEnvVar = "DOTNET_ENVIRONMENT";
         private const string EnvironmentPropertyName = "Environment";
 
         private readonly LogEventProperty _cachedProperty;
 
         public EnvironmentNameEnricher()
         {
-            var aspnetCoreEnv = Environment.GetEnvironmentVariable(AspNetCoreEnvVar);
+            var env = Environment.GetEnvironmentVariable(AspNetCoreEnvVar);
 
-            if (string.IsNullOrWhiteSpace(aspnetCoreEnv))
+            if (string.IsNullOrWhiteSpace(env))
             {
+                env = Environment.GetEnvironmentVariable(NetCoreEnvVar);
+
+                if (string.IsNullOrWhiteSpace(env))
+                {
 #if DEBUG
-                aspnetCoreEnv = "Debug";
+                    env = "Debug";
 #else
-                aspnetCoreEnv = "Release";
+                env = "Release";
 #endif
+                }
             }
 
-            _cachedProperty = new LogEventProperty(EnvironmentPropertyName, new ScalarValue(aspnetCoreEnv));
+            _cachedProperty = new LogEventProperty(EnvironmentPropertyName, new ScalarValue(env));
         }
 
         public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
