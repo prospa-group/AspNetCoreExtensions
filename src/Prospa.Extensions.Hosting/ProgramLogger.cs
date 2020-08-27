@@ -25,10 +25,7 @@ namespace Microsoft.Extensions.Hosting
                 .Enrich.WithDemystifiedStackTraces()
                 .Destructure.UsingAttributes();
 
-            if (ProspaConstants.Environments.IsDevelopment)
-            {
-                loggerConfiguration.WriteTo.Console(theme: AnsiConsoleTheme.Literate);
-            }
+            loggerConfiguration.WriteTo.Console(theme: AnsiConsoleTheme.Literate);
 
             WriteToDataDog(context.Configuration, loggerConfiguration, type);
 
