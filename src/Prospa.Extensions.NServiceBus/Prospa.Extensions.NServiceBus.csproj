@@ -11,7 +11,7 @@
   </ItemGroup>
   
   <ItemGroup Label="Third Party Package References">
-    <PackageReference Include="NServiceBus" Version="7.3.0" />
+    <PackageReference Include="NServiceBus" Version="7.4.3" />
   </ItemGroup>
 
 </Project>
