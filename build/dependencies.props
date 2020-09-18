@@ -6,7 +6,7 @@
 
   <PropertyGroup Label="Microsoft Package Versions">
     <MicrosoftExtensionsVersion>3.1.7</MicrosoftExtensionsVersion>
-    <MicrosoftExtensionsDiagnosticsHealthChecks>3.1.7</MicrosoftExtensionsDiagnosticsHealthChecks>
+    <MicrosoftExtensionsDiagnosticsHealthChecks>3.1.8</MicrosoftExtensionsDiagnosticsHealthChecks>
     <MicrosoftSourceLinkGithub>1.0.0</MicrosoftSourceLinkGithub>
     <MicrosoftJson>4.7.2</MicrosoftJson>
   </PropertyGroup>
