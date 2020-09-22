@@ -41,14 +41,14 @@ namespace Microsoft.Extensions.Hosting
         {
             var dataDogApiKey = configuration.GetValue<string>("DataDogApiKey");
             var appDomain = configuration.GetValue<string>("AppDomain");
-
+            var env = ProspaConstants.Environments.IsProduction ? "live" : ProspaConstants.Environments.CurrentEnv;
             if (!string.IsNullOrWhiteSpace(dataDogApiKey))
             {
                 loggerConfiguration.WriteTo.DatadogLogs(
                     dataDogApiKey,
                     source: appDomain,
                     service: type.Assembly.GetName().Name,
-                    tags: new[] { $"p3env:{ProspaConstants.Environments.CurrentEnv}", $"p3domain:{appDomain}", $"p3app:{type.Assembly.GetName().Name}" },
+                    tags: new[] { $"p3env:{env}", $"p3domain:{appDomain}", $"p3app:{type.Assembly.GetName().Name}" },
                     logLevel: LogEventLevel.Information);
             }
         }
