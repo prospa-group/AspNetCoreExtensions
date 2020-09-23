@@ -3,8 +3,8 @@
   <Import Project="dependencies.props" />
 
   <PropertyGroup>
-    <MinVerMinimumMajorMinor>3.0</MinVerMinimumMajorMinor>
-    <MinVerDefaultPreReleasePhase></MinVerDefaultPreReleasePhase>
+    <MinVerMinimumMajorMinor>3.1</MinVerMinimumMajorMinor>
+    <MinVerDefaultPreReleasePhase>preview</MinVerDefaultPreReleasePhase>
   </PropertyGroup>
   
   <PropertyGroup>
