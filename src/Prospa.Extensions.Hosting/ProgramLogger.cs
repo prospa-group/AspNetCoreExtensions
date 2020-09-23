@@ -48,7 +48,7 @@ namespace Microsoft.Extensions.Hosting
                     dataDogApiKey,
                     source: appDomain,
                     service: type.Assembly.GetName().Name,
-                    tags: new[] { $"p3env:{ProspaConstants.Environments.CurrentEnv}", $"p3domain:{appDomain}", $"p3app:{type.Assembly.GetName().Name}" },
+                    tags: new[] { $"p3env:{ProspaConstants.Environments.CurrentEnvLogTag()}", $"p3domain:{appDomain}", $"p3app:{type.Assembly.GetName().Name}" },
                     logLevel: LogEventLevel.Information);
             }
         }

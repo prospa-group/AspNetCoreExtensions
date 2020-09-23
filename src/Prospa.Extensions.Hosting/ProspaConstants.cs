@@ -60,6 +60,21 @@ namespace Prospa.Extensions.Hosting
 
             public static bool IsStaging => CurrentEnv == Microsoft.Extensions.Hosting.Environments.Staging;
 
+            public static string CurrentEnvLogTag()
+            {
+                if (IsProduction)
+                {
+                    return "live";
+                }
+
+                if (IsStaging)
+                {
+                    return "staging";
+                }
+
+                return "demo";
+            }
+
             public static string Prefix()
             {
                 if (IsDevelopment)
