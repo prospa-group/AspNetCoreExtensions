@@ -21,7 +21,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Third Party Package Versions">
-    <SerilogVersion>2.9.0</SerilogVersion>
+    <SerilogVersion>2.10.0</SerilogVersion>
   </PropertyGroup>
 
   <PropertyGroup Label="Test Package Versions">
