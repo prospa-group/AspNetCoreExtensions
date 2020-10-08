@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>Serilog extensions and enrichers.</Description>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <PackageTags>prospa;serilog</PackageTags>
   </PropertyGroup>
 
