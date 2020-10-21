@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using Microsoft.Extensions.Logging;
 
@@ -13,8 +14,8 @@ namespace Prospa.Extensions.AspNetCore.Http.DelegatingHandlers
         public LogLevel UnsuccessfulResponseLogLevel { get; set; } = LogLevel.Error;
 
         /// <summary>
-        /// Status codes in this array won't be logged as unsuccessful requests.
+        /// Values in this dictionary will override the log level defined in UnsuccessfulResponseLogLevel.
         /// </summary>
-        public HttpStatusCode[] IgnoreStatusCodes { get; set; } = Array.Empty<HttpStatusCode>();
+        public Dictionary<HttpStatusCode, LogLevel> StatusCodeLogLevelOverrides { get; set; } = new Dictionary<HttpStatusCode, LogLevel>();
     }
 }

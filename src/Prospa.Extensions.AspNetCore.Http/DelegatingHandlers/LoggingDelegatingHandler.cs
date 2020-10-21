@@ -23,10 +23,9 @@ namespace Prospa.Extensions.AspNetCore.Http.DelegatingHandlers
 
             if (!response.IsSuccessStatusCode)
             {
-                if (_options.IgnoreStatusCodes.Contains(response.StatusCode))
-                {
-                    return response;
-                }
+                var logLevel = _options.StatusCodeLogLevelOverrides?.ContainsKey(response.StatusCode) == true
+                    ? _options.StatusCodeLogLevelOverrides[response.StatusCode]
+                    : _options.UnsuccessfulResponseLogLevel;
 
                 var requestString = _options.DisableErrorRequestBodyLogging || request.Content == null
                     ? string.Empty
@@ -36,7 +35,7 @@ namespace Prospa.Extensions.AspNetCore.Http.DelegatingHandlers
                     : await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
                 _logger.Log(
-                    _options.UnsuccessfulResponseLogLevel,
+                    logLevel,
                     "http request unsuccessful {Method} requestURI: {RequesetURI} requestContent: {RequestContent} response: {StatusCode} {Response}",
                     request.Method.ToString(),
                     request.RequestUri,
