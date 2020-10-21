@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Sandbox.Api
 {
@@ -24,12 +25,12 @@ namespace Sandbox.Api
                .UseDefaultHealth()
                .UseCorrelationId()
                .UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = ForwardedHeaders.All })
-               .UseProspaDefaultDiagnostics(_hostingEnvironment)
                .UseProspaDefaultSwagger();
 
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseProspaDefaultDiagnostics(_hostingEnvironment);
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
 
@@ -43,6 +44,15 @@ namespace Sandbox.Api
             services.AddRouting(options => options.LowercaseUrls = true);
             services.AddProspaDefaultServices(_configuration, typeof(Startup));
             services.AddDefaultHealth(_configuration);
+
+            services.AddHttpLoggingDelegatingHandler(options =>
+            {
+                // if a 401 or 400 is returned from an API, log an warning.
+                // otherwise it as an Error.
+                options.UnsuccessfulResponseLogLevel = LogLevel.Error;
+                options.StatusCodeLogLevelOverrides[System.Net.HttpStatusCode.BadRequest] = LogLevel.Warning;
+                options.StatusCodeLogLevelOverrides[System.Net.HttpStatusCode.Unauthorized] = LogLevel.Warning;
+            });
         }
     }
 }
