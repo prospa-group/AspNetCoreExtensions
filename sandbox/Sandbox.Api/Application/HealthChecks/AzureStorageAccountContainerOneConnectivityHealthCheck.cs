@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Sandbox.Api.Application.HealthChecks
 {
-    public class SampleHealthCheck : IHealthCheck
+    public class AzureStorageAccountContainerOneConnectivityHealthCheck : IHealthCheck
     {
         public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
         {
@@ -13,15 +13,15 @@ namespace Sandbox.Api.Application.HealthChecks
 
             if (nowSecs % 2 == 0)
             {
-                return Task.FromResult(HealthCheckResult.Healthy());
+                return Task.FromResult(HealthCheckResult.Healthy("container one connectivity healthy"));
             }
 
             if (nowSecs % 3 == 0)
             {
-                return Task.FromResult(HealthCheckResult.Degraded());
+                return Task.FromResult(HealthCheckResult.Degraded("container one connectivity degraded"));
             }
 
-            return Task.FromResult(HealthCheckResult.Unhealthy());
+            return Task.FromResult(HealthCheckResult.Unhealthy("container one connectivity unhealthy"));
         }
     }
 }

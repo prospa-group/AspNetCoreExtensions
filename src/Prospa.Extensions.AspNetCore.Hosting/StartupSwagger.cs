@@ -18,21 +18,20 @@ namespace Microsoft.AspNetCore.Builder
 {
     public static class StartupSwagger
     {
-        public static IServiceCollection AddDefaultSwagger(this IServiceCollection services)
+        public static IServiceCollection AddProspaDefaultSwagger(this IServiceCollection services, Assembly startupAssembly)
         {
             var provider = services.BuildServiceProvider();
 
             services.AddSwaggerGen(
                 options =>
                 {
-                    var assembly = typeof(StartupSwagger).GetTypeInfo().Assembly;
-                    var assemblyDescription = assembly.GetCustomAttribute<AssemblyDescriptionAttribute>().Description;
+                    var assemblyDescription = startupAssembly.GetCustomAttribute<AssemblyDescriptionAttribute>().Description;
                     var apiVersionDescriptionProvider = provider.GetRequiredService<IApiVersionDescriptionProvider>();
 
-                    options.SwaggerVersionedDoc(apiVersionDescriptionProvider, assemblyDescription, assembly.GetName().Name);
+                    options.SwaggerVersionedDoc(apiVersionDescriptionProvider, assemblyDescription, startupAssembly.GetName().Name);
                     options.AllowFilteringDocsByApiVersion();
 
-                    AddDefaultOptions(options, assembly);
+                    AddDefaultOptions(options, startupAssembly);
                     AddDefaultOperationFilters(provider, options);
                     AddDefaultDocumentFilters(options);
                 });
@@ -40,7 +39,7 @@ namespace Microsoft.AspNetCore.Builder
             return services;
         }
 
-        public static IApplicationBuilder UseDefaultSwagger(this IApplicationBuilder app)
+        public static IApplicationBuilder UseProspaDefaultSwagger(this IApplicationBuilder app)
         {
             app.UseSwagger(
                 options =>
@@ -51,11 +50,6 @@ namespace Microsoft.AspNetCore.Builder
                     });
                 });
 
-            return app;
-        }
-
-        public static IApplicationBuilder UseDefaultSwaggerUi(this IApplicationBuilder app)
-        {
             app.UseSwaggerUI(
                 options =>
                 {

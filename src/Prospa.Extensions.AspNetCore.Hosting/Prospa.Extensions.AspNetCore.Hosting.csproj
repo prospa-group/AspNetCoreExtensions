@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Swagger AspNetCore Extensions.</Description>
+    <TargetFrameworks>netcoreapp3.1;</TargetFrameworks>
+    <PackageTags>prospa;aspnetcore;hosting</PackageTags>
+    <OpenApiGenerateDocuments>false</OpenApiGenerateDocuments>
+  </PropertyGroup>
+
+  <ItemGroup Label="Framework References">
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup Label="Third Party Package References">
+    <PackageReference Include="CorrelationId" Version="3.0.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="9.1.2" />
+    <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
+    <PackageReference Include="Serilog.AspNetCore" Version="3.4.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="$(SwashbuckleVersion)" />
+  </ItemGroup>
+
+  <ItemGroup Label="Microsoft Package References">
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.14.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="4.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.7" />
+  </ItemGroup>
+
+  <ItemGroup Label="Project References">
+    <ProjectReference Include="..\Prospa.Extensions.AspNetCore.Authorization\Prospa.Extensions.AspNetCore.Authorization.csproj" />
+    <ProjectReference Include="..\Prospa.Extensions.AspNetCore.Mvc.Core\Prospa.Extensions.AspNetCore.Mvc.Core.csproj" />
+    <ProjectReference Include="..\Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger\Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger.csproj" />
+    <ProjectReference Include="..\Prospa.Extensions.AspNetCore.Serilog\Prospa.Extensions.AspNetCore.Serilog.csproj" />
+    <ProjectReference Include="..\Prospa.Extensions.AspNetCore.Swagger\Prospa.Extensions.AspNetCore.Swagger.csproj" />
+    <ProjectReference Include="..\Prospa.Extensions.Hosting\Prospa.Extensions.Hosting.csproj" />
+  </ItemGroup>
+
+</Project>

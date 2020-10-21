@@ -1,40 +1,35 @@
-﻿using System.IO;
+﻿using System;
+using Azure.Core;
+using Azure.Identity;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
+using Prospa.Extensions.Hosting;
 
 namespace Sandbox.Api
 {
     public static class ProgramConfiguration
     {
-        public static IHostBuilder ConfigureDefaultAppConfiguration(this IHostBuilder webHostBuilder, string[] args)
+        public static void AddSharedAppConfiguration(this IConfigurationBuilder builder)
         {
-            webHostBuilder.ConfigureAppConfiguration(
-                (context, config) =>
+            var config = builder.Build();
+            var appConfigEndpoint = config.GetValue<string>(ProspaConstants.SharedConfigurationKeys.SharedAzureAppConfigurationEndpoint);
+
+            if (string.IsNullOrWhiteSpace(appConfigEndpoint))
+            {
+                throw new Exception($"Missing App Configuration, Key: {ProspaConstants.SharedConfigurationKeys.SharedAzureAppConfigurationEndpoint}");
+            }
+
+            var credentials = ProspaConstants.Environments.IsDevelopment
+                ? new DefaultAzureCredential()
+                : (TokenCredential)new ManagedIdentityCredential();
+
+            builder.AddAzureAppConfiguration(
+                options =>
                 {
-                    config.AddDefaultSources(args);
+                    options.Connect(new Uri(appConfigEndpoint), credentials);
+                    options.ConfigureKeyVault(kv => kv.SetCredential(credentials));
+                    options.Select("SHARED:*");
+                    options.TrimKeyPrefix("SHARED:");
                 });
-
-            return webHostBuilder;
-        }
-
-        public static IConfigurationBuilder AddDefaultSources(this IConfigurationBuilder builder, string[] args = null)
-        {
-            builder.SetBasePath(Directory.GetCurrentDirectory())
-                   .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                   .AddJsonFile($"appsettings.{Constants.Environments.CurrentAspNetCoreEnv ?? Constants.Environments.Production}.json", optional: true)
-                   .AddEnvironmentVariables();
-
-            if (Constants.Environments.IsDevelopment())
-            {
-                // config.AddUserSecrets(Assembly.GetExecutingAssembly());
-            }
-
-            if (args != null)
-            {
-                builder.AddCommandLine(args);
-            }
-
-            return builder;
         }
     }
 }

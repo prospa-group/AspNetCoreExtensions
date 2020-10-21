@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Sandbox.Api.Routing;
+using Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger.Routing;
 
 namespace Sandbox.Api.Controllers.V2
 {

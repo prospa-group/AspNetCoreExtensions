@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>Serilog extensions and enrichers.</Description>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <PackageTags>prospa;serilog</PackageTags>
   </PropertyGroup>
 
@@ -11,7 +11,7 @@
     <PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0" />
     <PackageReference Include="Serilog.Exceptions" Version="5.4.0" />
     <PackageReference Include="Serilog.Filters.Expressions" Version="2.1.0" />
-    <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="4.7.0" />
+    <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="4.7.1" />
   </ItemGroup>
 
 </Project>

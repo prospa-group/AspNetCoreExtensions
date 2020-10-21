@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿#if NETCOREAPP
+using Microsoft.AspNetCore.Builder;
 using Prospa.Extensions.AspNetCore.Http.Middlewares;
 
 namespace Prospa.Extensions.AspNetCore.Http.Builder
@@ -13,3 +14,4 @@ namespace Prospa.Extensions.AspNetCore.Http.Builder
         }
     }
 }
+#endif

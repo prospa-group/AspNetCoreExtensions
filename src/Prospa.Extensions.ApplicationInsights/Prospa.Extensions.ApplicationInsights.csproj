@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <Description>Application Insights extensions.</Description>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <PackageTags>prospa;http;extensions</PackageTags>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageTags>prospa;http;extensions;diagnostics</PackageTags>
   </PropertyGroup>
 
   <ItemGroup Label="Microsoft References">
-    <PackageReference Include="Microsoft.ApplicationInsights" Version="2.13.1" />
+    <PackageReference Include="Microsoft.ApplicationInsights" Version="2.15.0" />
   </ItemGroup>
 
 </Project>
