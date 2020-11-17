@@ -23,14 +23,14 @@ namespace Prospa.Extensions.Hosting
                 writer.WriteString("status", result.Status.ToString());
                 writer.WriteStartObject("results");
 
-                foreach (var (key, value) in result.Entries)
+                foreach (var entry in result.Entries)
                 {
-                    writer.WriteStartObject(key);
-                    writer.WriteString("status", value.Status.ToString());
-                    writer.WriteString("description", value.Description);
+                    writer.WriteStartObject(entry.Key);
+                    writer.WriteString("status", entry.Value.Status.ToString());
+                    writer.WriteString("description", entry.Value.Description);
                     writer.WriteStartObject("data");
 
-                    foreach (var item in value.Data)
+                    foreach (var item in entry.Value.Data)
                     {
                         writer.WritePropertyName(item.Key);
                         JsonSerializer.Serialize(writer, item.Value, item.Value?.GetType() ?? typeof(object));
