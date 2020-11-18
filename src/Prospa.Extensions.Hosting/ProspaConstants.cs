@@ -51,6 +51,7 @@ namespace Prospa.Extensions.Hosting
 
             writer.WriteEndObject();
             writer.WriteEndObject();
+            writer.Flush();
 
             return stream.ToArray();
         }
