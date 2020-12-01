@@ -5,6 +5,7 @@ trigger:
 
 jobs:
   - job: Linux
+    condition: eq(1,2)
     pool:
       vmImage: 'ubuntu-16.04'
     steps:
