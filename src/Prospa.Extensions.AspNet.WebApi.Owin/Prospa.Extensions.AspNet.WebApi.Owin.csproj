@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>AspNet WebApi Owin Extensions.</Description>
+    <TargetFrameworks>net45;net451;net452;net46;net461;net462;net47;net471;net472;net48</TargetFrameworks>
+    <PackageTags>prospa;aspnet;webapi;owin</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup Label="Microsoft Package References">
+    <PackageReference Include="Microsoft.AspNet.WebApi.Owin" Version="5.2.7" />
+  </ItemGroup>
+
+</Project>

@@ -24,7 +24,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_solution items", "_solutio
 		.gitignore = .gitignore
 		azure-pipelines.yml = azure-pipelines.yml
 		Extensions.sln.DotSettings = Extensions.sln.DotSettings
-		global.json = global.json
 		Prospa.ruleset = Prospa.ruleset
 		stylecop.json = stylecop.json
 	EndProjectSection
@@ -64,13 +63,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prospa.Extensions.Applicati
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prospa.Extensions.Diagnostics.DDPublisher", "src\Prospa.Extensions.Diagnostics.DDPublisher\Prospa.Extensions.Diagnostics.DDPublisher.csproj", "{65305900-4BAD-4FD3-84C1-3161143D6A0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prospa.Extensions.Diagnostics.Facts", "test\Prospa.Extensions.Diagnostics.Facts\Prospa.Extensions.Diagnostics.Facts.csproj", "{95B19539-0548-45F5-AEA4-19A2202FF656}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prospa.Extensions.Diagnostics.Facts", "test\Prospa.Extensions.Diagnostics.Facts\Prospa.Extensions.Diagnostics.Facts.csproj", "{95B19539-0548-45F5-AEA4-19A2202FF656}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prospa.Extensions.AspNetCore.Hosting", "src\Prospa.Extensions.AspNetCore.Hosting\Prospa.Extensions.AspNetCore.Hosting.csproj", "{04C016EB-656C-40A5-A265-EB895BAE3771}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prospa.Extensions.AspNetCore.Hosting", "src\Prospa.Extensions.AspNetCore.Hosting\Prospa.Extensions.AspNetCore.Hosting.csproj", "{04C016EB-656C-40A5-A265-EB895BAE3771}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prospa.Extensions.NServiceBus", "src\Prospa.Extensions.NServiceBus\Prospa.Extensions.NServiceBus.csproj", "{3B160E76-EB61-4CBC-95DB-E485AA7F381A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prospa.Extensions.NServiceBus", "src\Prospa.Extensions.NServiceBus\Prospa.Extensions.NServiceBus.csproj", "{3B160E76-EB61-4CBC-95DB-E485AA7F381A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prospa.Extensions.Hosting", "src\Prospa.Extensions.Hosting\Prospa.Extensions.Hosting.csproj", "{6569F741-578B-42CF-A094-D1D48EDC42CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prospa.Extensions.Hosting", "src\Prospa.Extensions.Hosting\Prospa.Extensions.Hosting.csproj", "{6569F741-578B-42CF-A094-D1D48EDC42CB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prospa.Extensions.AspNet.WebApi.Owin", "src\Prospa.Extensions.AspNet.WebApi.Owin\Prospa.Extensions.AspNet.WebApi.Owin.csproj", "{FE152D92-4C8C-4D03-BF82-BC509D8F84EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -150,6 +151,10 @@ Global
 		{6569F741-578B-42CF-A094-D1D48EDC42CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6569F741-578B-42CF-A094-D1D48EDC42CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6569F741-578B-42CF-A094-D1D48EDC42CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE152D92-4C8C-4D03-BF82-BC509D8F84EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE152D92-4C8C-4D03-BF82-BC509D8F84EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE152D92-4C8C-4D03-BF82-BC509D8F84EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE152D92-4C8C-4D03-BF82-BC509D8F84EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -173,6 +178,7 @@ Global
 		{04C016EB-656C-40A5-A265-EB895BAE3771} = {C7A3CBA0-B61F-4D11-8D9F-E5100AD46FE7}
 		{3B160E76-EB61-4CBC-95DB-E485AA7F381A} = {C7A3CBA0-B61F-4D11-8D9F-E5100AD46FE7}
 		{6569F741-578B-42CF-A094-D1D48EDC42CB} = {C7A3CBA0-B61F-4D11-8D9F-E5100AD46FE7}
+		{FE152D92-4C8C-4D03-BF82-BC509D8F84EF} = {C7A3CBA0-B61F-4D11-8D9F-E5100AD46FE7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D4D524ED-D9EF-4F80-8A13-166CE29728C5}
