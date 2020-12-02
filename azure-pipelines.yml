@@ -5,6 +5,7 @@ trigger:
 
 jobs:
   - job: Linux
+    condition: eq(1,2)
     pool:
       vmImage: 'ubuntu-16.04'
     steps:
@@ -12,7 +13,7 @@ jobs:
         displayName: 'Install .NET Core SDK'
         inputs:
           packageType: 'sdk'
-          useGlobalJson: true
+          version: '3.1.x'
       - task: Bash@3
         displayName: 'Build Script'
         inputs:
@@ -27,7 +28,7 @@ jobs:
         displayName: 'Install .NET Core SDK'
         inputs:
           packageType: 'sdk'
-          useGlobalJson: true
+          version: '3.1.x'
       - task: PowerShell@2
         displayName: 'Build Script'
         inputs:
