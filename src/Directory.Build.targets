@@ -3,7 +3,7 @@
   <Import Project="..\build\common.props" />
 
   <ItemGroup Label="Build">
-    <PackageReference Include="MinVer" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="MinVer" Version="2.4.0" PrivateAssets="All" />
     <PackageReference Update="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
     <PackageReference Update="StyleCop.Analyzers" Version="1.1.118" PrivateAssets="All" />
   </ItemGroup>
